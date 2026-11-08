@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ISARA | Party Wear</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#faf8f4;--beige:#eee7dc;--dark:#29251f;--gold:#a17a54;--muted:#777067}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{background:var(--cream);color:var(--dark);font-family:'DM Sans',sans-serif;line-height:1.7}
+img{display:block;max-width:100%}a{color:inherit}
+header{height:82px;padding:0 8%;display:flex;align-items:center;justify-content:space-between;background:rgba(250,248,244,.97);position:sticky;top:0;z-index:20;border-bottom:1px solid #e8e0d5}
+.logo{font:600 31px 'Playfair Display',serif;letter-spacing:7px;text-decoration:none}
+nav{display:flex;gap:27px}nav a{text-decoration:none;font-size:11px;letter-spacing:1.5px}nav a:hover{color:var(--gold)}
+h1,h2,h3{font-family:'Playfair Display',serif;font-weight:400}
+.eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);font-weight:600}
+.btn{display:inline-block;margin-top:23px;padding:14px 26px;background:var(--dark);color:#fff;text-decoration:none;font-size:10px;letter-spacing:2px;border:0;cursor:pointer;transition:.25s}
+.btn:hover{background:var(--gold)}
+section{padding:85px 9%}.heading{text-align:center;margin:0 auto 45px}.heading h2{font-size:clamp(34px,5vw,48px);margin-top:10px}.heading p{color:var(--muted);font-size:14px;margin-top:8px}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center;background:var(--beige);padding:70px 9%;min-height:600px}
+.hero h1{font-size:clamp(54px,7vw,86px);line-height:1.08;margin:20px 0}.hero h1 span{color:var(--gold)}
+.hero p{max-width:470px;color:var(--muted);font-size:14px;line-height:2}
+.hero-photo{height:480px;overflow:hidden}.hero-photo img{width:100%;height:100%;object-fit:cover}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center}.about-photo{height:490px;overflow:hidden}.about-photo img{width:100%;height:100%;object-fit:cover;object-position:center}
+.about-copy h2{font-size:clamp(35px,4vw,48px);line-height:1.2;margin:15px 0}.about-copy p{font-size:13px;color:var(--muted);line-height:2;margin-top:13px}
+.collection{background:var(--beige)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px;max-width:1000px;margin:auto}
+.card{background:var(--cream)}.card-photo{height:440px;overflow:hidden}.card-photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.card:hover .card-photo img{transform:scale(1.04)}
+.card-info{padding:25px}.card-info h3{font-size:27px}.card-info p{font-size:13px;color:var(--muted);margin-top:5px}
+.story{background:var(--dark);color:var(--cream);text-align:center;padding:90px 10%}.story h2{font-size:clamp(35px,5vw,53px);margin-top:15px}.story p{max-width:680px;margin:18px auto 0;color:#d4c8bb;font-size:14px;line-height:2}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.gallery-item{height:340px;overflow:hidden;background:var(--beige)}.gallery-item img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .4s}.gallery-item:hover img{transform:scale(1.025)}
+.contact{text-align:center;background:var(--beige)}.contact p{color:var(--muted);margin-top:12px}
+footer{background:var(--dark);color:#d4c8bb;text-align:center;padding:38px 10%;font-size:11px;letter-spacing:1px}footer strong{display:block;color:#fff;font:600 30px 'Playfair Display',serif;letter-spacing:7px;margin-bottom:8px}
+.back-link{display:inline-block;margin:0 0 28px;text-decoration:none;font-size:11px;letter-spacing:1.5px;color:var(--gold)}
+/* Visual photo adjustment panel */
+.adjust-tools{display:none;background:#fff;border:1px solid #ded5ca;padding:18px;margin-top:14px;box-shadow:0 8px 25px #29251f12}
+.adjust-tools.open{display:block}.adjust-tools h4{font:500 18px 'Playfair Display',serif;margin-bottom:12px}
+.adjust-tools label{display:block;font-size:11px;color:#5d554d;margin:10px 0 4px}
+.adjust-tools input[type=range]{width:100%;accent-color:var(--gold)}
+.adjust-tools select{width:100%;padding:8px;border:1px solid #ddd;background:#fff}
+.adjust-actions{display:flex;gap:8px;flex-wrap:wrap}.adjust-actions button{border:1px solid var(--dark);padding:8px 12px;background:var(--dark);color:white;font-size:10px;cursor:pointer}
+.adjust-actions button.secondary{background:white;color:var(--dark)}
+.adjust-help{font-size:11px;color:var(--muted);margin-top:8px}
+.adjust-toggle{margin-top:12px;padding:9px 13px;border:1px solid #b7a58f;background:transparent;color:var(--dark);font-size:10px;letter-spacing:1px;cursor:pointer}
+@media(max-width:800px){header{height:auto;padding:18px 5%;flex-direction:column;gap:13px}nav{gap:15px;flex-wrap:wrap;justify-content:center}nav a{font-size:9px}.hero{grid-template-columns:1fr;padding:50px 7%;gap:30px}.hero-photo{height:380px}section{padding:65px 7%}.about{grid-template-columns:1fr;gap:30px}.about-photo{height:390px}.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.gallery-item{height:260px}}
+@media(max-width:540px){.cards{grid-template-columns:1fr}.card-photo{height:420px}.gallery-item{height:220px}.hero-photo{height:330px}}
+</style></head><body>
+<header><a class="logo" href="index.html">ISARA</a><nav><a href="index.html">HOME</a><a href="index.html#about">ABOUT</a><a href="index.html#collection">COLLECTION</a><a href="index.html#contact">CONTACT</a></nav></header>
+<main><section><a class="back-link" href="index.html#collection">← BACK TO COLLECTIONS</a>
+<div class="heading"><div class="eyebrow">THE ISARA EDIT</div><h2>Party Wear</h2><p>Distinctive occasion styles designed to make an impression.</p></div>
+<div class="gallery"><div class="gallery-item" data-photo-frame>
+<img id="party-wear-1" data-adjustable src="assets/look-side.jpg" alt="ISARA occasion wear look" loading="lazy">
+</div>
+
+<button class="adjust-toggle" data-open-tools="party-wear-1">ADJUST PHOTO</button>
+<div class="adjust-tools" data-tools-for="party-wear-1">
+  <h4>Photo adjustment</h4>
+  <label>Zoom</label><input type="range" min="70" max="160" value="100" data-zoom>
+  <label>Horizontal position</label><input type="range" min="0" max="100" value="50" data-x>
+  <label>Vertical position</label><input type="range" min="0" max="100" value="50" data-y>
+  <label>Photo frame height</label><input type="range" min="220" max="800" value="340" data-height>
+  <label>Image fit</label><select data-fit><option value="cover">Cover (fill frame)</option><option value="contain">Contain (show full photo)</option><option value="fill">Stretch</option></select>
+  <label>CSS settings</label><input type="text" readonly data-css-output style="width:100%;padding:8px;border:1px solid #ddd;font-size:11px">
+  <div class="adjust-actions"><button type="button" data-copy-css>COPY SETTINGS</button><button type="button" class="secondary" onclick="location.reload()">RESET</button></div>
+  <p class="adjust-help">Preview changes on this device. Copy the CSS settings and ask for help applying them permanently in the site code.</p>
+</div>
+<div class="gallery-item" data-photo-frame>
+<img id="party-wear-2" data-adjustable src="assets/look-front.jpg" alt="ISARA party outfit front view" loading="lazy">
+</div>
+
+<button class="adjust-toggle" data-open-tools="party-wear-2">ADJUST PHOTO</button>
+<div class="adjust-tools" data-tools-for="party-wear-2">
+  <h4>Photo adjustment</h4>
+  <label>Zoom</label><input type="range" min="70" max="160" value="100" data-zoom>
+  <label>Horizontal position</label><input type="range" min="0" max="100" value="50" data-x>
+  <label>Vertical position</label><input type="range" min="0" max="100" value="50" data-y>
+  <label>Photo frame height</label><input type="range" min="220" max="800" value="340" data-height>
+  <label>Image fit</label><select data-fit><option value="cover">Cover (fill frame)</option><option value="contain">Contain (show full photo)</option><option value="fill">Stretch</option></select>
+  <label>CSS settings</label><input type="text" readonly data-css-output style="width:100%;padding:8px;border:1px solid #ddd;font-size:11px">
+  <div class="adjust-actions"><button type="button" data-copy-css>COPY SETTINGS</button><button type="button" class="secondary" onclick="location.reload()">RESET</button></div>
+  <p class="adjust-help">Preview changes on this device. Copy the CSS settings and ask for help applying them permanently in the site code.</p>
+</div>
+<div class="gallery-item" data-photo-frame>
+<img id="party-wear-3" data-adjustable src="assets/look-detail.jpg" alt="ISARA designer outfit detail" loading="lazy">
+</div>
+
+<button class="adjust-toggle" data-open-tools="party-wear-3">ADJUST PHOTO</button>
+<div class="adjust-tools" data-tools-for="party-wear-3">
+  <h4>Photo adjustment</h4>
+  <label>Zoom</label><input type="range" min="70" max="160" value="100" data-zoom>
+  <label>Horizontal position</label><input type="range" min="0" max="100" value="50" data-x>
+  <label>Vertical position</label><input type="range" min="0" max="100" value="50" data-y>
+  <label>Photo frame height</label><input type="range" min="220" max="800" value="340" data-height>
+  <label>Image fit</label><select data-fit><option value="cover">Cover (fill frame)</option><option value="contain">Contain (show full photo)</option><option value="fill">Stretch</option></select>
+  <label>CSS settings</label><input type="text" readonly data-css-output style="width:100%;padding:8px;border:1px solid #ddd;font-size:11px">
+  <div class="adjust-actions"><button type="button" data-copy-css>COPY SETTINGS</button><button type="button" class="secondary" onclick="location.reload()">RESET</button></div>
+  <p class="adjust-help">Preview changes on this device. Copy the CSS settings and ask for help applying them permanently in the site code.</p>
+</div>
+<div class="gallery-item" data-photo-frame>
+<img id="party-wear-4" data-adjustable src="assets/look-back.jpg" alt="ISARA occasion outfit back view" loading="lazy">
+</div>
+
+<button class="adjust-toggle" data-open-tools="party-wear-4">ADJUST PHOTO</button>
+<div class="adjust-tools" data-tools-for="party-wear-4">
+  <h4>Photo adjustment</h4>
+  <label>Zoom</label><input type="range" min="70" max="160" value="100" data-zoom>
+  <label>Horizontal position</label><input type="range" min="0" max="100" value="50" data-x>
+  <label>Vertical position</label><input type="range" min="0" max="100" value="50" data-y>
+  <label>Photo frame height</label><input type="range" min="220" max="800" value="340" data-height>
+  <label>Image fit</label><select data-fit><option value="cover">Cover (fill frame)</option><option value="contain">Contain (show full photo)</option><option value="fill">Stretch</option></select>
+  <label>CSS settings</label><input type="text" readonly data-css-output style="width:100%;padding:8px;border:1px solid #ddd;font-size:11px">
+  <div class="adjust-actions"><button type="button" data-copy-css>COPY SETTINGS</button><button type="button" class="secondary" onclick="location.reload()">RESET</button></div>
+  <p class="adjust-help">Preview changes on this device. Copy the CSS settings and ask for help applying them permanently in the site code.</p>
+</div>
+</div>
+<div style="text-align:center;margin-top:45px"><a class="btn" href="index.html">BACK TO HOME</a></div>
+</section></main>
+<footer><strong>ISARA</strong>PREMIUM WOMEN'S FASHION<p>© 2026 ISARA. All Rights Reserved.</p></footer>
+<script>
+document.querySelectorAll('[data-adjustable]').forEach((img, index) => {
+  const panel = document.querySelector(`[data-tools-for="${img.id}"]`);
+  if (!panel) return;
+  const zoom = panel.querySelector('[data-zoom]');
+  const x = panel.querySelector('[data-x]');
+  const y = panel.querySelector('[data-y]');
+  const fit = panel.querySelector('[data-fit]');
+  const height = panel.querySelector('[data-height]');
+  const output = panel.querySelector('[data-css-output]');
+  const update = () => {
+    img.style.objectFit = fit.value;
+    img.style.objectPosition = `${x.value}% ${y.value}%`;
+    img.style.transform = `scale(${zoom.value / 100})`;
+    const frame = img.closest('[data-photo-frame]');
+    if (frame) frame.style.height = `${height.value}px`;
+    output.value = `object-fit:${fit.value}; object-position:${x.value}% ${y.value}%; transform:scale(${(zoom.value/100).toFixed(2)}); frame-height:${height.value}px;`;
+  };
+  [zoom,x,y,fit,height].forEach(el => el.addEventListener('input', update));
+  update();
+});
+document.querySelectorAll('[data-open-tools]').forEach(button => {
+  button.addEventListener('click', () => {
+    const panel = document.querySelector(`[data-tools-for="${button.dataset.openTools}"]`);
+    panel.classList.toggle('open');
+    button.textContent = panel.classList.contains('open') ? 'CLOSE PHOTO ADJUSTMENT' : 'ADJUST PHOTO';
+  });
+});
+document.querySelectorAll('[data-copy-css]').forEach(button => {
+  button.addEventListener('click', async () => {
+    const panel = button.closest('.adjust-tools');
+    const value = panel.querySelector('[data-css-output]').value;
+    try { await navigator.clipboard.writeText(value); button.textContent='COPIED'; }
+    catch(e) { button.textContent='SELECT THE CSS BELOW'; }
+  });
+});
+</script></body></html>
