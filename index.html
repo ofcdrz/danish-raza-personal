@@ -50,4 +50,32 @@
 </footer>
 <script src="js/products.js"></script>
 <a class="whatsapp-float" href="https://wa.me/919746699702?text=Hello%20ISARA%2C%20I%20would%20like%20to%20enquire%20about%20your%20collection." target="_blank" rel="noopener" aria-label="Chat with ISARA on WhatsApp"><span aria-hidden="true">✆</span> WhatsApp</a>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const menuButton = document.querySelector(".menu-toggle");
+  const navigation = document.querySelector(".main-nav");
+
+  if (!menuButton || !navigation) return;
+
+  menuButton.addEventListener("click", function () {
+    navigation.classList.toggle("active");
+
+    const isOpen = navigation.classList.contains("active");
+    menuButton.setAttribute("aria-expanded", isOpen);
+    menuButton.setAttribute(
+      "aria-label",
+      isOpen ? "Close navigation" : "Open navigation"
+    );
+    menuButton.textContent = isOpen ? "✕" : "☰";
+  });
+
+  navigation.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      navigation.classList.remove("active");
+      menuButton.textContent = "☰";
+      menuButton.setAttribute("aria-expanded", "false");
+    });
+  });
+});
+</script>
 </body></html>
