@@ -4,64 +4,66 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ISARA | Fashion & Clothing Designer</title>
-
+<title>ISARA | Women's Fashion</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:#f8f5ef;color:#25231f;font-family:'DM Sans',sans-serif}
-header{height:85px;padding:0 8%;display:flex;justify-content:space-between;align-items:center;background:#f8f5ef;position:sticky;top:0;z-index:100;border-bottom:1px solid #e8e1d7}
-.logo{font-family:'Playfair Display',serif;font-size:30px;letter-spacing:5px;color:#29251f}
+body{background:#faf7f2;color:#29251f;font-family:'DM Sans',sans-serif}
+header{height:82px;padding:0 8%;display:flex;align-items:center;justify-content:space-between;background:#faf7f2;position:sticky;top:0;z-index:10;border-bottom:1px solid #e9e1d7}
+.logo{font-family:'Playfair Display',serif;font-size:32px;letter-spacing:6px}
 nav{display:flex;gap:30px}
-nav a{text-decoration:none;color:#333;font-size:13px;letter-spacing:1px}
-nav a:hover{color:#a17d55}
-.hero{min-height:650px;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:70px 10%;gap:50px;background:#eee8dd}
-.hero-content small{letter-spacing:4px;color:#96754f;font-size:11px}
-h1{font-family:'Playfair Display',serif;font-size:clamp(55px,7vw,90px);font-weight:400;line-height:1.05;margin:25px 0}
-.hero-content p{color:#6c665e;line-height:1.9;max-width:430px;font-size:15px}
-.btn{display:inline-block;margin-top:30px;padding:15px 32px;background:#29251f;color:white;text-decoration:none;font-size:12px;letter-spacing:2px;transition:.3s}
-.btn:hover{background:#a17d55}
-.hero-image{height:480px;background:linear-gradient(145deg,#c8b49e,#8c7865,#d8c7b4);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.hero-image:before{content:"ISARA";font-family:'Playfair Display',serif;font-size:65px;letter-spacing:12px;color:#ffffff55;transform:rotate(-90deg)}
-.image-caption{position:absolute;bottom:25px;color:white;letter-spacing:3px;font-size:11px}
-section{padding:100px 10%}
-.section-title{text-align:center;margin-bottom:55px}
-.section-title small{letter-spacing:4px;color:#a17d55;font-size:11px}
-h2{font-family:'Playfair Display',serif;font-size:45px;font-weight:400;margin-top:15px}
-.about{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
-.about-art{height:390px;background:linear-gradient(145deg,#d5c2ac,#a58b72);display:flex;align-items:center;justify-content:center}
-.about-art span{font-family:'Playfair Display',serif;color:#ffffff88;font-size:45px;letter-spacing:8px}
-.about-text p{color:#716a61;line-height:2;margin-top:20px;font-size:14px}
-.collection{background:#eee8dd}
+nav a{text-decoration:none;color:#38332c;font-size:12px;letter-spacing:1.5px}
+nav a:hover{color:#ad805b}
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:650px;background:#eee6dc;align-items:center;padding:65px 9%;gap:45px}
+.eyebrow{font-size:11px;letter-spacing:4px;color:#a17a54}
+h1,h2,h3{font-family:'Playfair Display',serif;font-weight:400}
+h1{font-size:clamp(55px,7vw,88px);line-height:1.08;margin:25px 0}
+.hero p{color:#71675e;line-height:1.9;font-size:15px;max-width:450px}
+.btn{display:inline-block;margin-top:28px;padding:15px 30px;background:#302921;color:white;text-decoration:none;font-size:11px;letter-spacing:2px;transition:.3s}
+.btn:hover{background:#a17a54}
+.hero-image{height:510px;overflow:hidden}
+.hero-image img{width:100%;height:100%;object-fit:cover}
+section{padding:90px 9%}
+.section-heading{text-align:center;margin-bottom:45px}
+.section-heading h2{font-size:46px;margin-top:12px}
+.section-heading p{color:#82766a;margin-top:12px;font-size:14px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center}
+.about img{width:100%;height:430px;object-fit:cover}
+.about-text h2{font-size:45px;margin:15px 0}
+.about-text p{font-size:14px;line-height:2;color:#766d64;margin-top:15px}
+.collection{background:#eee6dc}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
-.card{background:#f8f5ef}
-.card-art{height:300px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:28px;color:#ffffffaa}
-.card:nth-child(1) .card-art{background:linear-gradient(140deg,#b6a08a,#756456)}
-.card:nth-child(2) .card-art{background:linear-gradient(140deg,#d4bda9,#a18c79)}
-.card:nth-child(3) .card-art{background:linear-gradient(140deg,#a69b8d,#5e554c)}
+.card{background:#faf7f2;overflow:hidden}
+.card img{width:100%;height:390px;object-fit:cover;display:block;transition:transform .6s}
+.card:hover img{transform:scale(1.04)}
 .card-info{padding:22px}
-.card-info h3{font-family:'Playfair Display',serif;font-size:23px;font-weight:400}
-.card-info p{font-size:12px;color:#837b70;margin-top:8px}
-.philosophy{text-align:center;background:#29251f;color:#f8f5ef}
-.philosophy h2{font-size:48px}
-.philosophy p{max-width:600px;margin:25px auto 0;line-height:2;color:#c8bdb0;font-size:14px}
+.card-info h3{font-size:25px}
+.card-info p{font-size:12px;color:#82766a;margin-top:8px}
+.story{text-align:center;background:#302921;color:#faf7f2}
+.story h2{font-size:clamp(34px,5vw,55px);margin-top:20px}
+.story p{max-width:650px;margin:20px auto 0;color:#d2c5b7;font-size:14px;line-height:2}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.gallery img{width:100%;height:300px;object-fit:cover}
 .contact{text-align:center}
-.contact p{color:#716a61;margin-top:20px;line-height:2}
-footer{padding:35px 8%;background:#29251f;color:#c8bdb0;text-align:center;font-size:12px;letter-spacing:1px}
-footer strong{font-family:'Playfair Display',serif;color:#fff;font-size:20px;letter-spacing:4px}
+.contact p{color:#786e64;margin-top:15px;line-height:2}
+footer{background:#302921;color:#d2c5b7;text-align:center;padding:35px 10%;font-size:12px;letter-spacing:1px}
+footer strong{display:block;font-family:'Playfair Display',serif;font-size:27px;letter-spacing:6px;color:white;margin-bottom:12px}
 @media(max-width:750px){
-header{height:auto;padding:20px 5%;flex-direction:column;gap:18px}
-nav{gap:14px;flex-wrap:wrap;justify-content:center}
-nav a{font-size:11px}
-.hero{grid-template-columns:1fr;padding:55px 7%;gap:35px}
-.hero-image{height:350px}
-section{padding:70px 7%}
-.about{grid-template-columns:1fr;gap:35px}
-.about-art{height:300px}
+header{height:auto;padding:20px 5%;flex-direction:column;gap:17px}
+nav{gap:16px;flex-wrap:wrap;justify-content:center}
+nav a{font-size:10px}
+.hero{grid-template-columns:1fr;padding:55px 7%}
+.hero-image{height:390px}
+section{padding:65px 7%}
+.about{grid-template-columns:1fr;gap:30px}
+.about img{height:350px}
 .cards{grid-template-columns:1fr}
-h2{font-size:37px}
+.card img{height:420px}
+.gallery{grid-template-columns:repeat(2,1fr)}
+.gallery img{height:220px}
+.section-heading h2{font-size:37px}
 }
 </style>
 </head>
@@ -74,76 +76,96 @@ h2{font-size:37px}
 <a href="#home">HOME</a>
 <a href="#about">ABOUT</a>
 <a href="#collection">COLLECTION</a>
+<a href="#gallery">GALLERY</a>
 <a href="#contact">CONTACT</a>
 </nav>
 </header>
 
 <main>
 <div class="hero" id="home">
-<div class="hero-content">
-<small>FASHION • ART • ELEGANCE</small>
-<h1>Style is<br>an Art.</h1>
-<p>Welcome to ISARA — a creative space dedicated to fashion, clothing and timeless design. Discover elegance through creativity.</p>
-<a href="#collection" class="btn">EXPLORE COLLECTION</a>
+<div>
+<div class="eyebrow">A WORLD OF FEMININE ELEGANCE</div>
+<h1>Fashion<br>Made for Her.</h1>
+<p>Discover the world of ISARA — where beautiful clothing, timeless elegance and modern style come together. Celebrate your individuality through fashion.</p>
+<a href="#collection" class="btn">EXPLORE COLLECTION →</a>
 </div>
 <div class="hero-image">
-<div class="image-caption">THE WORLD OF ISARA</div>
+<img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1000&q=85" alt="Women's fashion editorial">
 </div>
 </div>
 
 <section id="about">
 <div class="about">
-<div class="about-art"><span>ISARA</span></div>
+<img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=85" alt="Women's fashion and clothing">
 <div class="about-text">
-<small style="letter-spacing:4px;color:#a17d55">OUR STORY</small>
-<h2>About ISARA</h2>
-<p>ISARA is a fashion and clothing design brand built around creativity, style and elegance.</p>
-<p>Our vision is to explore beautiful designs, unique ideas and inspiring fashion concepts. Every design begins with imagination.</p>
+<div class="eyebrow">DISCOVER ISARA</div>
+<h2>Designed for Her.</h2>
+<p>Welcome to ISARA, a women's fashion destination inspired by creativity, beauty and personal style.</p>
+<p>From elegant traditional outfits to modern western looks, explore fashion that celebrates confidence and individuality.</p>
+<a href="#collection" class="btn">DISCOVER MORE</a>
 </div>
 </div>
 </section>
 
 <section class="collection" id="collection">
-<div class="section-title">
-<small>CREATIVITY & STYLE</small>
-<h2>Explore Our World</h2>
+<div class="section-heading">
+<div class="eyebrow">OUR STYLE EDIT</div>
+<h2>Explore Collections</h2>
+<p>Find your style. Express yourself.</p>
 </div>
+
 <div class="cards">
 <div class="card">
-<div class="card-art">01</div>
+<img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=85" alt="Ethnic women's fashion">
 <div class="card-info">
-<h3>Modern Fashion</h3>
-<p>Contemporary fashion concepts</p>
+<h3>Ethnic Wear</h3>
+<p>Graceful traditional fashion</p>
 </div>
 </div>
+
 <div class="card">
-<div class="card-art">02</div>
+<img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=85" alt="Women's western fashion">
 <div class="card-info">
-<h3>Elegant Clothing</h3>
-<p>Timeless clothing inspiration</p>
+<h3>Western Wear</h3>
+<p>Modern everyday elegance</p>
 </div>
 </div>
+
 <div class="card">
-<div class="card-art">03</div>
+<img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=800&q=85" alt="Women's party fashion">
 <div class="card-info">
-<h3>Creative Designs</h3>
-<p>Ideas and artistic expression</p>
+<h3>Party Wear</h3>
+<p>Looks made for special moments</p>
 </div>
 </div>
 </div>
 </section>
 
-<section class="philosophy">
-<small style="letter-spacing:4px;color:#c5a77e">THE ISARA PHILOSOPHY</small>
-<h2>Elegance in Every Design.</h2>
-<p>Fashion is more than clothing. It is creativity, confidence and a way to express who you are.</p>
+<section class="story">
+<div class="eyebrow">THE ISARA PHILOSOPHY</div>
+<h2>Elegance in Every Detail.</h2>
+<p>Fashion is not just what you wear. It is how you express yourself, how you feel and how confidently you own your style.</p>
+</section>
+
+<section id="gallery">
+<div class="section-heading">
+<div class="eyebrow">STYLE INSPIRATION</div>
+<h2>The Fashion Gallery</h2>
+<p>A glimpse into the world of women's fashion.</p>
+</div>
+<div class="gallery">
+<img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=85" alt="Women's fashion portrait">
+<img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=600&q=85" alt="Women's clothing">
+<img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=85" alt="Fashion editorial">
+<img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=600&q=85" alt="Women's style">
+</div>
 </section>
 
 <section class="contact" id="contact">
-<div class="section-title">
-<small>GET IN TOUCH</small>
-<h2>Let's Connect</h2>
-<p>Have an idea or want to connect with ISARA?<br>Contact details will be added here soon.</p>
+<div class="section-heading">
+<div class="eyebrow">WE WOULD LOVE TO HEAR FROM YOU</div>
+<h2>Let's Connect.</h2>
+<p>Have a question or want to know more about ISARA?<br>Our contact details will be added here soon.</p>
 </div>
 <a href="#home" class="btn">BACK TO TOP ↑</a>
 </section>
@@ -151,8 +173,8 @@ h2{font-size:37px}
 
 <footer>
 <strong>ISARA</strong>
-<p style="margin-top:12px">FASHION & CLOTHING DESIGNER</p>
-<p style="margin-top:12px">© 2026 ISARA. All Rights Reserved.</p>
+WOMEN'S FASHION & CLOTHING
+<p style="margin-top:15px">© 2026 ISARA. All Rights Reserved.</p>
 </footer>
 
 </body>
