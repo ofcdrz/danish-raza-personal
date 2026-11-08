@@ -13,11 +13,11 @@
 ### 1. Set your WhatsApp number
 Open `js/products.js` and replace:
 ```js
-const ISARA_WHATSAPP_NUMBER = "91XXXXXXXXXX";
+const ISARA_WHATSAPP_NUMBER = "919746699702";
 ```
 with your business WhatsApp number, digits only, including country code. Example format: `919876543210`.
 
-Also replace `91XXXXXXXXXX` in the WhatsApp links in `index.html` and `css`? In `index.html`, update the WhatsApp URL in the footer/contact link if you change it. The product detail enquiry button uses the number from `products.js`.
+Also replace `919746699702` in the WhatsApp links in `index.html` and `css`? In `index.html`, update the WhatsApp URL in the footer/contact link if you change it. The product detail enquiry button uses the number from `products.js`.
 
 ### 2. Check image paths
 The code expects these existing repository files:
