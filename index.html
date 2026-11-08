@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISARA | Fashion & Clothing Designer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#f8f5ef;color:#25231f;font-family:'DM Sans',sans-serif}
+header{height:85px;padding:0 8%;display:flex;justify-content:space-between;align-items:center;background:#f8f5ef;position:sticky;top:0;z-index:100;border-bottom:1px solid #e8e1d7}
+.logo{font-family:'Playfair Display',serif;font-size:30px;letter-spacing:5px;color:#29251f}
+nav{display:flex;gap:30px}
+nav a{text-decoration:none;color:#333;font-size:13px;letter-spacing:1px}
+nav a:hover{color:#a17d55}
+.hero{min-height:650px;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:70px 10%;gap:50px;background:#eee8dd}
+.hero-content small{letter-spacing:4px;color:#96754f;font-size:11px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(55px,7vw,90px);font-weight:400;line-height:1.05;margin:25px 0}
+.hero-content p{color:#6c665e;line-height:1.9;max-width:430px;font-size:15px}
+.btn{display:inline-block;margin-top:30px;padding:15px 32px;background:#29251f;color:white;text-decoration:none;font-size:12px;letter-spacing:2px;transition:.3s}
+.btn:hover{background:#a17d55}
+.hero-image{height:480px;background:linear-gradient(145deg,#c8b49e,#8c7865,#d8c7b4);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-image:before{content:"ISARA";font-family:'Playfair Display',serif;font-size:65px;letter-spacing:12px;color:#ffffff55;transform:rotate(-90deg)}
+.image-caption{position:absolute;bottom:25px;color:white;letter-spacing:3px;font-size:11px}
+section{padding:100px 10%}
+.section-title{text-align:center;margin-bottom:55px}
+.section-title small{letter-spacing:4px;color:#a17d55;font-size:11px}
+h2{font-family:'Playfair Display',serif;font-size:45px;font-weight:400;margin-top:15px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.about-art{height:390px;background:linear-gradient(145deg,#d5c2ac,#a58b72);display:flex;align-items:center;justify-content:center}
+.about-art span{font-family:'Playfair Display',serif;color:#ffffff88;font-size:45px;letter-spacing:8px}
+.about-text p{color:#716a61;line-height:2;margin-top:20px;font-size:14px}
+.collection{background:#eee8dd}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
+.card{background:#f8f5ef}
+.card-art{height:300px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:28px;color:#ffffffaa}
+.card:nth-child(1) .card-art{background:linear-gradient(140deg,#b6a08a,#756456)}
+.card:nth-child(2) .card-art{background:linear-gradient(140deg,#d4bda9,#a18c79)}
+.card:nth-child(3) .card-art{background:linear-gradient(140deg,#a69b8d,#5e554c)}
+.card-info{padding:22px}
+.card-info h3{font-family:'Playfair Display',serif;font-size:23px;font-weight:400}
+.card-info p{font-size:12px;color:#837b70;margin-top:8px}
+.philosophy{text-align:center;background:#29251f;color:#f8f5ef}
+.philosophy h2{font-size:48px}
+.philosophy p{max-width:600px;margin:25px auto 0;line-height:2;color:#c8bdb0;font-size:14px}
+.contact{text-align:center}
+.contact p{color:#716a61;margin-top:20px;line-height:2}
+footer{padding:35px 8%;background:#29251f;color:#c8bdb0;text-align:center;font-size:12px;letter-spacing:1px}
+footer strong{font-family:'Playfair Display',serif;color:#fff;font-size:20px;letter-spacing:4px}
+@media(max-width:750px){
+header{height:auto;padding:20px 5%;flex-direction:column;gap:18px}
+nav{gap:14px;flex-wrap:wrap;justify-content:center}
+nav a{font-size:11px}
+.hero{grid-template-columns:1fr;padding:55px 7%;gap:35px}
+.hero-image{height:350px}
+section{padding:70px 7%}
+.about{grid-template-columns:1fr;gap:35px}
+.about-art{height:300px}
+.cards{grid-template-columns:1fr}
+h2{font-size:37px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">ISARA</div>
+<nav>
+<a href="#home">HOME</a>
+<a href="#about">ABOUT</a>
+<a href="#collection">COLLECTION</a>
+<a href="#contact">CONTACT</a>
+</nav>
+</header>
+
+<main>
+<div class="hero" id="home">
+<div class="hero-content">
+<small>FASHION • ART • ELEGANCE</small>
+<h1>Style is<br>an Art.</h1>
+<p>Welcome to ISARA — a creative space dedicated to fashion, clothing and timeless design. Discover elegance through creativity.</p>
+<a href="#collection" class="btn">EXPLORE COLLECTION</a>
+</div>
+<div class="hero-image">
+<div class="image-caption">THE WORLD OF ISARA</div>
+</div>
+</div>
+
+<section id="about">
+<div class="about">
+<div class="about-art"><span>ISARA</span></div>
+<div class="about-text">
+<small style="letter-spacing:4px;color:#a17d55">OUR STORY</small>
+<h2>About ISARA</h2>
+<p>ISARA is a fashion and clothing design brand built around creativity, style and elegance.</p>
+<p>Our vision is to explore beautiful designs, unique ideas and inspiring fashion concepts. Every design begins with imagination.</p>
+</div>
+</div>
+</section>
+
+<section class="collection" id="collection">
+<div class="section-title">
+<small>CREATIVITY & STYLE</small>
+<h2>Explore Our World</h2>
+</div>
+<div class="cards">
+<div class="card">
+<div class="card-art">01</div>
+<div class="card-info">
+<h3>Modern Fashion</h3>
+<p>Contemporary fashion concepts</p>
+</div>
+</div>
+<div class="card">
+<div class="card-art">02</div>
+<div class="card-info">
+<h3>Elegant Clothing</h3>
+<p>Timeless clothing inspiration</p>
+</div>
+</div>
+<div class="card">
+<div class="card-art">03</div>
+<div class="card-info">
+<h3>Creative Designs</h3>
+<p>Ideas and artistic expression</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="philosophy">
+<small style="letter-spacing:4px;color:#c5a77e">THE ISARA PHILOSOPHY</small>
+<h2>Elegance in Every Design.</h2>
+<p>Fashion is more than clothing. It is creativity, confidence and a way to express who you are.</p>
+</section>
+
+<section class="contact" id="contact">
+<div class="section-title">
+<small>GET IN TOUCH</small>
+<h2>Let's Connect</h2>
+<p>Have an idea or want to connect with ISARA?<br>Contact details will be added here soon.</p>
+</div>
+<a href="#home" class="btn">BACK TO TOP ↑</a>
+</section>
+</main>
+
+<footer>
+<strong>ISARA</strong>
+<p style="margin-top:12px">FASHION & CLOTHING DESIGNER</p>
+<p style="margin-top:12px">© 2026 ISARA. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
