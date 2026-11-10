@@ -1,30 +1,231 @@
+
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ISARA | Party Wear</title><meta name="description" content="Distinctive occasion looks for evenings, celebrations and memorable gatherings.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css"></head><body><div class="announcement">A considered wardrobe for every celebration · Women's fashion by ISARA</div>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ISARA | Party Wear Collection</title>
+<meta name="description" content="Explore the ISARA Party Wear collection.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+.party-intro {
+  text-align:center;
+  padding:65px 20px 45px;
+}
+.party-intro h2 {
+  font:400 clamp(32px,5vw,48px) "Playfair Display",serif;
+  margin:12px 0;
+}
+.party-intro p {
+  color:#786f66;
+  font-size:14px;
+}
+.party-gallery {
+  width:min(1200px,90%);
+  margin:0 auto 90px;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:22px;
+}
+.party-item {
+  overflow:hidden;
+  background:#eee7dc;
+}
+.party-item img {
+  width:100%;
+  height:430px;
+  object-fit:cover;
+  display:block;
+  transition:transform .7s ease;
+}
+.party-item:hover img {
+  transform:scale(1.045);
+}
+.party-caption {
+  padding:16px;
+  background:#faf8f4;
+}
+.party-caption h3 {
+  font:400 21px "Playfair Display",serif;
+}
+.party-caption p {
+  color:#786f66;
+  font-size:11px;
+  margin-top:4px;
+  letter-spacing:1px;
+}
+.party-contact {
+  text-align:center;
+  background:#eee7dc;
+  padding:65px 20px;
+}
+.party-contact h2 {
+  font:400 clamp(30px,5vw,44px) "Playfair Display",serif;
+  margin:10px 0;
+}
+.party-contact p {
+  color:#786f66;
+  margin-bottom:22px;
+}
+@media(max-width:800px) {
+  .party-gallery {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:13px;
+  }
+  .party-item img {height:340px;}
+}
+@media(max-width:500px) {
+  .party-gallery {
+    width:92%;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    margin-bottom:55px;
+  }
+  .party-item img {height:250px;}
+  .party-caption {padding:10px;}
+  .party-caption h3 {font-size:16px;}
+  .party-caption p {font-size:9px;}
+  .party-intro {padding:45px 18px 30px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="announcement">
+A considered wardrobe for every celebration · Women's fashion by ISARA
+</div>
+
 <header class="site-header">
   <a class="brand" href="index.html">ISARA</a>
-  <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button>
+  <button class="menu-toggle" type="button" aria-label="Open navigation"
+  aria-expanded="false" aria-controls="primary-navigation">
+    <span></span><span></span><span></span>
+  </button>
   <nav class="main-nav" id="primary-navigation">
-    <a href="index.html">Home</a><a href="index.html#collections">Collections</a>
-    <a href="ethnic-wear.html">Ethnic Wear</a><a href="party-wear.html">Party Wear</a><a href="index.html#about">Our Story</a><a href="index.html#contact">Contact</a>
+    <a href="index.html">Home</a>
+    <a href="index.html#collections">Collections</a>
+    <a href="ethnic-wear.html">Ethnic Wear</a>
+    <a href="party-wear.html">Party Wear</a>
+    <a href="index.html#about">Our Story</a>
+    <a href="index.html#contact">Contact</a>
   </nav>
 </header>
-<main><section class="page-hero"><div class="container"><div class="eyebrow">The occasion edit</div><h1>Party Wear</h1><p>Distinctive occasion looks for evenings, celebrations and memorable gatherings.</p></div></section>
-<div class="container"><div class="breadcrumb"><a href="index.html">HOME</a> / PARTY WEAR</div>
-<div class="toolbar"><p>Explore the ISARA edit</p><select aria-label="Sort products" onchange="isaraSortCards(this.value)"><option value="default">Featured</option><option value="name">Name A–Z</option></select></div>
-<div class="product-grid" id="party-products"></div></div></main>
+
+<main>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="eyebrow">The occasion edit</div>
+    <h1>Party Wear</h1>
+    <p>Discover statement looks for celebrations and special moments.</p>
+  </div>
+</section>
+
+<section class="party-intro">
+  <div class="eyebrow">The ISARA collection</div>
+  <h2>Designed to make an impression.</h2>
+  <p>Explore our selected party wear designs.</p>
+</section>
+
+<section class="party-gallery">
+
+  <article class="party-item">
+    <img src="IMG-20261108-WA0015~2.jpg.jpeg"
+    alt="ISARA Party Wear design 01" loading="lazy">
+    <div class="party-caption">
+      <h3>Design 01</h3>
+      <p>PARTY WEAR COLLECTION</p>
+    </div>
+  </article>
+
+  <article class="party-item">
+    <img src="IMG_20261105_194316.jpg.jpeg"
+    alt="ISARA Party Wear design 02" loading="lazy">
+    <div class="party-caption">
+      <h3>Design 02</h3>
+      <p>PARTY WEAR COLLECTION</p>
+    </div>
+  </article>
+
+  <article class="party-item">
+    <img src="IMG_20261105_194324.jpg.jpeg"
+    alt="ISARA Party Wear design 03" loading="lazy">
+    <div class="party-caption">
+      <h3>Design 03</h3>
+      <p>PARTY WEAR COLLECTION</p>
+    </div>
+  </article>
+
+  <article class="party-item">
+    <img src="IMG_20261105_194327.jpg.jpeg"
+    alt="ISARA Party Wear design 04" loading="lazy">
+    <div class="party-caption">
+      <h3>Design 04</h3>
+      <p>PARTY WEAR COLLECTION</p>
+    </div>
+  </article>
+
+  <article class="party-item">
+    <img src="IMG_20261105_194328.jpg.jpeg"
+    alt="ISARA Party Wear design 05" loading="lazy">
+    <div class="party-caption">
+      <h3>Design 05</h3>
+      <p>PARTY WEAR COLLECTION</p>
+    </div>
+  </article>
+
+</section>
+
+<section class="party-contact">
+  <div class="eyebrow">Connect with ISARA</div>
+  <h2>Find your perfect look.</h2>
+  <p>For prices, availability and styling enquiries, contact us.</p>
+  <a class="btn" href="https://wa.me/919746699702"
+  target="_blank" rel="noopener">Enquire on WhatsApp →</a>
+</section>
+
+</main>
+
 <footer class="footer">
   <div class="footer-grid">
-    <div><a class="brand" href="index.html">ISARA</a><p>Thoughtfully curated women's fashion, celebrating individuality through graceful design and timeless style.</p></div>
-    <div><h4>Explore</h4><div class="footer-links"><a href="ethnic-wear.html">Ethnic Wear</a><a href="party-wear.html">Party Wear</a><a href="index.html#about">About ISARA</a></div></div>
-    <div><h4>Connect</h4><div class="footer-links"><a href="index.html#contact">Contact</a><a href="https://wa.me/919746699702" target="_blank" rel="noopener">WhatsApp Enquiry</a></div></div>
+    <div>
+      <a class="brand" href="index.html">ISARA</a>
+      <p>Thoughtfully curated women's fashion, celebrating individuality through graceful design and timeless style.</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <div class="footer-links">
+        <a href="ethnic-wear.html">Ethnic Wear</a>
+        <a href="party-wear.html">Party Wear</a>
+        <a href="index.html#about">About ISARA</a>
+      </div>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <div class="footer-links">
+        <a href="index.html#contact">Contact</a>
+        <a href="https://wa.me/919746699702">WhatsApp Enquiry</a>
+      </div>
+    </div>
   </div>
   <div class="copyright">© 2026 ISARA. All Rights Reserved.</div>
-</footer><script src="js/products.js"></script><script src="js/site.js"></script>
-<script>function isaraSortCards(mode){const el=document.getElementById("party-products");if(mode==="name"){[...el.children].sort((a,b)=>a.querySelector("h3").textContent.localeCompare(b.querySelector("h3").textContent)).forEach(n=>el.appendChild(n));}}</script>
+</footer>
 
-<a class="whatsapp-float" href="https://wa.me/919746699702?text=Hello%20ISARA%2C%20I%20would%20like%20to%20enquire%20about%20your%20collection." target="_blank" rel="noopener" aria-label="Chat with ISARA on WhatsApp"><span aria-hidden="true">✆</span> WhatsApp</a>
-</body></html>
+<script src="js/products.js"></script>
+<script src="js/site.js"></script>
+
+<a class="whatsapp-float"
+href="https://wa.me/919746699702"
+target="_blank" rel="noopener" aria-label="WhatsApp enquiry">
+<span aria-hidden="true">✆</span> WhatsApp
+</a>
+
+</body>
+</html>
