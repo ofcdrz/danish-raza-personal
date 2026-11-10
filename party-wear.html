@@ -6,8 +6,8 @@
 <link rel="stylesheet" href="css/style.css"></head><body><div class="announcement">A considered wardrobe for every celebration · Women's fashion by ISARA</div>
 <header class="site-header">
   <a class="brand" href="index.html">ISARA</a>
-  <button class="menu-toggle" aria-label="Open navigation">☰</button>
-  <nav class="main-nav">
+  <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button>
+  <nav class="main-nav" id="primary-navigation">
     <a href="index.html">Home</a><a href="index.html#collections">Collections</a>
     <a href="ethnic-wear.html">Ethnic Wear</a><a href="party-wear.html">Party Wear</a><a href="index.html#about">Our Story</a><a href="index.html#contact">Contact</a>
   </nav>
@@ -23,7 +23,7 @@
     <div><h4>Connect</h4><div class="footer-links"><a href="index.html#contact">Contact</a><a href="https://wa.me/919746699702" target="_blank" rel="noopener">WhatsApp Enquiry</a></div></div>
   </div>
   <div class="copyright">© 2026 ISARA. All Rights Reserved.</div>
-</footer><script src="js/products.js"></script>
+</footer><script src="js/products.js"></script><script src="js/site.js"></script>
 <script>function isaraSortCards(mode){const el=document.getElementById("party-products");if(mode==="name"){[...el.children].sort((a,b)=>a.querySelector("h3").textContent.localeCompare(b.querySelector("h3").textContent)).forEach(n=>el.appendChild(n));}}</script>
 
 <a class="whatsapp-float" href="https://wa.me/919746699702?text=Hello%20ISARA%2C%20I%20would%20like%20to%20enquire%20about%20your%20collection." target="_blank" rel="noopener" aria-label="Chat with ISARA on WhatsApp"><span aria-hidden="true">✆</span> WhatsApp</a>
