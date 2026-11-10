@@ -16,50 +16,138 @@
 <style>
 .party-intro {
   text-align:center;
-  padding:65px 20px 45px;
+  padding:65px 20px 40px;
 }
 .party-intro h2 {
   font:400 clamp(32px,5vw,48px) "Playfair Display",serif;
   margin:12px 0;
 }
-.party-intro p {
-  color:#786f66;
-  font-size:14px;
+.party-intro p {color:#786f66;font-size:14px;}
+
+.design-container {
+  width:min(1100px,90%);
+  margin:0 auto 85px;
 }
-.party-gallery {
-  width:min(1200px,90%);
-  margin:0 auto 90px;
+.design-card {
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:22px;
+  grid-template-columns:1.1fr .9fr;
+  gap:35px;
+  align-items:start;
+  background:#fff;
+  padding:22px;
+  border:1px solid #e6ded3;
 }
-.party-item {
+.design-main {
+  cursor:zoom-in;
   overflow:hidden;
   background:#eee7dc;
 }
-.party-item img {
+.design-main img {
   width:100%;
-  height:430px;
+  height:650px;
   object-fit:cover;
   display:block;
-  transition:transform .7s ease;
+  transition:transform .5s ease;
 }
-.party-item:hover img {
-  transform:scale(1.045);
+.design-main:hover img {transform:scale(1.02);}
+
+.design-thumbnails {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:12px;
 }
-.party-caption {
-  padding:16px;
-  background:#faf8f4;
+.design-thumbnails button {
+  border:2px solid transparent;
+  padding:0;
+  background:#eee7dc;
+  cursor:pointer;
+  overflow:hidden;
 }
-.party-caption h3 {
-  font:400 21px "Playfair Display",serif;
+.design-thumbnails button.active {
+  border-color:#a77c55;
 }
-.party-caption p {
+.design-thumbnails img {
+  width:100%;
+  height:110px;
+  object-fit:cover;
+  display:block;
+}
+.design-info {padding:35px 15px;}
+.design-info .eyebrow {margin-bottom:12px;}
+.design-info h2 {
+  font:400 clamp(30px,4vw,43px) "Playfair Display",serif;
+  line-height:1.2;
+}
+.design-info p {
   color:#786f66;
-  font-size:11px;
-  margin-top:4px;
-  letter-spacing:1px;
+  font-size:13px;
+  line-height:2;
+  margin:18px 0;
 }
+.design-number {
+  color:#a77c55;
+  font-size:11px;
+  letter-spacing:2px;
+  margin-bottom:15px;
+}
+.design-info .btn {margin-top:12px;}
+
+.lightbox {
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:rgba(12,12,12,.96);
+  align-items:center;
+  justify-content:center;
+  padding:65px 65px 45px;
+}
+.lightbox.open {display:flex;}
+.lightbox img {
+  max-width:100%;
+  max-height:100%;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+}
+.lightbox-close,.lightbox-prev,.lightbox-next {
+  position:absolute;
+  border:0;
+  background:rgba(255,255,255,.13);
+  color:white;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.lightbox-close {
+  top:18px;
+  right:22px;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  font-size:27px;
+}
+.lightbox-prev,.lightbox-next {
+  top:50%;
+  transform:translateY(-50%);
+  width:48px;
+  height:58px;
+  border-radius:5px;
+  font-size:30px;
+}
+.lightbox-prev {left:15px;}
+.lightbox-next {right:15px;}
+.lightbox-count {
+  position:absolute;
+  bottom:18px;
+  color:white;
+  font-size:13px;
+  letter-spacing:2px;
+}
+body.viewer-open {overflow:hidden;}
+
 .party-contact {
   text-align:center;
   background:#eee7dc;
@@ -73,25 +161,27 @@
   color:#786f66;
   margin-bottom:22px;
 }
-@media(max-width:800px) {
-  .party-gallery {
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:13px;
+
+@media(max-width:750px) {
+  .design-card {
+    grid-template-columns:1fr;
+    gap:10px;
+    padding:12px;
   }
-  .party-item img {height:340px;}
+  .design-main img {height:470px;}
+  .design-info {padding:20px 8px;}
+  .design-thumbnails img {height:85px;}
 }
 @media(max-width:500px) {
-  .party-gallery {
-    width:92%;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:10px;
-    margin-bottom:55px;
-  }
-  .party-item img {height:250px;}
-  .party-caption {padding:10px;}
-  .party-caption h3 {font-size:16px;}
-  .party-caption p {font-size:9px;}
-  .party-intro {padding:45px 18px 30px;}
+  .party-intro {padding:45px 18px 28px;}
+  .design-container {width:93%;margin-bottom:55px;}
+  .design-main img {height:390px;}
+  .design-thumbnails {gap:7px;}
+  .design-thumbnails img {height:75px;}
+  .lightbox {padding:55px 8px 45px;}
+  .lightbox-prev {left:5px;}
+  .lightbox-next {right:5px;}
+  .lightbox-prev,.lightbox-next {width:36px;height:48px;}
 }
 </style>
 </head>
@@ -131,55 +221,50 @@ A considered wardrobe for every celebration · Women's fashion by ISARA
 <section class="party-intro">
   <div class="eyebrow">The ISARA collection</div>
   <h2>Designed to make an impression.</h2>
-  <p>Explore our selected party wear designs.</p>
+  <p>Explore our selected party wear design.</p>
 </section>
 
-<section class="party-gallery">
+<section class="design-container">
 
-  <article class="party-item">
-    <img src="IMG-20261108-WA0015~2.jpg.jpeg"
-    alt="ISARA Party Wear design 01" loading="lazy">
-    <div class="party-caption">
-      <h3>Design 01</h3>
-      <p>PARTY WEAR COLLECTION</p>
-    </div>
-  </article>
+  <div class="design-card">
 
-  <article class="party-item">
-    <img src="IMG_20261105_194316.jpg.jpeg"
-    alt="ISARA Party Wear design 02" loading="lazy">
-    <div class="party-caption">
-      <h3>Design 02</h3>
-      <p>PARTY WEAR COLLECTION</p>
-    </div>
-  </article>
+    <div>
+      <div class="design-main" onclick="openViewer(0)">
+        <img id="mainDesignImage"
+        src="IMG_20261105_194316.jpg.jpeg"
+        alt="ISARA Party Wear Design">
+      </div>
 
-  <article class="party-item">
-    <img src="IMG_20261105_194324.jpg.jpeg"
-    alt="ISARA Party Wear design 03" loading="lazy">
-    <div class="party-caption">
-      <h3>Design 03</h3>
-      <p>PARTY WEAR COLLECTION</p>
+      <div class="design-thumbnails">
+        <button class="active" onclick="changeDesign(0,this)" aria-label="View photo 1">
+          <img src="IMG_20261105_194316.jpg.jpeg" alt="Design photo 1">
+        </button>
+        <button onclick="changeDesign(1,this)" aria-label="View photo 2">
+          <img src="IMG_20261105_194324.jpg.jpeg" alt="Design photo 2">
+        </button>
+        <button onclick="changeDesign(2,this)" aria-label="View photo 3">
+          <img src="IMG_20261105_194327.jpg.jpeg" alt="Design photo 3">
+        </button>
+        <button onclick="changeDesign(3,this)" aria-label="View photo 4">
+          <img src="IMG_20261105_194328.jpg.jpeg" alt="Design photo 4">
+        </button>
+      </div>
     </div>
-  </article>
 
-  <article class="party-item">
-    <img src="IMG_20261105_194327.jpg.jpeg"
-    alt="ISARA Party Wear design 04" loading="lazy">
-    <div class="party-caption">
-      <h3>Design 04</h3>
-      <p>PARTY WEAR COLLECTION</p>
+    <div class="design-info">
+      <div class="eyebrow">ISARA · PARTY WEAR</div>
+      <div class="design-number">DESIGN NO. 01</div>
+      <h2>Elegant Party Wear</h2>
+      <p>
+        A distinctive look for special occasions and celebrations.
+        Explore all four photographs to view the design from different angles.
+      </p>
+      <p><strong>Price:</strong> On enquiry</p>
+      <a class="btn" href="https://wa.me/919746699702?text=Hello%20ISARA%2C%20I%20am%20interested%20in%20your%20Party%20Wear%20design."
+      target="_blank" rel="noopener">Enquire on WhatsApp →</a>
     </div>
-  </article>
 
-  <article class="party-item">
-    <img src="IMG_20261105_194328.jpg.jpeg"
-    alt="ISARA Party Wear design 05" loading="lazy">
-    <div class="party-caption">
-      <h3>Design 05</h3>
-      <p>PARTY WEAR COLLECTION</p>
-    </div>
-  </article>
+  </div>
 
 </section>
 
@@ -218,8 +303,84 @@ A considered wardrobe for every celebration · Women's fashion by ISARA
   <div class="copyright">© 2026 ISARA. All Rights Reserved.</div>
 </footer>
 
+<div class="lightbox" id="lightbox" role="dialog"
+aria-modal="true" aria-label="Product photo viewer">
+  <button class="lightbox-close" onclick="closeViewer()" aria-label="Close">×</button>
+  <button class="lightbox-prev" onclick="moveViewer(-1)" aria-label="Previous photo">‹</button>
+  <img id="lightboxImage" src="" alt="ISARA design full screen">
+  <button class="lightbox-next" onclick="moveViewer(1)" aria-label="Next photo">›</button>
+  <div class="lightbox-count" id="lightboxCount">1 / 4</div>
+</div>
+
 <script src="js/products.js"></script>
 <script src="js/site.js"></script>
+
+<script>
+const designPhotos = [
+  "IMG_20261105_194316.jpg.jpeg",
+  "IMG_20261105_194324.jpg.jpeg",
+  "IMG_20261105_194327.jpg.jpeg",
+  "IMG_20261105_194328.jpg.jpeg"
+];
+
+let currentPhoto = 0;
+
+function changeDesign(index, button) {
+  currentPhoto = index;
+  document.getElementById("mainDesignImage").src = designPhotos[index];
+
+  document.querySelectorAll(".design-thumbnails button").forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  button.classList.add("active");
+}
+
+function openViewer(index) {
+  currentPhoto = index;
+  updateViewer();
+  document.getElementById("lightbox").classList.add("open");
+  document.body.classList.add("viewer-open");
+}
+
+function closeViewer() {
+  document.getElementById("lightbox").classList.remove("open");
+  document.body.classList.remove("viewer-open");
+}
+
+function moveViewer(direction) {
+  currentPhoto = (currentPhoto + direction + designPhotos.length) % designPhotos.length;
+  updateViewer();
+}
+
+function updateViewer() {
+  document.getElementById("lightboxImage").src = designPhotos[currentPhoto];
+  document.getElementById("lightboxCount").textContent =
+    (currentPhoto + 1) + " / " + designPhotos.length;
+}
+
+document.addEventListener("keydown", function(event) {
+  const viewer = document.getElementById("lightbox");
+  if (!viewer.classList.contains("open")) return;
+
+  if (event.key === "Escape") closeViewer();
+  if (event.key === "ArrowRight") moveViewer(1);
+  if (event.key === "ArrowLeft") moveViewer(-1);
+});
+
+let touchStartX = 0;
+
+document.getElementById("lightbox").addEventListener("touchstart", function(event) {
+  touchStartX = event.changedTouches[0].screenX;
+}, {passive:true});
+
+document.getElementById("lightbox").addEventListener("touchend", function(event) {
+  const difference = event.changedTouches[0].screenX - touchStartX;
+  if (Math.abs(difference) > 50) {
+    moveViewer(difference < 0 ? 1 : -1);
+  }
+}, {passive:true});
+</script>
 
 <a class="whatsapp-float"
 href="https://wa.me/919746699702"
