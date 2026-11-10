@@ -150,3 +150,29 @@ h1,h2,h3,.serif{font-family:"Playfair Display",Georgia,serif;font-weight:400}
     padding: 5px 0;
   }
 }
+
+/* ISARA Visible Mobile Menu Button */
+@media (max-width: 650px) {
+  .menu-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+    background: #171717 !important;
+    border: 1px solid #171717 !important;
+    border-radius: 4px;
+    color: #ffffff !important;
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #ffffff !important;
+  }
+}
+
