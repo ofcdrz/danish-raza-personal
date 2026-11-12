@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,44 +14,54 @@
 <link rel="stylesheet" href="css/style.css">
 
 <style>
-/* ISARA HERO SIGNATURE DESIGN */
-
-.hero-copy {
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-signature {
+/* =========================================
+   NEW HEADER BRAND LOGO (TOP LEFT)
+========================================= */
+.brand-signature {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 34px;
+  gap: 12px;
+  text-decoration: none;
 }
 
-.signature-line {
-  width: 42px;
+.header-signature-line {
+  width: 28px;
   height: 1px;
   background: #b18a61;
 }
 
-.signature-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 35px;
-  font-weight: 500;
-  letter-spacing: 8px;
-  line-height: 1;
-  color: #29231f;
+.header-signature-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.signature-caption {
-  display: block;
-  margin-top: 8px;
+.header-signature-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 6px;
+  line-height: 1;
+  color: #29231f;
+  margin-right: -6px; /* letter-spacing fix */
+}
+
+.header-signature-caption {
   font-family: 'DM Sans', sans-serif;
-  font-size: 8px;
-  letter-spacing: 4px;
+  font-size: 7px;
+  letter-spacing: 3px;
   text-transform: uppercase;
   color: #a47c54;
-  text-align: center;
+  margin-top: 4px;
+  margin-right: -3px;
+}
+
+/* =========================================
+   HERO SECTION & OTHERS
+========================================= */
+.hero-copy {
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-copy .eyebrow {
@@ -183,23 +192,20 @@
 /* MOBILE RESPONSIVE */
 
 @media (max-width: 650px) {
-  .hero-signature {
-    margin-bottom: 26px;
-    gap: 11px;
+  .header-signature-line {
+    width: 18px;
   }
-
-  .signature-logo {
-    font-size: 29px;
-    letter-spacing: 6px;
+  
+  .header-signature-logo {
+    font-size: 20px;
+    letter-spacing: 4px;
+    margin-right: -4px;
   }
-
-  .signature-line {
-    width: 28px;
-  }
-
-  .signature-caption {
-    font-size: 7px;
-    letter-spacing: 3px;
+  
+  .header-signature-caption {
+    font-size: 6px;
+    letter-spacing: 2px;
+    margin-right: -2px;
   }
 
   .hero-credit {
@@ -230,7 +236,16 @@
 </div>
 
 <header class="site-header">
-  <a class="brand" href="index.html">ISARA</a>
+  
+  <!-- NEW LOGO PLACED IN HEADER TOP LEFT -->
+  <a class="brand-signature" href="index.html">
+    <span class="header-signature-line"></span>
+    <div class="header-signature-text">
+      <span class="header-signature-logo">ISARA</span>
+      <span class="header-signature-caption">The House of Elegance</span>
+    </div>
+    <span class="header-signature-line"></span>
+  </a>
 
   <button class="menu-toggle" type="button"
     aria-label="Open navigation"
@@ -255,16 +270,7 @@
 
   <div class="hero-copy">
 
-    <div class="hero-signature">
-      <span class="signature-line"></span>
-
-      <div>
-        <div class="signature-logo">ISARA</div>
-        <span class="signature-caption">The House of Elegance</span>
-      </div>
-
-      <span class="signature-line"></span>
-    </div>
+    <!-- Removed the old logo block from here to make the heading pop -->
 
     <div class="eyebrow">The art of feminine elegance</div>
 
