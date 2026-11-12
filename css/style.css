@@ -334,5 +334,23 @@ img {
     object-fit: cover;
     object-position: center center;
 }
+/* ISARA Collection Card Height Adjustment */
+.category-card {
+  height: 530px !important;
+  min-height: 530px !important;
+  overflow: hidden;
+}
 
+.category-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 650px) {
+  .category-card {
+    height: 430px !important;
+    min-height: 430px !important;
+  }
+}
 
