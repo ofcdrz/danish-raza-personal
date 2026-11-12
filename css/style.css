@@ -176,3 +176,126 @@ h1,h2,h3,.serif{font-family:"Playfair Display",Georgia,serif;font-weight:400}
   }
 }
 
+/* =================================
+   ISARA PREMIUM EXPERIENCE 2.0
+   Smooth Performance Upgrade
+================================= */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Better rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Smooth buttons and links */
+a, button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.btn,
+.main-nav a,
+.category-card,
+.whatsapp-float {
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+/* Premium button hover */
+@media (hover: hover) {
+  .btn:hover {
+    transform: translateY(-3px);
+  }
+
+  .category-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* Image performance */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.hero-media img,
+.category-card img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  backface-visibility: hidden;
+}
+
+/* Smooth image hover */
+.category-card img {
+  transition: transform 0.45s ease;
+}
+
+@media (hover: hover) {
+  .category-card:hover img {
+    transform: scale(1.035);
+  }
+}
+
+/* Premium section entrance */
+@keyframes isaraFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-copy,
+.hero-media {
+  animation: isaraFadeUp 0.7s ease both;
+}
+
+.hero-media {
+  animation-delay: 0.12s;
+}
+
+/* Better mobile experience */
+@media (max-width: 650px) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .hero-copy,
+  .hero-media {
+    animation-duration: 0.45s;
+  }
+
+  .category-card,
+  .btn,
+  .whatsapp-float {
+    transition-duration: 0.2s;
+  }
+}
+
+/* Accessibility: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
