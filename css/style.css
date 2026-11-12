@@ -312,3 +312,16 @@ img {
   object-position: center 30%;
 }
 
+/* ISARA - Full Ethnic Outfit Visibility */
+
+.category-grid .category-card:first-child {
+  background: #e9dfd5;
+}
+
+.category-grid .category-card:first-child img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+  object-position: center center !important;
+}
+
