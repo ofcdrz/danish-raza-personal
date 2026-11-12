@@ -690,14 +690,17 @@ html { scroll-behavior: smooth; }
 <script src="js/site.js"></script>
 
 <!-- =========================================
-     LOGIN POPUP JAVASCRIPT
+     LOGIN POPUP JAVASCRIPT & GOOGLE SHEET
 ========================================== -->
 <script>
+  // Aapka Google Script URL yahan add ho gaya hai
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzh0yMfhA7Y7zW6x4Cj7-RLbdlfOlXjjjcOIa7TPgSiYjfgU_utuVF6N0EuBTCRTF4/exec";
+
   function openLoginPopup() {
     const modal = document.getElementById("whatsappLoginModal");
     if(modal) {
       modal.classList.add("open");
-      document.body.style.overflow = "hidden"; // Background scroll rokne ke liye
+      document.body.style.overflow = "hidden"; 
       
       // Reset forms
       document.getElementById("loginStep1").style.display = "block";
@@ -711,7 +714,7 @@ html { scroll-behavior: smooth; }
     const modal = document.getElementById("whatsappLoginModal");
     if(modal) {
       modal.classList.remove("open");
-      document.body.style.overflow = ""; // Scroll wapas chalu karein
+      document.body.style.overflow = ""; 
     }
   }
 
@@ -723,12 +726,38 @@ html { scroll-behavior: smooth; }
       return;
     }
 
-    // Yahan backend API call hogi (Future mein)
-    // Abhi ke liye hum sirf next step dikha rahe hain
-    
-    document.getElementById("displayNumber").innerText = "+91 " + number;
-    document.getElementById("loginStep1").style.display = "none";
-    document.getElementById("loginStep2").style.display = "block";
+    const btn = document.querySelector(".login-submit-btn");
+    const originalText = btn.innerText;
+    btn.innerText = "Saving...";
+    btn.disabled = true;
+
+    // Google Sheet me data bhejna
+    const formData = new FormData();
+    formData.append("mobile", number);
+
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      body: formData
+    })
+    .then(response => {
+      // Data save hone ke baad OTP step dikhayein
+      document.getElementById("displayNumber").innerText = "+91 " + number;
+      document.getElementById("loginStep1").style.display = "none";
+      document.getElementById("loginStep2").style.display = "block";
+      
+      btn.innerText = originalText;
+      btn.disabled = false;
+    })
+    .catch(error => {
+      // Agar Google Script URL galat ho ya error aaye tab bhi OTP screen dikhegi
+      console.log("Error:", error);
+      document.getElementById("displayNumber").innerText = "+91 " + number;
+      document.getElementById("loginStep1").style.display = "none";
+      document.getElementById("loginStep2").style.display = "block";
+      
+      btn.innerText = originalText;
+      btn.disabled = false;
+    });
   }
 
   function verifyOTP() {
@@ -739,8 +768,8 @@ html { scroll-behavior: smooth; }
       return;
     }
 
-    // Demo Verification (Future mein backend se verify hoga)
-    alert("Login Successful! (Demo)");
+    // Demo Verification
+    alert("Login Successful! Welcome to ISARA.");
     closeLoginPopup();
   }
 
