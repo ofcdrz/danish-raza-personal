@@ -9,25 +9,58 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/style.css">
 
 <style>
 /* =========================================
-   NEW HEADER BRAND LOGO (TOP LEFT)
+   GLOBAL & SCROLL ANIMATIONS
 ========================================= */
+html { scroll-behavior: smooth; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-copy > * {
+  animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  opacity: 0;
+}
+.hero-copy .eyebrow { animation-delay: 0.1s; }
+.hero-copy h1 { animation-delay: 0.2s; }
+.hero-copy p { animation-delay: 0.3s; }
+.hero-copy .hero-actions { animation-delay: 0.4s; }
+.hero-copy .hero-credit { animation-delay: 0.5s; }
+
+/* =========================================
+   PREMIUM HEADER (GLASS EFFECT)
+========================================= */
+.site-header {
+  background: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(230, 222, 211, 0.5);
+  transition: all 0.3s ease;
+}
+
 .brand-signature {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   text-decoration: none;
 }
 
 .header-signature-line {
-  width: 28px;
+  width: 30px;
   height: 1px;
   background: #b18a61;
+  transition: width 0.3s ease;
+}
+
+.brand-signature:hover .header-signature-line {
+  width: 45px; /* Hover par lines lambi hongi */
 }
 
 .header-signature-text {
@@ -38,49 +71,95 @@
 
 .header-signature-logo {
   font-family: 'Playfair Display', serif;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 500;
   letter-spacing: 6px;
   line-height: 1;
-  color: #29231f;
-  margin-right: -6px; /* letter-spacing fix */
+  color: #1a1614;
+  margin-right: -6px;
 }
 
 .header-signature-caption {
   font-family: 'DM Sans', sans-serif;
-  font-size: 7px;
-  letter-spacing: 3px;
+  font-size: 7.5px;
+  font-weight: 600;
+  letter-spacing: 3.5px;
   text-transform: uppercase;
   color: #a47c54;
-  margin-top: 4px;
-  margin-right: -3px;
+  margin-top: 5px;
+  margin-right: -3.5px;
 }
 
 /* =========================================
-   HERO SECTION & OTHERS
+   HERO SECTION
 ========================================= */
+.hero {
+  background: #fcfaf8;
+  position: relative;
+}
+
 .hero-copy {
   position: relative;
   overflow: hidden;
+  padding-right: 20px;
 }
 
 .hero-copy .eyebrow {
-  letter-spacing: 4px;
+  letter-spacing: 5px;
+  color: #a47c54;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.hero-copy h1 {
+  font: 400 clamp(3rem, 5.5vw, 4.8rem) "Playfair Display", serif;
+  line-height: 1.1;
+  margin-bottom: 25px;
+  color: #1a1614;
+}
+
+.hero-copy h1 em {
+  color: #b18a61;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.hero-copy p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: #6a6057;
+  max-width: 90%;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 35px;
+}
+
+/* Premium Button Hover */
+.btn {
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
 }
 
 .hero-credit {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 42px;
-  color: #8b7969;
+  gap: 12px;
+  margin-top: 50px;
+  color: #9a8c7e;
   font-size: 10px;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .hero-credit::before {
   content: "";
-  width: 28px;
+  width: 35px;
   height: 1px;
   background: #b18a61;
 }
@@ -88,19 +167,22 @@
 .hero-credit strong {
   color: #8b6846;
   font-weight: 600;
+  letter-spacing: 1.5px;
 }
 
+/* Watermark background */
 .hero-copy::after {
   content: "ISARA";
   position: absolute;
-  right: -35px;
-  bottom: -65px;
+  right: -40px;
+  bottom: -70px;
   font-family: 'Playfair Display', serif;
-  font-size: clamp(90px, 15vw, 190px);
-  letter-spacing: 12px;
-  color: rgba(177,138,97,0.045);
+  font-size: clamp(120px, 18vw, 220px);
+  letter-spacing: 15px;
+  color: rgba(177,138,97,0.05);
   pointer-events: none;
   z-index: 0;
+  font-weight: 600;
 }
 
 .hero-copy > * {
@@ -108,18 +190,31 @@
   z-index: 1;
 }
 
-/* COLLECTION IMAGE FRAME FIX */
+.hero-media {
+  overflow: hidden;
+}
 
+.hero-media img {
+  transition: transform 1.5s ease;
+}
+
+.hero:hover .hero-media img {
+  transform: scale(1.03); /* Slow zoom effect */
+}
+
+/* =========================================
+   COLLECTIONS (CARDS)
+========================================= */
 .category-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: 30px;
 }
 
 .category-card {
   position: relative !important;
   display: block !important;
-  height: 460px !important;
+  height: 520px !important; /* Thoda lamba kiya */
   min-height: 0 !important;
   overflow: hidden !important;
   background: #e8ded3;
@@ -139,6 +234,11 @@
   padding: 0 !important;
   border: 0 !important;
   z-index: -1;
+  transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+.category-card:hover > img {
+  transform: scale(1.06); /* Image zoom on hover */
 }
 
 /* Ethnic photo positioning */
@@ -161,24 +261,26 @@
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  padding: 28px !important;
+  padding: 35px !important;
   background: linear-gradient(
     to top,
-    rgba(24, 19, 16, 0.72) 0%,
-    rgba(24, 19, 16, 0.20) 38%,
-    rgba(24, 19, 16, 0) 72%
+    rgba(20, 15, 12, 0.8) 0%,
+    rgba(20, 15, 12, 0.3) 40%,
+    rgba(20, 15, 12, 0) 70%
   ) !important;
   z-index: 1;
 }
 
 .category-overlay h3 {
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   color: #fff;
+  font-size: 1.8rem;
 }
 
 .category-overlay p {
-  margin: 0 0 20px;
-  color: #fff;
+  margin: 0 0 25px;
+  color: #e0d6cd;
+  font-size: 14px;
 }
 
 .category-overlay .btn {
@@ -187,44 +289,46 @@
   justify-content: center;
   width: fit-content;
   margin: 0;
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 0;
 }
 
-/* MOBILE RESPONSIVE */
+.category-card:hover .category-overlay .btn {
+  background: #fff;
+  color: #1a1614;
+}
 
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
 @media (max-width: 650px) {
-  .header-signature-line {
-    width: 18px;
-  }
-  
-  .header-signature-logo {
-    font-size: 20px;
-    letter-spacing: 4px;
-    margin-right: -4px;
-  }
-  
-  .header-signature-caption {
-    font-size: 6px;
-    letter-spacing: 2px;
-    margin-right: -2px;
-  }
+  .header-signature-line { width: 18px; }
+  .header-signature-logo { font-size: 22px; letter-spacing: 4px; margin-right: -4px; }
+  .header-signature-caption { font-size: 6.5px; letter-spacing: 2.5px; margin-right: -2.5px; }
 
-  .hero-credit {
-    margin-top: 30px;
-    font-size: 9px;
+  .hero-copy h1 { font-size: 2.8rem; }
+  .hero-copy p { font-size: 14px; max-width: 100%; }
+  
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .hero-actions .btn {
+    width: 100%;
+    text-align: center;
   }
 
   .category-grid {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 20px;
   }
 
-  .category-card {
-    height: 420px !important;
-  }
-
-  .category-overlay {
-    padding: 22px !important;
-  }
+  .category-card { height: 450px !important; }
+  .category-overlay { padding: 25px !important; }
 }
 </style>
 </head>
@@ -237,7 +341,7 @@
 
 <header class="site-header">
   
-  <!-- NEW LOGO PLACED IN HEADER TOP LEFT -->
+  <!-- PREMIUM LOGO TOP LEFT -->
   <a class="brand-signature" href="index.html">
     <span class="header-signature-line"></span>
     <div class="header-signature-text">
@@ -269,8 +373,6 @@
 <section class="hero" id="home">
 
   <div class="hero-copy">
-
-    <!-- Removed the old logo block from here to make the heading pop -->
 
     <div class="eyebrow">The art of feminine elegance</div>
 
