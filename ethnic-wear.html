@@ -13,160 +13,44 @@
 <link rel="stylesheet" href="css/style.css">
 
 <style>
-.ethnic-intro {
-  text-align:center;
-  padding:65px 20px 40px;
-}
-.ethnic-intro h2 {
-  font:400 clamp(32px,5vw,48px) "Playfair Display",serif;
-  margin:12px 0;
-}
+.ethnic-intro {text-align:center;padding:65px 20px 40px;}
+.ethnic-intro h2 {font:400 clamp(32px,5vw,48px) "Playfair Display",serif;margin:12px 0;}
 .ethnic-intro p {color:#786f66;font-size:14px;}
 
-.design-container {
-  width:min(1100px,90%);
-  margin:0 auto 85px;
-}
-.design-card {
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:35px;
-  align-items:start;
-  background:#fff;
-  padding:22px;
-  border:1px solid #e6ded3;
-}
-.design-main {
-  cursor:zoom-in;
-  overflow:hidden;
-  background:#eee7dc;
-}
-.design-main img {
-  width:100%;
-  height:650px;
-  object-fit:cover;
-  display:block;
-  transition:transform .5s ease;
-}
+.design-container {width:min(1100px,90%);margin:0 auto 85px;}
+.design-card {display:grid;grid-template-columns:1.1fr .9fr;gap:35px;align-items:start;background:#fff;padding:22px;border:1px solid #e6ded3;}
+.design-main {cursor:zoom-in;overflow:hidden;background:#eee7dc;}
+.design-main img {width:100%;height:650px;object-fit:cover;display:block;transition:transform .5s ease;}
 .design-main:hover img {transform:scale(1.02);}
 
-.design-thumbnails {
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  margin-top:12px;
-}
-.design-thumbnails button {
-  border:2px solid transparent;
-  padding:0;
-  background:#eee7dc;
-  cursor:pointer;
-  overflow:hidden;
-}
-.design-thumbnails button.active {
-  border-color:#a77c55;
-}
-.design-thumbnails img {
-  width:100%;
-  height:110px;
-  object-fit:cover;
-  display:block;
-}
+.design-thumbnails {display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:12px;}
+.design-thumbnails button {border:2px solid transparent;padding:0;background:#eee7dc;cursor:pointer;overflow:hidden;}
+.design-thumbnails button.active {border-color:#a77c55;}
+.design-thumbnails img {width:100%;height:110px;object-fit:cover;display:block;}
 .design-info {padding:35px 15px;}
 .design-info .eyebrow {margin-bottom:12px;}
-.design-info h2 {
-  font:400 clamp(30px,4vw,43px) "Playfair Display",serif;
-  line-height:1.2;
-}
-.design-info p {
-  color:#786f66;
-  font-size:13px;
-  line-height:2;
-  margin:18px 0;
-}
-.design-number {
-  color:#a77c55;
-  font-size:11px;
-  letter-spacing:2px;
-  margin-bottom:15px;
-}
+.design-info h2 {font:400 clamp(30px,4vw,43px) "Playfair Display",serif;line-height:1.2;}
+.design-info p {color:#786f66;font-size:13px;line-height:2;margin:18px 0;}
+.design-number {color:#a77c55;font-size:11px;letter-spacing:2px;margin-bottom:15px;}
 .design-info .btn {margin-top:12px;}
 
-.lightbox {
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  background:rgba(12,12,12,.96);
-  align-items:center;
-  justify-content:center;
-  padding:65px 65px 45px;
-}
+.lightbox {display:none;position:fixed;inset:0;z-index:9999;background:rgba(12,12,12,.96);align-items:center;justify-content:center;padding:65px 65px 45px;}
 .lightbox.open {display:flex;}
-.lightbox img {
-  max-width:100%;
-  max-height:100%;
-  width:auto;
-  height:auto;
-  object-fit:contain;
-}
-.lightbox-close,.lightbox-prev,.lightbox-next {
-  position:absolute;
-  border:0;
-  background:rgba(255,255,255,.13);
-  color:white;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.lightbox-close {
-  top:18px;
-  right:22px;
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  font-size:27px;
-}
-.lightbox-prev,.lightbox-next {
-  top:50%;
-  transform:translateY(-50%);
-  width:48px;
-  height:58px;
-  border-radius:5px;
-  font-size:30px;
-}
+.lightbox img {max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;}
+.lightbox-close,.lightbox-prev,.lightbox-next {position:absolute;border:0;background:rgba(255,255,255,.13);color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.lightbox-close {top:18px;right:22px;width:44px;height:44px;border-radius:50%;font-size:27px;}
+.lightbox-prev,.lightbox-next {top:50%;transform:translateY(-50%);width:48px;height:58px;border-radius:5px;font-size:30px;}
 .lightbox-prev {left:15px;}
 .lightbox-next {right:15px;}
-.lightbox-count {
-  position:absolute;
-  bottom:18px;
-  color:white;
-  font-size:13px;
-  letter-spacing:2px;
-}
+.lightbox-count {position:absolute;bottom:18px;color:white;font-size:13px;letter-spacing:2px;}
 body.viewer-open {overflow:hidden;}
 
-.ethnic-contact {
-  text-align:center;
-  background:#eee7dc;
-  padding:65px 20px;
-}
-.ethnic-contact h2 {
-  font:400 clamp(30px,5vw,44px) "Playfair Display",serif;
-  margin:10px 0;
-}
-.ethnic-contact p {
-  color:#786f66;
-  margin-bottom:22px;
-}
+.ethnic-contact {text-align:center;background:#eee7dc;padding:65px 20px;}
+.ethnic-contact h2 {font:400 clamp(30px,5vw,44px) "Playfair Display",serif;margin:10px 0;}
+.ethnic-contact p {color:#786f66;margin-bottom:22px;}
 
 @media(max-width:750px) {
-  .design-card {
-    grid-template-columns:1fr;
-    gap:10px;
-    padding:12px;
-  }
+  .design-card {grid-template-columns:1fr;gap:10px;padding:12px;}
   .design-main img {height:470px;}
   .design-info {padding:20px 8px;}
   .design-thumbnails img {height:85px;}
@@ -224,28 +108,29 @@ A considered wardrobe for every celebration · Women's fashion by ISARA
 </section>
 
 <section class="design-container">
-
   <div class="design-card">
-
     <div>
       <div class="design-main" onclick="openViewer(0)">
         <img id="mainDesignImage"
-        src="ethnic-1.jpg.jpeg"
+        src="assets/assets/IMG_20261106_183032.jpg.jpeg"
         alt="ISARA Ethnic Wear Design">
       </div>
 
       <div class="design-thumbnails">
         <button class="active" onclick="changeDesign(0,this)" aria-label="View photo 1">
-          <img src="ethnic-1.jpg.jpeg" alt="Design photo 1">
+          <img src="assets/assets/IMG_20261106_183032.jpg.jpeg" alt="Design photo 1">
         </button>
         <button onclick="changeDesign(1,this)" aria-label="View photo 2">
-          <img src="ethnic-2.jpg.jpeg" alt="Design photo 2">
+          <img src="assets/assets/IMG_20261105_185917.jpg.jpeg" alt="Design photo 2">
         </button>
         <button onclick="changeDesign(2,this)" aria-label="View photo 3">
-          <img src="ethnic-3.jpg.jpeg" alt="Design photo 3">
+          <img src="assets/assets/IMG_20261106_183208.jpg.jpeg" alt="Design photo 3">
         </button>
         <button onclick="changeDesign(3,this)" aria-label="View photo 4">
-          <img src="ethnic-4.jpg.jpeg" alt="Design photo 4">
+          <img src="assets/assets/IMG_20261105_185926.jpg.jpeg" alt="Design photo 4">
+        </button>
+        <button onclick="changeDesign(4,this)" aria-label="View photo 5">
+          <img src="assets/assets/IMG_20261105_185911.jpg.jpeg" alt="Design photo 5">
         </button>
       </div>
     </div>
@@ -256,15 +141,13 @@ A considered wardrobe for every celebration · Women's fashion by ISARA
       <h2>Elegant Ethnic Wear</h2>
       <p>
         A graceful look rooted in tradition, crafted for festive and special occasions.
-        Explore all four photographs to view the design from different angles.
+        Explore all five photographs to view the design from different angles.
       </p>
       <p><strong>Price:</strong> On enquiry</p>
       <a class="btn" href="https://wa.me/919746699702?text=Hello%20ISARA%2C%20I%20am%20interested%20in%20your%20Ethnic%20Wear%20design."
       target="_blank" rel="noopener">Enquire on WhatsApp →</a>
     </div>
-
   </div>
-
 </section>
 
 <section class="ethnic-contact">
@@ -308,7 +191,7 @@ aria-modal="true" aria-label="Product photo viewer">
   <button class="lightbox-prev" onclick="moveViewer(-1)" aria-label="Previous photo">‹</button>
   <img id="lightboxImage" src="" alt="ISARA design full screen">
   <button class="lightbox-next" onclick="moveViewer(1)" aria-label="Next photo">›</button>
-  <div class="lightbox-count" id="lightboxCount">1 / 4</div>
+  <div class="lightbox-count" id="lightboxCount">1 / 5</div>
 </div>
 
 <script src="js/products.js"></script>
@@ -316,10 +199,11 @@ aria-modal="true" aria-label="Product photo viewer">
 
 <script>
 const designPhotos = [
-  "ethnic-1.jpg.jpeg",
-  "ethnic-2.jpg.jpeg",
-  "ethnic-3.jpg.jpeg",
-  "ethnic-4.jpg.jpeg"
+  "assets/assets/IMG_20261106_183032.jpg.jpeg",
+  "assets/assets/IMG_20261105_185917.jpg.jpeg",
+  "assets/assets/IMG_20261106_183208.jpg.jpeg",
+  "assets/assets/IMG_20261105_185926.jpg.jpeg",
+  "assets/assets/IMG_20261105_185911.jpg.jpeg"
 ];
 
 let currentPhoto = 0;
@@ -327,11 +211,9 @@ let currentPhoto = 0;
 function changeDesign(index, button) {
   currentPhoto = index;
   document.getElementById("mainDesignImage").src = designPhotos[index];
-
   document.querySelectorAll(".design-thumbnails button").forEach(btn => {
     btn.classList.remove("active");
   });
-
   button.classList.add("active");
 }
 
@@ -361,7 +243,6 @@ function updateViewer() {
 document.addEventListener("keydown", function(event) {
   const viewer = document.getElementById("lightbox");
   if (!viewer.classList.contains("open")) return;
-
   if (event.key === "Escape") closeViewer();
   if (event.key === "ArrowRight") moveViewer(1);
   if (event.key === "ArrowLeft") moveViewer(-1);
