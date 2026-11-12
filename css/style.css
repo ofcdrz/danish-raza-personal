@@ -353,4 +353,25 @@ img {
     min-height: 430px !important;
   }
 }
+/* ISARA Collection Cards Height Fix */
 
+#collections .category-card {
+    height: 540px !important;
+    min-height: 540px !important;
+    overflow: hidden;
+    position: relative;
+}
+
+#collections .category-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+@media (max-width: 650px) {
+    #collections .category-card {
+        height: 460px !important;
+        min-height: 460px !important;
+    }
+}
