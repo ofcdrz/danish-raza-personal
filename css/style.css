@@ -103,7 +103,11 @@ h1,h2,h3,.serif{font-family:"Playfair Display",Georgia,serif;font-weight:400}
  .footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:first-child{grid-column:1/-1}
  .product-detail{grid-template-columns:1fr;gap:25px;padding-top:25px}.detail-copy{position:static}.detail-gallery img{height:290px}.detail-gallery img:first-child{height:440px}
  .toolbar{align-items:flex-start;flex-direction:column}
-}/* ISARA Mobile Navigation Fix */
+}
+
+/* =================================
+   ISARA Mobile Navigation Fix (Transparent & Black Lines)
+================================= */
 @media (max-width: 650px) {
   .site-header {
     position: sticky;
@@ -111,16 +115,33 @@ h1,h2,h3,.serif{font-family:"Playfair Display",Georgia,serif;font-weight:400}
     z-index: 9999;
   }
 
+  /* Mobile Button - Transparent Background */
   .menu-toggle {
-    display: block;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: transparent !important; /* Black box hataya */
+    border: none !important;
+    padding: 0;
     cursor: pointer;
-    padding: 8px 12px;
-    color: var(--ink);
-    font-size: 26px;
     position: relative;
     z-index: 10001;
   }
 
+  /* 3 Lines - Black Color */
+  .menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--ink) !important; /* Lines ko black kiya */
+    transition: all 0.3s ease;
+  }
+
+  /* Dropdown Menu */
   .main-nav {
     display: none;
     position: absolute;
@@ -148,31 +169,6 @@ h1,h2,h3,.serif{font-family:"Playfair Display",Georgia,serif;font-weight:400}
     width: 100%;
     font-size: 13px;
     padding: 5px 0;
-  }
-}
-
-/* ISARA Visible Mobile Menu Button */
-@media (max-width: 650px) {
-  .menu-toggle {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 6px;
-    width: 44px;
-    height: 44px;
-    background: #171717 !important;
-    border: 1px solid #171717 !important;
-    border-radius: 4px;
-    color: #ffffff !important;
-    cursor: pointer;
-  }
-
-  .menu-toggle span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: #ffffff !important;
   }
 }
 
