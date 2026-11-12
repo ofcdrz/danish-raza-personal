@@ -299,3 +299,16 @@ img {
   }
 }
 
+/* ISARA Ethnic Wear Image Frame Adjustment */
+
+.category-card {
+  overflow: hidden;
+}
+
+.category-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
