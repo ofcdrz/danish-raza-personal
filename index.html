@@ -456,6 +456,9 @@ html { scroll-behavior: smooth; }
 
 <body>
 
+<!-- HIDDEN IFRAME FOR FORM SUBMISSION (CORS bypass) -->
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
 <div class="announcement">
   A considered wardrobe for every celebration · Women's fashion by ISARA
 </div>
@@ -693,8 +696,8 @@ html { scroll-behavior: smooth; }
      LOGIN POPUP JAVASCRIPT & GOOGLE SHEET
 ========================================== -->
 <script>
-  // Aapka Google Script URL yahan add ho gaya hai
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzh0yMfhA7Y7zW6x4Cj7-RLbdlfOlXjjjcOIa7TPgSiYjfgU_utuVF6N0EuBTCRTF4/exec";
+  // Aapka Naya Google Script URL yahan add ho gaya hai
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyVMr4irj4i5TpuNDCSE-tgzAOjbZ0t7WY3x1qwaPpoLKO2HPCWWPmo3SmwpXgCOpBs/exec";
 
   function openLoginPopup() {
     const modal = document.getElementById("whatsappLoginModal");
@@ -731,33 +734,31 @@ html { scroll-behavior: smooth; }
     btn.innerText = "Saving...";
     btn.disabled = true;
 
-    // Google Sheet me data bhejna
-    const formData = new FormData();
-    formData.append("mobile", number);
+    // Hidden Form Method (CORS bypass)
+    const form = document.createElement("form");
+    form.method = "GET"; 
+    form.action = GOOGLE_SCRIPT_URL; 
+    form.target = "hidden_iframe"; 
 
-    fetch(GOOGLE_SCRIPT_URL, {
-      method: "POST",
-      body: formData
-    })
-    .then(response => {
-      // Data save hone ke baad OTP step dikhayein
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "mobile";
+    input.value = number;
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+
+    // 1.5 seconds wait for data to save in background
+    setTimeout(() => {
       document.getElementById("displayNumber").innerText = "+91 " + number;
       document.getElementById("loginStep1").style.display = "none";
       document.getElementById("loginStep2").style.display = "block";
       
       btn.innerText = originalText;
       btn.disabled = false;
-    })
-    .catch(error => {
-      // Agar Google Script URL galat ho ya error aaye tab bhi OTP screen dikhegi
-      console.log("Error:", error);
-      document.getElementById("displayNumber").innerText = "+91 " + number;
-      document.getElementById("loginStep1").style.display = "none";
-      document.getElementById("loginStep2").style.display = "block";
-      
-      btn.innerText = originalText;
-      btn.disabled = false;
-    });
+    }, 1500);
   }
 
   function verifyOTP() {
@@ -768,7 +769,6 @@ html { scroll-behavior: smooth; }
       return;
     }
 
-    // Demo Verification
     alert("Login Successful! Welcome to ISARA.");
     closeLoginPopup();
   }
