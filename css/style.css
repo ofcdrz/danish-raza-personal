@@ -115,7 +115,6 @@ h1,h2,h3,.serif{font-family:"Playfair Display",Georgia,serif;font-weight:400}
     z-index: 9999;
   }
 
-  /* Mobile Button - Transparent Background */
   .menu-toggle {
     display: flex !important;
     align-items: center;
@@ -124,7 +123,7 @@ h1,h2,h3,.serif{font-family:"Playfair Display",Georgia,serif;font-weight:400}
     gap: 5px;
     width: 44px;
     height: 44px;
-    background: transparent !important; /* Black box hataya */
+    background: transparent !important;
     border: none !important;
     padding: 0;
     cursor: pointer;
@@ -132,16 +131,14 @@ h1,h2,h3,.serif{font-family:"Playfair Display",Georgia,serif;font-weight:400}
     z-index: 10001;
   }
 
-  /* 3 Lines - Black Color */
   .menu-toggle span {
     display: block;
     width: 24px;
     height: 2px;
-    background: var(--ink) !important; /* Lines ko black kiya */
+    background: var(--ink) !important;
     transition: all 0.3s ease;
   }
 
-  /* Dropdown Menu */
   .main-nav {
     display: none;
     position: absolute;
@@ -158,7 +155,6 @@ h1,h2,h3,.serif{font-family:"Playfair Display",Georgia,serif;font-weight:400}
     z-index: 10000;
   }
 
-  /* JavaScript active class ko show karega */
   .main-nav.active,
   .main-nav.open {
     display: flex !important;
@@ -174,28 +170,20 @@ h1,h2,h3,.serif{font-family:"Playfair Display",Georgia,serif;font-weight:400}
 
 /* =================================
    ISARA PREMIUM EXPERIENCE 2.0
-   Smooth Performance Upgrade
 ================================= */
-
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
-
-/* Better rendering */
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
-
-/* Smooth buttons and links */
 a, button {
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
-
 .btn,
 .main-nav a,
 .category-card,
@@ -207,24 +195,11 @@ a, button {
     transform 0.25s ease,
     opacity 0.25s ease;
 }
-
-/* Premium button hover */
 @media (hover: hover) {
-  .btn:hover {
-    transform: translateY(-3px);
-  }
-
-  .category-card:hover {
-    transform: translateY(-4px);
-  }
+  .btn:hover { transform: translateY(-3px); }
+  .category-card:hover { transform: translateY(-4px); }
 }
-
-/* Image performance */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
+img { max-width: 100%; height: auto; }
 .hero-media img,
 .category-card img {
   display: block;
@@ -232,62 +207,29 @@ img {
   object-fit: cover;
   backface-visibility: hidden;
 }
-
-/* Smooth image hover */
-.category-card img {
-  transition: transform 0.45s ease;
-}
-
+.category-card img { transition: transform 0.45s ease; }
 @media (hover: hover) {
-  .category-card:hover img {
-    transform: scale(1.035);
-  }
+  .category-card:hover img { transform: scale(1.035); }
 }
 
-/* Premium section entrance */
 @keyframes isaraFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
 .hero-copy,
 .hero-media {
   animation: isaraFadeUp 0.7s ease both;
 }
+.hero-media { animation-delay: 0.12s; }
 
-.hero-media {
-  animation-delay: 0.12s;
-}
-
-/* Better mobile experience */
 @media (max-width: 650px) {
-  html {
-    scroll-behavior: smooth;
-  }
-
-  .hero-copy,
-  .hero-media {
-    animation-duration: 0.45s;
-  }
-
-  .category-card,
-  .btn,
-  .whatsapp-float {
-    transition-duration: 0.2s;
-  }
+  html { scroll-behavior: smooth; }
+  .hero-copy, .hero-media { animation-duration: 0.45s; }
+  .category-card, .btn, .whatsapp-float { transition-duration: 0.2s; }
 }
 
-/* Accessibility: reduce motion */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -296,78 +238,157 @@ img {
 }
 
 /* ISARA - Ethnic Wear Premium Image Frame */
-
-#collections .category-grid .category-card:first-child {
-  overflow: hidden;
-  background: #e9dfd5;
-}
-
+#collections .category-grid .category-card:first-child { overflow: hidden; background: #e9dfd5; }
 #collections .category-grid .category-card:first-child > img {
-  display: block;
-  width: 100%;
-  height: 480px;
+  display: block; width: 100%; height: 480px;
   object-fit: cover !important;
   object-position: center 20% !important;
   transform: none !important;
 }
-
-/* Mobile image frame */
 @media (max-width: 650px) {
   #collections .category-grid .category-card:first-child > img {
     height: 420px;
     object-position: center 25% !important;
   }
 }
+
 /* ISARA Collection Image Size */
-.category-card {
-    height: 530px !important;
-    overflow: hidden;
+.category-card { height: 530px !important; overflow: hidden; }
+.category-card > img { width: 100%; height: 100%; object-fit: cover; object-position: center center; }
+.category-card { height: 530px !important; min-height: 530px !important; overflow: hidden; }
+.category-card img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 650px) {
+  .category-card { height: 430px !important; min-height: 430px !important; }
+}
+#collections .category-card { height: 540px !important; min-height: 540px !important; overflow: hidden; position: relative; }
+#collections .category-card img { width: 100%; height: 100%; object-fit: cover; object-position: center center; }
+@media (max-width: 650px) {
+    #collections .category-card { height: 460px !important; min-height: 460px !important; }
 }
 
-.category-card > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-}
-/* ISARA Collection Card Height Adjustment */
-.category-card {
-  height: 530px !important;
-  min-height: 530px !important;
-  overflow: hidden;
+
+/* =================================
+   WHATSAPP LOGIN POPUP DESIGN
+================================= */
+.login-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(20, 15, 12, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.category-card img {
+.login-modal.open {
+  display: flex;
+  opacity: 1;
+}
+
+.login-modal-content {
+  background: var(--ivory);
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 420px;
+  padding: 40px 35px;
+  border: 1px solid var(--line);
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
 }
 
-@media (max-width: 650px) {
-  .category-card {
-    height: 430px !important;
-    min-height: 430px !important;
+.login-modal.open .login-modal-content {
+  transform: translateY(0);
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.close-modal:hover {
+  color: var(--ink);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-header h2 {
+  font-size: 28px;
+  margin: 10px 0 8px;
+  color: var(--ink);
+}
+
+.login-header p {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  background: #fff;
+  margin-bottom: 20px;
+  padding: 0 15px;
+  transition: border-color 0.3s;
+}
+
+.input-group:focus-within {
+  border-color: var(--gold);
+}
+
+.country-code {
+  font-size: 14px;
+  color: var(--ink);
+  font-weight: 500;
+  padding-right: 12px;
+  border-right: 1px solid var(--line);
+}
+
+.input-group input {
+  width: 100%;
+  padding: 16px 12px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: transparent;
+  color: var(--ink);
+}
+
+.login-submit-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.resend-text {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 20px;
+}
+
+.resend-text a {
+  color: var(--gold);
+  text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+  .login-modal-content {
+    padding: 30px 20px;
+    width: 90%;
   }
-}
-/* ISARA Collection Cards Height Fix */
-
-#collections .category-card {
-    height: 540px !important;
-    min-height: 540px !important;
-    overflow: hidden;
-    position: relative;
-}
-
-#collections .category-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-}
-
-@media (max-width: 650px) {
-    #collections .category-card {
-        height: 460px !important;
-        min-height: 460px !important;
-    }
 }
