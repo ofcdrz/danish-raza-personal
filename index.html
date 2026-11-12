@@ -456,9 +456,6 @@ html { scroll-behavior: smooth; }
 
 <body>
 
-<!-- HIDDEN IFRAME FOR FORM SUBMISSION (CORS bypass) -->
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-
 <div class="announcement">
   A considered wardrobe for every celebration · Women's fashion by ISARA
 </div>
@@ -664,7 +661,7 @@ html { scroll-behavior: smooth; }
     
     <div class="login-header">
       <div class="eyebrow">ISARA Account</div>
-      <h2>Login with WhatsApp</h2>
+      <h2>Login with Phone</h2>
       <p>Enter your mobile number to receive a secure OTP.</p>
     </div>
 
@@ -674,14 +671,14 @@ html { scroll-behavior: smooth; }
         <span class="country-code">+91</span>
         <input type="tel" id="mobileNumber" placeholder="Enter 10-digit number" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
       </div>
-      <button class="btn login-submit-btn" onclick="sendOTP()">Send OTP via WhatsApp →</button>
+      <button class="btn login-submit-btn" onclick="sendOTP()">Send OTP →</button>
     </div>
 
     <!-- Step 2: OTP Form (Hidden initially) -->
     <div id="loginStep2" style="display: none;">
       <p style="font-size: 12px; color: #786f66; margin-bottom: 15px;">OTP sent to <strong id="displayNumber"></strong></p>
       <div class="input-group">
-        <input type="text" id="otpCode" placeholder="Enter 4-digit OTP" maxlength="4" style="text-align: center; letter-spacing: 8px; font-size: 18px;" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+        <input type="text" id="otpCode" placeholder="Enter 6-digit OTP" maxlength="6" style="text-align: center; letter-spacing: 8px; font-size: 18px;" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
       </div>
       <button class="btn login-submit-btn" onclick="verifyOTP()">Verify & Login →</button>
       <p class="resend-text">Didn't receive? <a href="javascript:void(0)" onclick="sendOTP()">Resend OTP</a></p>
@@ -689,23 +686,48 @@ html { scroll-behavior: smooth; }
   </div>
 </div>
 
+<!-- Recaptcha ke liye invisible container -->
+<div id="recaptcha-container"></div>
+
 <script src="js/products.js"></script>
 <script src="js/site.js"></script>
 
 <!-- =========================================
-     LOGIN POPUP JAVASCRIPT & GOOGLE SHEET
+     FIREBASE LOGIN JAVASCRIPT
 ========================================== -->
-<script>
-  // Aapka Naya Google Script URL yahan add ho gaya hai
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw1RqzToKyHEKFjRkxOg9_Lco292j_qtuB6Wy_oi81G63n62n5P4dDCOl1SA_huCTh5/exec";
+<script type="module">
+  // Firebase Modules Import karein
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-  function openLoginPopup() {
+  // Aapka Firebase Config
+  const firebaseConfig = {
+    apiKey: "AIzaSyBZTkVDMgZ9QhtI_XgWDvpLz82-yo3tTus",
+    authDomain: "isara-650a4.firebaseapp.com",
+    projectId: "isara-650a4",
+    storageBucket: "isara-650a4.firebasestorage.app",
+    messagingSenderId: "787157429434",
+    appId: "1:787157429434:web:c723bc59d05abdbd1c6683",
+    measurementId: "G-8H6GVFVDQ4"
+  };
+
+  // Firebase Initialize
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // ReCAPTCHA Setup
+  window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+    'size': 'invisible',
+    'callback': (response) => {
+      // reCAPTCHA solved
+    }
+  });
+
+  window.openLoginPopup = function() {
     const modal = document.getElementById("whatsappLoginModal");
     if(modal) {
       modal.classList.add("open");
       document.body.style.overflow = "hidden"; 
-      
-      // Reset forms
       document.getElementById("loginStep1").style.display = "block";
       document.getElementById("loginStep2").style.display = "none";
       document.getElementById("mobileNumber").value = "";
@@ -713,7 +735,7 @@ html { scroll-behavior: smooth; }
     }
   }
 
-  function closeLoginPopup() {
+  window.closeLoginPopup = function() {
     const modal = document.getElementById("whatsappLoginModal");
     if(modal) {
       modal.classList.remove("open");
@@ -721,59 +743,57 @@ html { scroll-behavior: smooth; }
     }
   }
 
-  function sendOTP() {
-    const number = document.getElementById("mobileNumber").value;
+  window.sendOTP = function() {
+    let number = document.getElementById("mobileNumber").value;
     
     if(number.length !== 10) {
       alert("Kripya 10 digit ka sahi mobile number daalein.");
       return;
     }
 
+    const fullNumber = "+91" + number;
     const btn = document.querySelector(".login-submit-btn");
     const originalText = btn.innerText;
-    btn.innerText = "Saving...";
+    btn.innerText = "Sending...";
     btn.disabled = true;
 
-    // Hidden Form Method (CORS bypass)
-    const form = document.createElement("form");
-    form.method = "GET"; 
-    form.action = GOOGLE_SCRIPT_URL; 
-    form.target = "hidden_iframe"; 
-
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = "mobile";
-    input.value = number;
-    form.appendChild(input);
-
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
-
-    // 1.5 seconds wait for data to save in background
-    setTimeout(() => {
-      document.getElementById("displayNumber").innerText = "+91 " + number;
-      document.getElementById("loginStep1").style.display = "none";
-      document.getElementById("loginStep2").style.display = "block";
-      
-      btn.innerText = originalText;
-      btn.disabled = false;
-    }, 1500);
+    // Firebase API Call
+    signInWithPhoneNumber(auth, fullNumber, window.recaptchaVerifier)
+      .then((confirmationResult) => {
+        window.confirmationResult = confirmationResult;
+        
+        document.getElementById("displayNumber").innerText = "+91 " + number;
+        document.getElementById("loginStep1").style.display = "none";
+        document.getElementById("loginStep2").style.display = "block";
+        
+        btn.innerText = originalText;
+        btn.disabled = false;
+      }).catch((error) => {
+        console.error("Error:", error);
+        alert("OTP bhejne me error aayi: " + error.message);
+        btn.innerText = originalText;
+        btn.disabled = false;
+      });
   }
 
-  function verifyOTP() {
+  window.verifyOTP = function() {
     const otp = document.getElementById("otpCode").value;
     
-    if(otp.length !== 4) {
-      alert("Kripya 4 digit ka OTP daalein.");
+    if(otp.length !== 6) {
+      alert("Kripya 6 digit ka OTP daalein.");
       return;
     }
 
-    alert("Login Successful! Welcome to ISARA.");
-    closeLoginPopup();
+    window.confirmationResult.confirm(otp).then((result) => {
+      // Login Successful
+      alert("Login Successful! Welcome to ISARA.");
+      closeLoginPopup();
+      console.log("User logged in:", result.user.phoneNumber);
+    }).catch((error) => {
+      alert("Galat OTP! Kripya sahi OTP daalein.");
+    });
   }
 
-  // Modal ke bahar click karne par band karna
   window.onclick = function(event) {
     const modal = document.getElementById("whatsappLoginModal");
     if (event.target === modal) {
