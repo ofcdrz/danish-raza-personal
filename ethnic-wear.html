@@ -1,29 +1,225 @@
+
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ISARA | Ethnic Wear</title><meta name="description" content="Graceful ethnic styles, thoughtfully selected for celebrations and special moments.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>ISARA | Ethnic Wear</title>
+<meta name="description" content="Discover elegant ethnic wear by ISARA. Graceful styles for celebrations and special moments.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css"></head><body><div class="announcement">A considered wardrobe for every celebration · Women's fashion by ISARA</div>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+.ethnic-feature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 65px;
+  padding-top: 45px;
+  padding-bottom: 90px;
+}
+
+.ethnic-image {
+  overflow: hidden;
+  background: #eee4d9;
+}
+
+.ethnic-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 760px;
+  object-fit: cover;
+  transition: transform .6s ease;
+}
+
+@media (hover:hover) {
+  .ethnic-image:hover img {
+    transform: scale(1.025);
+  }
+}
+
+.ethnic-content .eyebrow {
+  color: #a47c54;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.ethnic-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(34px, 5vw, 58px);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 18px 0;
+}
+
+.ethnic-content p {
+  color: #777;
+  line-height: 1.9;
+  max-width: 440px;
+  margin-bottom: 28px;
+}
+
+.ethnic-detail {
+  font-family: 'Playfair Display', serif;
+  color: #a47c54;
+  font-size: 16px;
+  font-style: italic;
+  margin-bottom: 28px;
+}
+
+@media(max-width:700px) {
+  .ethnic-feature {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding-top: 25px;
+    padding-bottom: 55px;
+  }
+
+  .ethnic-image img {
+    max-height: none;
+  }
+
+  .ethnic-content {
+    padding: 0 5px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="announcement">
+A considered wardrobe for every celebration · Women's fashion by ISARA
+</div>
+
 <header class="site-header">
   <a class="brand" href="index.html">ISARA</a>
-  <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button>
+
+  <button class="menu-toggle" type="button"
+    aria-label="Open navigation"
+    aria-expanded="false"
+    aria-controls="primary-navigation">
+    <span></span><span></span><span></span>
+  </button>
+
   <nav class="main-nav" id="primary-navigation">
-    <a href="index.html">Home</a><a href="index.html#collections">Collections</a>
-    <a href="ethnic-wear.html">Ethnic Wear</a><a href="party-wear.html">Party Wear</a><a href="index.html#about">Our Story</a><a href="index.html#contact">Contact</a>
+    <a href="index.html">Home</a>
+    <a href="index.html#collections">Collections</a>
+    <a href="ethnic-wear.html">Ethnic Wear</a>
+    <a href="party-wear.html">Party Wear</a>
+    <a href="index.html#about">Our Story</a>
+    <a href="index.html#contact">Contact</a>
   </nav>
 </header>
-<main><section class="page-hero"><div class="container"><div class="eyebrow">The heritage edit</div><h1>Ethnic Wear</h1><p>Graceful ethnic styles, thoughtfully selected for celebrations and special moments.</p></div></section>
-<div class="container"><div class="breadcrumb"><a href="index.html">HOME</a> / ETHNIC WEAR</div>
-<div class="empty-note ethnic-coming-soon"><h2>Coming soon</h2><p>We are thoughtfully curating our Ethnic Wear collection. New designs and photographs will appear here soon.</p><a class="btn" href="party-wear.html">Explore Party Wear</a></div></div></main>
-<footer class="footer">
-  <div class="footer-grid">
-    <div><a class="brand" href="index.html">ISARA</a><p>Thoughtfully curated women's fashion, celebrating individuality through graceful design and timeless style.</p></div>
-    <div><h4>Explore</h4><div class="footer-links"><a href="ethnic-wear.html">Ethnic Wear</a><a href="party-wear.html">Party Wear</a><a href="index.html#about">About ISARA</a></div></div>
-    <div><h4>Connect</h4><div class="footer-links"><a href="index.html#contact">Contact</a><a href="https://wa.me/919746699702" target="_blank" rel="noopener">WhatsApp Enquiry</a></div></div>
-  </div>
-  <div class="copyright">© 2026 ISARA. All Rights Reserved.</div>
-</footer><script src="js/products.js"></script>
 
+<main>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="eyebrow">The heritage edit</div>
+    <h1>Ethnic Wear</h1>
+    <p>Graceful styles. Timeless elegance. Made for your special moments.</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <div class="breadcrumb">
+    <a href="index.html">HOME</a> / ETHNIC WEAR
+  </div>
+
+  <section class="ethnic-feature">
+
+    <div class="ethnic-image">
+      <img
+        src="assets/assets/ethnic-wear.jpg"
+        alt="ISARA elegant pink ethnic wear outfit"
+        loading="eager">
+    </div>
+
+    <div class="ethnic-content">
+
+      <div class="eyebrow">ISARA · THE ETHNIC COLLECTION</div>
+
+      <h2>Elegance woven into every detail.</h2>
+
+      <p>
+        Discover a graceful expression of traditional beauty.
+        Our ethnic collection celebrates beautiful silhouettes,
+        intricate detailing and timeless feminine elegance.
+      </p>
+
+      <div class="ethnic-detail">
+        A beautiful look for unforgettable moments.
+      </div>
+
+      <a class="btn"
+        href="https://wa.me/919746699702?text=Hello%20ISARA%2C%20I%20would%20like%20to%20enquire%20about%20the%20Ethnic%20Wear%20collection."
+        target="_blank" rel="noopener">
+        Enquire on WhatsApp →
+      </a>
+
+    </div>
+
+  </section>
+
+</div>
+
+</main>
+
+<footer class="footer">
+
+  <div class="footer-grid">
+
+    <div>
+      <a class="brand" href="index.html">ISARA</a>
+      <p>
+        Thoughtfully curated women's fashion, celebrating individuality
+        through graceful design and timeless style.
+      </p>
+    </div>
+
+    <div>
+      <h4>Explore</h4>
+      <div class="footer-links">
+        <a href="ethnic-wear.html">Ethnic Wear</a>
+        <a href="party-wear.html">Party Wear</a>
+        <a href="index.html#about">About ISARA</a>
+      </div>
+    </div>
+
+    <div>
+      <h4>Connect</h4>
+      <div class="footer-links">
+        <a href="index.html#contact">Contact</a>
+        <a href="https://wa.me/919746699702" target="_blank" rel="noopener">WhatsApp Enquiry</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    © 2026 ISARA. All Rights Reserved.
+  </div>
+
+</footer>
+
+<script src="js/products.js"></script>
 <script src="js/site.js"></script>
-<a class="whatsapp-float" href="https://wa.me/919746699702?text=Hello%20ISARA%2C%20I%20would%20like%20to%20enquire%20about%20your%20collection." target="_blank" rel="noopener" aria-label="Chat with ISARA on WhatsApp"><span aria-hidden="true">✆</span> WhatsApp</a>
-</body></html>
+
+<a class="whatsapp-float"
+  href="https://wa.me/919746699702"
+  target="_blank" rel="noopener"
+  aria-label="Chat with ISARA on WhatsApp">
+  <span aria-hidden="true">✆</span> WhatsApp
+</a>
+
+</body>
+</html>
