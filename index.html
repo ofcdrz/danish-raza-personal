@@ -15,7 +15,7 @@
   --ivory: #faf8f4; --sand: #eee7dc; --ink: #28231f; --muted: #786f66; --gold: #a77c55; --line: #e6ded3; --white: #ffffff;
   
   /* Glassmorphism Variables */
-  --glass-bg: rgba(20, 15, 12, 0.65); /* Darker glass for better contrast */
+  --glass-bg: rgba(20, 15, 12, 0.65); 
   --glass-border: rgba(255, 255, 255, 0.2);
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   --header-bg: rgba(250, 248, 244, 0.75); 
@@ -109,7 +109,10 @@ img { max-width: 100%; display: block; }
 .category-card { position: relative !important; display: block !important; width: 100% !important; height: 540px !important; overflow: hidden !important; background: var(--sand); border-radius: 12px; transition: transform 0.6s ease, box-shadow 0.6s ease; }
 .category-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
 .category-card > img { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center 20% !important; transition: transform 1.2s ease !important; z-index: 1; }
-.category-card[href="party-wear.html"] > img { object-position: center 45% !important; }
+
+/* FIX: nth-child use kiya hai kyunki ab woh <a> tag nahi hai */
+.category-card:nth-child(2) > img { object-position: center 45% !important; } 
+
 .category-card:hover > img { transform: scale(1.08); }
 
 /* Chhota aur Sleek Glass Card */
@@ -117,7 +120,7 @@ img { max-width: 100%; display: block; }
   position: absolute !important; 
   bottom: 25px !important; 
   left: 25px !important; 
-  right: auto !important; /* Width ko content ke hisaab se adjust karne ke liye */
+  right: auto !important; 
   display: inline-flex !important; 
   flex-direction: column; 
   align-items: flex-start; 
@@ -227,25 +230,29 @@ img { max-width: 100%; display: block; }
       <h2>Explore our collections</h2>
       <p>Distinctive styles for celebrations, gatherings and moments worth remembering.</p>
     </div>
+    
     <div class="category-grid">
-      <a class="category-card" href="ethnic-wear.html">
+      
+      <!-- Ethnic Wear Card (Link replaced with clickable div) -->
+      <div class="category-card" onclick="window.location.href='ethnic-wear.html'" style="cursor: pointer;">
         <img src="assets/assets/Ethnic%20Wear.jpg" alt="Ethnic Wear" loading="lazy">
-        <!-- Refined Glass Overlay -->
         <div class="category-overlay">
           <h3>Ethnic Wear</h3>
           <p>Timeless elegance for every celebration.</p>
           <span class="btn">Explore →</span>
         </div>
-      </a>
-      <a class="category-card" href="party-wear.html">
+      </div>
+
+      <!-- Party Wear Card (Link replaced with clickable div) -->
+      <div class="category-card" onclick="window.location.href='party-wear.html'" style="cursor: pointer;">
         <img src="assets/assets/IMG_20261105_194316.jpg.jpeg" alt="Party Wear" loading="lazy">
-        <!-- Refined Glass Overlay -->
         <div class="category-overlay">
           <h3>Party Wear</h3>
           <p>Refined looks for special occasions.</p>
           <span class="btn">Explore →</span>
         </div>
-      </a>
+      </div>
+
     </div>
   </div>
 </section>
