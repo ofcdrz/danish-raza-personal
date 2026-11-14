@@ -15,34 +15,47 @@
 
 <style>
 /* =========================================
-   GLOBAL & SCROLL ANIMATIONS
+   GLOBAL & SMOOTH SCROLL
 ========================================= */
-html { scroll-behavior: smooth; }
+html { 
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
+/* Custom Selection Color */
+::selection {
+  background: #b18a61;
+  color: #fff;
+}
+
+/* =========================================
+   KEYFRAME ANIMATIONS
+========================================= */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.hero-copy > * {
-  animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-  opacity: 0;
+@keyframes slowZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
 }
-.hero-copy .eyebrow { animation-delay: 0.1s; }
-.hero-copy h1 { animation-delay: 0.2s; }
-.hero-copy p { animation-delay: 0.3s; }
-.hero-copy .hero-actions { animation-delay: 0.4s; }
-.hero-copy .hero-credit { animation-delay: 0.5s; }
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
 
 /* =========================================
    PREMIUM HEADER (GLASS EFFECT)
 ========================================= */
 .site-header {
-  background: rgba(255, 255, 255, 0.92) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(230, 222, 211, 0.5);
-  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(230, 222, 211, 0.6);
+  transition: all 0.4s ease;
 }
 
 .brand-signature {
@@ -56,11 +69,11 @@ html { scroll-behavior: smooth; }
   width: 30px;
   height: 1px;
   background: #b18a61;
-  transition: width 0.3s ease;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .brand-signature:hover .header-signature-line {
-  width: 45px;
+  width: 50px;
 }
 
 .header-signature-text {
@@ -90,12 +103,34 @@ html { scroll-behavior: smooth; }
   margin-right: -3.5px;
 }
 
+/* Nav Link Hover Underline */
+.main-nav a {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -4px;
+  left: 0;
+  background-color: #b18a61;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.main-nav a:hover::after {
+  width: 100%;
+}
+
 /* =========================================
    HERO SECTION
 ========================================= */
 .hero {
   background: #fcfaf8;
   position: relative;
+  overflow: hidden;
 }
 
 .hero-copy {
@@ -103,6 +138,16 @@ html { scroll-behavior: smooth; }
   overflow: hidden;
   padding-right: 20px;
 }
+
+.hero-copy > * {
+  animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+.hero-copy .eyebrow { animation-delay: 0.1s; }
+.hero-copy h1 { animation-delay: 0.2s; }
+.hero-copy p { animation-delay: 0.3s; }
+.hero-copy .hero-actions { animation-delay: 0.4s; }
+.hero-copy .hero-credit { animation-delay: 0.5s; }
 
 .hero-copy .eyebrow {
   letter-spacing: 5px;
@@ -131,7 +176,7 @@ html { scroll-behavior: smooth; }
   max-width: 90%;
 }
 
-/* Hero Actions (Explore Button) */
+/* Premium Button Style */
 .hero-actions {
   display: flex;
   gap: 15px;
@@ -139,11 +184,32 @@ html { scroll-behavior: smooth; }
 }
 
 .btn {
-  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
 }
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: #a47c54;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+
+.btn:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  color: #fff;
+  border-color: #a47c54;
+  box-shadow: 0 10px 25px rgba(164, 124, 84, 0.2);
 }
 
 .hero-credit {
@@ -179,27 +245,23 @@ html { scroll-behavior: smooth; }
   font-family: 'Playfair Display', serif;
   font-size: clamp(120px, 18vw, 220px);
   letter-spacing: 15px;
-  color: rgba(177,138,97,0.05);
+  color: rgba(177,138,97,0.04);
   pointer-events: none;
   z-index: 0;
   font-weight: 600;
 }
 
-.hero-copy > * {
-  position: relative;
-  z-index: 1;
-}
-
+/* Hero Image Smooth Slow Zoom */
 .hero-media {
   overflow: hidden;
+  position: relative;
 }
 
 .hero-media img {
-  transition: transform 1.5s ease;
-}
-
-.hero:hover .hero-media img {
-  transform: scale(1.03);
+  animation: slowZoom 20s infinite alternate ease-in-out;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 /* =========================================
@@ -219,6 +281,13 @@ html { scroll-behavior: smooth; }
   overflow: hidden !important;
   background: #e8ded3;
   isolation: isolate;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.category-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
 }
 
 .category-card > img {
@@ -234,11 +303,11 @@ html { scroll-behavior: smooth; }
   padding: 0 !important;
   border: 0 !important;
   z-index: -1;
-  transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .category-card:hover > img {
-  transform: scale(1.06);
+  transform: scale(1.08);
 }
 
 .category-card[href="ethnic-wear.html"] > img {
@@ -262,9 +331,9 @@ html { scroll-behavior: smooth; }
   padding: 35px !important;
   background: linear-gradient(
     to top,
-    rgba(20, 15, 12, 0.8) 0%,
-    rgba(20, 15, 12, 0.3) 40%,
-    rgba(20, 15, 12, 0) 70%
+    rgba(20, 15, 12, 0.85) 0%,
+    rgba(20, 15, 12, 0.3) 45%,
+    rgba(20, 15, 12, 0) 75%
   ) !important;
   z-index: 1;
 }
@@ -273,6 +342,12 @@ html { scroll-behavior: smooth; }
   margin: 0 0 10px;
   color: #fff;
   font-size: 1.8rem;
+  transform: translateY(0);
+  transition: transform 0.4s ease;
+}
+
+.category-card:hover .category-overlay h3 {
+  transform: translateY(-5px);
 }
 
 .category-overlay p {
@@ -292,11 +367,6 @@ html { scroll-behavior: smooth; }
   color: #fff;
   padding: 12px 24px;
   border-radius: 0;
-}
-
-.category-card:hover .category-overlay .btn {
-  background: #fff;
-  color: #1a1614;
 }
 
 /* =========================================
@@ -326,6 +396,9 @@ html { scroll-behavior: smooth; }
 
   .category-card { height: 450px !important; }
   .category-overlay { padding: 25px !important; }
+  
+  /* Mobile par heavy animations band karne ke liye */
+  .hero-media img { animation: none; }
 }
 </style>
 </head>
@@ -362,7 +435,6 @@ html { scroll-behavior: smooth; }
     <a href="party-wear.html">Party Wear</a>
     <a href="index.html#about">Our Story</a>
     <a href="index.html#contact">Contact</a>
-    <!-- Login button removed -->
   </nav>
 </header>
 
@@ -371,29 +443,22 @@ html { scroll-behavior: smooth; }
 <section class="hero" id="home">
 
   <div class="hero-copy">
-
     <div class="eyebrow">The art of feminine elegance</div>
-
     <h1>
       Elegance<br>
       <em>redefined.</em>
     </h1>
-
     <p>
       Discover ISARA — a considered world of women's ethnic and
       occasion wear, where graceful silhouettes meet thoughtful
       details and contemporary expression.
     </p>
-
     <div class="hero-actions">
       <a class="btn" href="#collections">Explore collections →</a>
     </div>
-
     <div class="hero-credit">
-      An exclusive brand experience by
-      <strong>Shahbaz Raza</strong>
+      An exclusive brand experience by <strong>Shahbaz Raza</strong>
     </div>
-
   </div>
 
   <div class="hero-media">
@@ -426,7 +491,6 @@ html { scroll-behavior: smooth; }
           src="assets/assets/Ethnic%20Wear.jpg"
           alt="ISARA Ethnic Wear Collection"
           loading="lazy">
-
         <div class="category-overlay">
           <h3>Ethnic Wear</h3>
           <p>Timeless elegance for every celebration.</p>
@@ -439,7 +503,6 @@ html { scroll-behavior: smooth; }
           src="assets/assets/IMG_20261105_194316.jpg.jpeg"
           alt="ISARA Party Wear"
           loading="lazy">
-
         <div class="category-overlay">
           <h3>Party Wear</h3>
           <p>Refined looks for special occasions.</p>
@@ -453,15 +516,12 @@ html { scroll-behavior: smooth; }
 
 <section class="section" style="background:#fff">
   <div class="container">
-
     <div class="section-head">
       <div class="eyebrow">A closer look</div>
       <h2>Selected designs</h2>
       <p>Explore selected party looks from the ISARA wardrobe.</p>
     </div>
-
     <div class="product-grid" id="featured-products"></div>
-
   </div>
 </section>
 
@@ -480,9 +540,7 @@ html { scroll-behavior: smooth; }
   <div class="eyebrow">Connect with ISARA</div>
   <h2>Let's find your look.</h2>
   <p>For prices, availability, sizing and styling enquiries, speak with our team.</p>
-
-  <a class="btn" href="https://wa.me/919746699702"
-    target="_blank" rel="noopener">
+  <a class="btn" href="https://wa.me/919746699702" target="_blank" rel="noopener" style="background: #1a1614; border-color: #1a1614;">
     Enquire on WhatsApp →
   </a>
 </section>
@@ -490,9 +548,7 @@ html { scroll-behavior: smooth; }
 </main>
 
 <footer class="footer">
-
   <div class="footer-grid">
-
     <div>
       <a class="brand" href="index.html">ISARA</a>
       <p>
@@ -500,7 +556,6 @@ html { scroll-behavior: smooth; }
         through graceful design and timeless style.
       </p>
     </div>
-
     <div>
       <h4>Explore</h4>
       <div class="footer-links">
@@ -509,22 +564,17 @@ html { scroll-behavior: smooth; }
         <a href="index.html#about">About ISARA</a>
       </div>
     </div>
-
     <div>
       <h4>Connect</h4>
       <div class="footer-links">
         <a href="index.html#contact">Contact</a>
-        <a href="https://wa.me/919746699702"
-          target="_blank" rel="noopener">WhatsApp Enquiry</a>
+        <a href="https://wa.me/919746699702" target="_blank" rel="noopener">WhatsApp Enquiry</a>
       </div>
     </div>
-
   </div>
-
   <div class="copyright">
     © 2026 ISARA. All Rights Reserved.
   </div>
-
 </footer>
 
 <script src="js/products.js"></script>
