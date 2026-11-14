@@ -40,7 +40,7 @@ img { max-width: 100%; display: block; }
 .main-nav a:hover::after { width: 100%; }
 .theme-toggle { background: transparent; border: 1px solid var(--line); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); transition: all 0.3s ease; margin-left: 5px; padding: 0; }
 .theme-toggle:hover { border-color: var(--gold); color: var(--gold); transform: rotate(15deg); }
-.menu-toggle { display: none; border: 0; background: none; font-size: 24px; cursor: pointer; }
+.menu-toggle { display: none; border: 0; background: none; font-size: 24px; cursor: pointer; color: var(--ink); }
 
 /* ================= BUTTONS ================= */
 .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 24px; background: var(--ink) !important; color: var(--ivory) !important; border: 1px solid var(--ink) !important; font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase; position: relative; overflow: hidden; z-index: 1; transition: all 0.4s ease; cursor: pointer; }
@@ -88,7 +88,7 @@ body.viewer-open { overflow:hidden; }
 .party-contact h2 { font:400 clamp(30px,5vw,44px) "Playfair Display",serif; margin:10px 0; color: var(--ink); }
 .party-contact p { color: var(--muted); margin-bottom:22px; }
 
-/* ================= FOOTER (ALWAYS DARK) ================= */
+/* ================= FOOTER ================= */
 .footer { background: #1a1614 !important; color: #d6ccc1 !important; padding: 50px 6% 25px; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 35px; max-width: 1200px; margin: auto; }
 .footer .brand { display: inline-block; color: #ffffff !important; margin-bottom: 12px; font-size: 26px; font-family: 'Playfair Display', serif; letter-spacing: 5px; }
@@ -107,7 +107,7 @@ body.viewer-open { overflow:hidden; }
 }
 @media(max-width: 650px) {
   .site-header { height: auto; padding: 15px 6%; flex-wrap: wrap; }
-  .menu-toggle { display: block; background: none; border: none; font-size: 24px; color: var(--ink); }
+  .menu-toggle { display: block; }
   .main-nav { display: none; width: 100%; padding: 15px 0; flex-direction: column; align-items: flex-start; gap: 15px; }
   .main-nav.active { display: flex; }
   .theme-toggle { margin: 10px 0 0 0; }
@@ -234,12 +234,10 @@ body.viewer-open { overflow:hidden; }
 </div>
 
 <script>
-  // Mobile Menu Toggle
   document.getElementById('menu-toggle').addEventListener('click', function() {
     document.getElementById('main-nav').classList.toggle('active');
   });
 
-  // Theme Logic
   const themeToggleBtn = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
   const htmlElement = document.documentElement;
@@ -258,7 +256,6 @@ body.viewer-open { overflow:hidden; }
     }
   });
 
-  // Gallery Logic
   const designPhotos = [
     "assets/assets/IMG_20261105_194316.jpg.jpeg", "assets/assets/IMG_20261105_194324.jpg.jpeg",
     "assets/assets/IMG_20261105_194327.jpg.jpeg", "assets/assets/IMG_20261105_194328.jpg.jpeg"
