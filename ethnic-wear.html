@@ -13,58 +13,127 @@
 <link rel="stylesheet" href="css/style.css">
 
 <style>
-.ethnic-intro {text-align:center;padding:65px 20px 40px;}
-.ethnic-intro h2 {font:400 clamp(32px,5vw,48px) "Playfair Display",serif;margin:12px 0;}
-.ethnic-intro p {color:#786f66;font-size:14px;}
+/* =========================================
+   THEME VARIABLES (Light & Dark)
+========================================= */
+:root {
+  --ivory: #faf8f4;
+  --sand: #eee7dc;
+  --ink: #28231f;
+  --muted: #786f66;
+  --gold: #a77c55;
+  --line: #e6ded3;
+  --white: #ffffff;
+  --header-bg: rgba(255, 255, 255, 0.85);
+}
 
-.design-container {width:min(1100px,90%);margin:0 auto 85px;}
-.design-card {display:grid;grid-template-columns:1.1fr .9fr;gap:35px;align-items:start;background:#fff;padding:22px;border:1px solid #e6ded3;}
-.design-main {cursor:zoom-in;overflow:hidden;background:#eee7dc;}
-.design-main img {width:100%;height:650px;object-fit:cover;display:block;transition:transform .5s ease;}
-.design-main:hover img {transform:scale(1.02);}
+[data-theme="dark"] {
+  --ivory: #12100e;
+  --sand: #1a1715;
+  --ink: #f4f1ec;
+  --muted: #a89f95;
+  --gold: #c49a72;
+  --line: #2e2823;
+  --white: #1c1815;
+  --header-bg: rgba(18, 16, 14, 0.85);
+}
 
-.design-thumbnails {display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:12px;}
-.design-thumbnails button {border:2px solid transparent;padding:0;background:#eee7dc;cursor:pointer;overflow:hidden;}
-.design-thumbnails button.active {border-color:#a77c55;}
-.design-thumbnails img {width:100%;height:110px;object-fit:cover;display:block;}
-.design-info {padding:35px 15px;}
-.design-info .eyebrow {margin-bottom:12px;}
-.design-info h2 {font:400 clamp(30px,4vw,43px) "Playfair Display",serif;line-height:1.2;}
-.design-info p {color:#786f66;font-size:13px;line-height:2;margin:18px 0;}
-.design-number {color:#a77c55;font-size:11px;letter-spacing:2px;margin-bottom:15px;}
-.design-info .btn {margin-top:12px;}
+/* =========================================
+   GLOBAL & SMOOTH TRANSITIONS
+========================================= */
+html { scroll-behavior: smooth; }
+body {
+  background-color: var(--ivory);
+  color: var(--ink);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
 
-.lightbox {display:none;position:fixed;inset:0;z-index:9999;background:rgba(12,12,12,.96);align-items:center;justify-content:center;padding:65px 65px 45px;}
-.lightbox.open {display:flex;}
-.lightbox img {max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;}
-.lightbox-close,.lightbox-prev,.lightbox-next {position:absolute;border:0;background:rgba(255,255,255,.13);color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-.lightbox-close {top:18px;right:22px;width:44px;height:44px;border-radius:50%;font-size:27px;}
-.lightbox-prev,.lightbox-next {top:50%;transform:translateY(-50%);width:48px;height:58px;border-radius:5px;font-size:30px;}
-.lightbox-prev {left:15px;}
-.lightbox-next {right:15px;}
-.lightbox-count {position:absolute;bottom:18px;color:white;font-size:13px;letter-spacing:2px;}
-body.viewer-open {overflow:hidden;}
+/* =========================================
+   HEADER & THEME TOGGLE
+========================================= */
+.site-header {
+  background: var(--header-bg) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+  transition: all 0.4s ease;
+}
+.brand-signature { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.header-signature-line { width: 30px; height: 1px; background: var(--gold); transition: width 0.4s ease; }
+.brand-signature:hover .header-signature-line { width: 45px; }
+.header-signature-text { display: flex; flex-direction: column; align-items: center; }
+.header-signature-logo { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500; letter-spacing: 6px; line-height: 1; color: var(--ink); margin-right: -6px; }
+.header-signature-caption { font-family: 'DM Sans', sans-serif; font-size: 7.5px; font-weight: 600; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); margin-top: 5px; margin-right: -3.5px; }
+.main-nav a { position: relative; color: var(--ink); transition: color 0.3s ease; }
+.main-nav a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0; background-color: var(--gold); transition: width 0.4s ease; }
+.main-nav a:hover::after { width: 100%; }
 
-.ethnic-contact {text-align:center;background:#eee7dc;padding:65px 20px;}
-.ethnic-contact h2 {font:400 clamp(30px,5vw,44px) "Playfair Display",serif;margin:10px 0;}
-.ethnic-contact p {color:#786f66;margin-bottom:22px;}
+.theme-toggle {
+  background: transparent; border: 1px solid var(--line); border-radius: 50%;
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--ink); transition: all 0.3s ease; margin-left: 5px; padding: 0;
+}
+.theme-toggle:hover { border-color: var(--gold); color: var(--gold); transform: rotate(15deg); }
+
+/* =========================================
+   ETHNIC PAGE STYLES
+========================================= */
+.page-hero { background: var(--sand); padding: 65px 0; text-align: center; transition: background 0.5s ease; }
+.page-hero h1 { font-size: clamp(42px,6vw,68px); margin:8px 0; font-family: "Playfair Display",serif; font-weight: 400; color: var(--ink); }
+.page-hero p { color: var(--muted); font-size:13px; }
+
+.ethnic-intro { text-align:center; padding:65px 20px 40px; }
+.ethnic-intro h2 { font:400 clamp(32px,5vw,48px) "Playfair Display",serif; margin:12px 0; color: var(--ink); }
+.ethnic-intro p { color: var(--muted); font-size:14px; }
+
+.design-container { width:min(1100px,90%); margin:0 auto 85px; }
+.design-card { display:grid; grid-template-columns:1.1fr .9fr; gap:35px; align-items:start; background: var(--white); padding:22px; border:1px solid var(--line); transition: background 0.5s ease, border 0.5s ease; }
+.design-main { cursor:zoom-in; overflow:hidden; background: var(--sand); }
+.design-main img { width:100%; height:650px; object-fit:cover; display:block; transition:transform .5s ease; }
+.design-main:hover img { transform:scale(1.02); }
+
+.design-thumbnails { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:12px; }
+.design-thumbnails button { border:2px solid transparent; padding:0; background: var(--sand); cursor:pointer; overflow:hidden; transition: border 0.3s; }
+.design-thumbnails button.active { border-color: var(--gold); }
+.design-thumbnails img { width:100%; height:110px; object-fit:cover; display:block; }
+
+.design-info { padding:35px 15px; }
+.design-info .eyebrow { margin-bottom:12px; color: var(--gold); font-size:10px; letter-spacing:4px; text-transform:uppercase; font-weight:600; }
+.design-info h2 { font:400 clamp(30px,4vw,43px) "Playfair Display",serif; line-height:1.2; color: var(--ink); }
+.design-info p { color: var(--muted); font-size:13px; line-height:2; margin:18px 0; }
+.design-number { color: var(--gold); font-size:11px; letter-spacing:2px; margin-bottom:15px; }
+.design-info .btn { margin-top:12px; }
+
+/* Lightbox */
+.lightbox { display:none; position:fixed; inset:0; z-index:9999; background:rgba(12,12,12,.96); align-items:center; justify-content:center; padding:65px 65px 45px; }
+.lightbox.open { display:flex; }
+.lightbox img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+.lightbox-close,.lightbox-prev,.lightbox-next { position:absolute; border:0; background:rgba(255,255,255,.13); color:white; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.lightbox-close { top:18px; right:22px; width:44px; height:44px; border-radius:50%; font-size:27px; }
+.lightbox-prev,.lightbox-next { top:50%; transform:translateY(-50%); width:48px; height:58px; border-radius:5px; font-size:30px; }
+.lightbox-prev { left:15px; } .lightbox-next { right:15px; }
+.lightbox-count { position:absolute; bottom:18px; color:white; font-size:13px; letter-spacing:2px; }
+body.viewer-open { overflow:hidden; }
+
+.ethnic-contact { text-align:center; background: var(--sand); padding:65px 20px; transition: background 0.5s ease; }
+.ethnic-contact h2 { font:400 clamp(30px,5vw,44px) "Playfair Display",serif; margin:10px 0; color: var(--ink); }
+.ethnic-contact p { color: var(--muted); margin-bottom:22px; }
 
 @media(max-width:750px) {
-  .design-card {grid-template-columns:1fr;gap:10px;padding:12px;}
-  .design-main img {height:470px;}
-  .design-info {padding:20px 8px;}
-  .design-thumbnails img {height:85px;}
+  .design-card { grid-template-columns:1fr; gap:10px; padding:12px; }
+  .design-main img { height:470px; }
+  .design-info { padding:20px 8px; }
+  .design-thumbnails img { height:85px; }
 }
 @media(max-width:500px) {
-  .ethnic-intro {padding:45px 18px 28px;}
-  .design-container {width:93%;margin-bottom:55px;}
-  .design-main img {height:390px;}
-  .design-thumbnails {gap:7px;}
-  .design-thumbnails img {height:75px;}
-  .lightbox {padding:55px 8px 45px;}
-  .lightbox-prev {left:5px;}
-  .lightbox-next {right:5px;}
-  .lightbox-prev,.lightbox-next {width:36px;height:48px;}
+  .ethnic-intro { padding:45px 18px 28px; }
+  .design-container { width:93%; margin-bottom:55px; }
+  .design-main img { height:390px; }
+  .design-thumbnails { gap:7px; }
+  .design-thumbnails img { height:75px; }
+  .lightbox { padding:55px 8px 45px; }
+  .lightbox-prev { left:5px; } .lightbox-next { right:5px; }
+  .lightbox-prev,.lightbox-next { width:36px; height:48px; }
 }
 </style>
 </head>
@@ -76,11 +145,19 @@ A considered wardrobe for every celebration · Women's fashion by ISARA
 </div>
 
 <header class="site-header">
-  <a class="brand" href="index.html">ISARA</a>
-  <button class="menu-toggle" type="button" aria-label="Open navigation"
-  aria-expanded="false" aria-controls="primary-navigation">
+  <a class="brand-signature" href="index.html">
+    <span class="header-signature-line"></span>
+    <div class="header-signature-text">
+      <span class="header-signature-logo">ISARA</span>
+      <span class="header-signature-caption">The House of Elegance</span>
+    </div>
+    <span class="header-signature-line"></span>
+  </a>
+
+  <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation">
     <span></span><span></span><span></span>
   </button>
+
   <nav class="main-nav" id="primary-navigation">
     <a href="index.html">Home</a>
     <a href="index.html#collections">Collections</a>
@@ -88,6 +165,13 @@ A considered wardrobe for every celebration · Women's fashion by ISARA
     <a href="party-wear.html">Party Wear</a>
     <a href="index.html#about">Our Story</a>
     <a href="index.html#contact">Contact</a>
+    
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark/Light Mode">
+      <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
   </nav>
 </header>
 
@@ -95,14 +179,14 @@ A considered wardrobe for every celebration · Women's fashion by ISARA
 
 <section class="page-hero">
   <div class="container">
-    <div class="eyebrow">The timeless edit</div>
+    <div class="eyebrow" style="color:var(--gold);">The timeless edit</div>
     <h1>Ethnic Wear</h1>
     <p>Discover graceful traditional looks crafted for every occasion.</p>
   </div>
 </section>
 
 <section class="ethnic-intro">
-  <div class="eyebrow">The ISARA collection</div>
+  <div class="eyebrow" style="color:var(--gold);">The ISARA collection</div>
   <h2>Tradition, reimagined.</h2>
   <p>Explore our selected ethnic wear design.</p>
 </section>
@@ -111,27 +195,14 @@ A considered wardrobe for every celebration · Women's fashion by ISARA
   <div class="design-card">
     <div>
       <div class="design-main" onclick="openViewer(0)">
-        <img id="mainDesignImage"
-        src="assets/assets/IMG_20261106_183032.jpg.jpeg"
-        alt="ISARA Ethnic Wear Design">
+        <img id="mainDesignImage" src="assets/assets/IMG_20261106_183032.jpg.jpeg" alt="ISARA Ethnic Wear Design">
       </div>
-
       <div class="design-thumbnails">
-        <button class="active" onclick="changeDesign(0,this)" aria-label="View photo 1">
-          <img src="assets/assets/IMG_20261106_183032.jpg.jpeg" alt="Design photo 1">
-        </button>
-        <button onclick="changeDesign(1,this)" aria-label="View photo 2">
-          <img src="assets/assets/IMG_20261105_185917.jpg.jpeg" alt="Design photo 2">
-        </button>
-        <button onclick="changeDesign(2,this)" aria-label="View photo 3">
-          <img src="assets/assets/IMG_20261106_183208.jpg.jpeg" alt="Design photo 3">
-        </button>
-        <button onclick="changeDesign(3,this)" aria-label="View photo 4">
-          <img src="assets/assets/IMG_20261105_185926.jpg.jpeg" alt="Design photo 4">
-        </button>
-        <button onclick="changeDesign(4,this)" aria-label="View photo 5">
-          <img src="assets/assets/IMG_20261105_185911.jpg.jpeg" alt="Design photo 5">
-        </button>
+        <button class="active" onclick="changeDesign(0,this)"><img src="assets/assets/IMG_20261106_183032.jpg.jpeg" alt="Design 1"></button>
+        <button onclick="changeDesign(1,this)"><img src="assets/assets/IMG_20261105_185917.jpg.jpeg" alt="Design 2"></button>
+        <button onclick="changeDesign(2,this)"><img src="assets/assets/IMG_20261106_183208.jpg.jpeg" alt="Design 3"></button>
+        <button onclick="changeDesign(3,this)"><img src="assets/assets/IMG_20261105_185926.jpg.jpeg" alt="Design 4"></button>
+        <button onclick="changeDesign(4,this)"><img src="assets/assets/IMG_20261105_185911.jpg.jpeg" alt="Design 5"></button>
       </div>
     </div>
 
@@ -139,58 +210,52 @@ A considered wardrobe for every celebration · Women's fashion by ISARA
       <div class="eyebrow">ISARA · ETHNIC WEAR</div>
       <div class="design-number">DESIGN NO. 01</div>
       <h2>Elegant Ethnic Wear</h2>
-      <p>
-        A graceful look rooted in tradition, crafted for festive and special occasions.
-        Explore all five photographs to view the design from different angles.
-      </p>
+      <p>A graceful look rooted in tradition, crafted for festive and special occasions. Explore all five photographs.</p>
       <p><strong>Price:</strong> On enquiry</p>
-      <a class="btn" href="https://wa.me/919746699702?text=Hello%20ISARA%2C%20I%20am%20interested%20in%20your%20Ethnic%20Wear%20design."
-      target="_blank" rel="noopener">Enquire on WhatsApp →</a>
+      <a class="btn" href="https://wa.me/919746699702?text=Hello%20ISARA%2C%20I%20am%20interested%20in%20your%20Ethnic%20Wear%20design." target="_blank" rel="noopener">Enquire on WhatsApp →</a>
     </div>
   </div>
 </section>
 
 <section class="ethnic-contact">
-  <div class="eyebrow">Connect with ISARA</div>
+  <div class="eyebrow" style="color:var(--gold);">Connect with ISARA</div>
   <h2>Find your perfect look.</h2>
   <p>For prices, availability and styling enquiries, contact us.</p>
-  <a class="btn" href="https://wa.me/919746699702"
-  target="_blank" rel="noopener">Enquire on WhatsApp →</a>
+  <a class="btn" href="https://wa.me/919746699702" target="_blank" rel="noopener">Enquire on WhatsApp →</a>
 </section>
 
 </main>
 
-<footer class="footer">
+<footer class="footer" style="background:var(--ink); transition:background 0.5s ease;">
   <div class="footer-grid">
     <div>
-      <a class="brand" href="index.html">ISARA</a>
-      <p>Thoughtfully curated women's fashion, celebrating individuality through graceful design and timeless style.</p>
+      <a class="brand" href="index.html" style="color:var(--white);">ISARA</a>
+      <p style="color:var(--muted);">Thoughtfully curated women's fashion, celebrating individuality through graceful design and timeless style.</p>
     </div>
     <div>
-      <h4>Explore</h4>
+      <h4 style="color:var(--white);">Explore</h4>
       <div class="footer-links">
-        <a href="ethnic-wear.html">Ethnic Wear</a>
-        <a href="party-wear.html">Party Wear</a>
-        <a href="index.html#about">About ISARA</a>
+        <a href="ethnic-wear.html" style="color:var(--muted);">Ethnic Wear</a>
+        <a href="party-wear.html" style="color:var(--muted);">Party Wear</a>
+        <a href="index.html#about" style="color:var(--muted);">About ISARA</a>
       </div>
     </div>
     <div>
-      <h4>Connect</h4>
+      <h4 style="color:var(--white);">Connect</h4>
       <div class="footer-links">
-        <a href="index.html#contact">Contact</a>
-        <a href="https://wa.me/919746699702">WhatsApp Enquiry</a>
+        <a href="index.html#contact" style="color:var(--muted);">Contact</a>
+        <a href="https://wa.me/919746699702" style="color:var(--muted);">WhatsApp Enquiry</a>
       </div>
     </div>
   </div>
-  <div class="copyright">© 2026 ISARA. All Rights Reserved.</div>
+  <div class="copyright" style="color:var(--muted); border-color:var(--line);">© 2026 ISARA. All Rights Reserved.</div>
 </footer>
 
-<div class="lightbox" id="lightbox" role="dialog"
-aria-modal="true" aria-label="Product photo viewer">
-  <button class="lightbox-close" onclick="closeViewer()" aria-label="Close">×</button>
-  <button class="lightbox-prev" onclick="moveViewer(-1)" aria-label="Previous photo">‹</button>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lightbox-close" onclick="closeViewer()">×</button>
+  <button class="lightbox-prev" onclick="moveViewer(-1)">‹</button>
   <img id="lightboxImage" src="" alt="ISARA design full screen">
-  <button class="lightbox-next" onclick="moveViewer(1)" aria-label="Next photo">›</button>
+  <button class="lightbox-next" onclick="moveViewer(1)">›</button>
   <div class="lightbox-count" id="lightboxCount">1 / 5</div>
 </div>
 
@@ -198,6 +263,30 @@ aria-modal="true" aria-label="Product photo viewer">
 <script src="js/site.js"></script>
 
 <script>
+// Theme Logic
+const themeToggleBtn = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+const htmlElement = document.documentElement;
+const sunIcon = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
+const moonIcon = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+
+if (localStorage.getItem('isara-theme') === 'dark') {
+  htmlElement.setAttribute('data-theme', 'dark');
+  themeIcon.innerHTML = moonIcon;
+}
+themeToggleBtn.addEventListener('click', () => {
+  if (htmlElement.getAttribute('data-theme') === 'dark') {
+    htmlElement.removeAttribute('data-theme');
+    localStorage.setItem('isara-theme', 'light');
+    themeIcon.innerHTML = sunIcon;
+  } else {
+    htmlElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('isara-theme', 'dark');
+    themeIcon.innerHTML = moonIcon;
+  }
+});
+
+// Gallery Logic
 const designPhotos = [
   "assets/assets/IMG_20261106_183032.jpg.jpeg",
   "assets/assets/IMG_20261105_185917.jpg.jpeg",
@@ -205,40 +294,18 @@ const designPhotos = [
   "assets/assets/IMG_20261105_185926.jpg.jpeg",
   "assets/assets/IMG_20261105_185911.jpg.jpeg"
 ];
-
 let currentPhoto = 0;
 
 function changeDesign(index, button) {
   currentPhoto = index;
   document.getElementById("mainDesignImage").src = designPhotos[index];
-  document.querySelectorAll(".design-thumbnails button").forEach(btn => {
-    btn.classList.remove("active");
-  });
+  document.querySelectorAll(".design-thumbnails button").forEach(btn => btn.classList.remove("active"));
   button.classList.add("active");
 }
-
-function openViewer(index) {
-  currentPhoto = index;
-  updateViewer();
-  document.getElementById("lightbox").classList.add("open");
-  document.body.classList.add("viewer-open");
-}
-
-function closeViewer() {
-  document.getElementById("lightbox").classList.remove("open");
-  document.body.classList.remove("viewer-open");
-}
-
-function moveViewer(direction) {
-  currentPhoto = (currentPhoto + direction + designPhotos.length) % designPhotos.length;
-  updateViewer();
-}
-
-function updateViewer() {
-  document.getElementById("lightboxImage").src = designPhotos[currentPhoto];
-  document.getElementById("lightboxCount").textContent =
-    (currentPhoto + 1) + " / " + designPhotos.length;
-}
+function openViewer(index) { currentPhoto = index; updateViewer(); document.getElementById("lightbox").classList.add("open"); document.body.classList.add("viewer-open"); }
+function closeViewer() { document.getElementById("lightbox").classList.remove("open"); document.body.classList.remove("viewer-open"); }
+function moveViewer(direction) { currentPhoto = (currentPhoto + direction + designPhotos.length) % designPhotos.length; updateViewer(); }
+function updateViewer() { document.getElementById("lightboxImage").src = designPhotos[currentPhoto]; document.getElementById("lightboxCount").textContent = (currentPhoto + 1) + " / " + designPhotos.length; }
 
 document.addEventListener("keydown", function(event) {
   const viewer = document.getElementById("lightbox");
@@ -247,26 +314,12 @@ document.addEventListener("keydown", function(event) {
   if (event.key === "ArrowRight") moveViewer(1);
   if (event.key === "ArrowLeft") moveViewer(-1);
 });
-
 let touchStartX = 0;
-
-document.getElementById("lightbox").addEventListener("touchstart", function(event) {
-  touchStartX = event.changedTouches[0].screenX;
-}, {passive:true});
-
+document.getElementById("lightbox").addEventListener("touchstart", function(event) { touchStartX = event.changedTouches[0].screenX; }, {passive:true});
 document.getElementById("lightbox").addEventListener("touchend", function(event) {
   const difference = event.changedTouches[0].screenX - touchStartX;
-  if (Math.abs(difference) > 50) {
-    moveViewer(difference < 0 ? 1 : -1);
-  }
+  if (Math.abs(difference) > 50) moveViewer(difference < 0 ? 1 : -1);
 }, {passive:true});
 </script>
-
-<a class="whatsapp-float"
-href="https://wa.me/919746699702"
-target="_blank" rel="noopener" aria-label="WhatsApp enquiry">
-<span aria-hidden="true">✆</span> WhatsApp
-</a>
-
 </body>
 </html>
