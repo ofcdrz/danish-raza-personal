@@ -52,12 +52,12 @@ img { max-width: 100%; display: block; }
 .btn:hover::before { transform: scaleX(1); transform-origin: left; }
 .btn:hover { color: var(--btn-text) !important; border-color: var(--gold) !important; box-shadow: 0 10px 20px rgba(164, 124, 84, 0.2); }
 
-/* ================= HERO SECTION ================= */
-.hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 610px; background: var(--sand); transition: background 0.5s ease; overflow: hidden; }
-.hero-copy { padding: 75px 10% 75px 14%; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; position: relative; }
+/* ================= HERO SECTION (SIZE REDUCED) ================= */
+.hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 500px; background: var(--sand); transition: background 0.5s ease; overflow: hidden; }
+.hero-copy { padding: 50px 10% 50px 14%; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; position: relative; }
 .hero-copy > * { animation: fadeUp 1s ease forwards; opacity: 0; }
 .hero-copy .eyebrow { animation-delay: 0.1s; letter-spacing: 5px; color: var(--gold); font-weight: 600; margin-bottom: 20px; font-size: 10px; text-transform: uppercase; }
-.hero-copy h1 { animation-delay: 0.2s; font: 400 clamp(3rem, 5.5vw, 4.8rem) "Playfair Display", serif; line-height: 1.1; margin-bottom: 25px; color: var(--ink); }
+.hero-copy h1 { animation-delay: 0.2s; font: 400 clamp(2.5rem, 4.5vw, 4.2rem) "Playfair Display", serif; line-height: 1.1; margin-bottom: 25px; color: var(--ink); }
 .hero-copy h1 em { color: var(--gold); font-style: italic; font-weight: 400; }
 .hero-copy p { animation-delay: 0.3s; font-size: 15px; line-height: 1.9; color: var(--muted); max-width: 90%; }
 .hero-actions { animation-delay: 0.4s; display: flex; gap: 15px; margin-top: 35px; }
@@ -98,12 +98,12 @@ img { max-width: 100%; display: block; }
   width: 100% !important; 
   height: 100% !important; 
   object-fit: cover !important; 
-  object-position: center 20% !important; /* Ethnic Wear Position */
+  object-position: center 20% !important; 
   transition: transform 1.2s ease !important; 
   z-index: 1; 
 }
 
-/* PARTY WEAR PHOTO POSITION FIX (Thoda upar shift karne ke liye) */
+/* PARTY WEAR PHOTO POSITION FIX */
 .category-card[href="party-wear.html"] > img {
   object-position: center 45% !important; 
 }
@@ -137,8 +137,8 @@ img { max-width: 100%; display: block; }
 /* ================= RESPONSIVE ================= */
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; }
-  .hero-copy { padding: 55px 8%; }
-  .hero-media { height: 450px; }
+  .hero-copy { padding: 50px 8%; }
+  .hero-media { height: 400px; }
 }
 @media (max-width: 650px) {
   .site-header { height: auto; padding: 15px 6%; flex-wrap: wrap; }
@@ -146,7 +146,7 @@ img { max-width: 100%; display: block; }
   .main-nav { display: none; width: 100%; padding: 15px 0; flex-direction: column; align-items: flex-start; gap: 15px; }
   .main-nav.active { display: flex; }
   .theme-toggle { margin: 10px 0 0 0; }
-  .hero-copy h1 { font-size: 2.8rem; }
+  .hero-copy h1 { font-size: 2.5rem; }
   .category-grid { grid-template-columns: 1fr; }
   .category-card { height: 480px !important; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
