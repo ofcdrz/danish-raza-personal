@@ -300,125 +300,6 @@ html { scroll-behavior: smooth; }
 }
 
 /* =========================================
-   WHATSAPP LOGIN POPUP DESIGN
-========================================= */
-.login-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  background: rgba(20, 15, 12, 0.7);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.login-modal.open {
-  display: flex;
-  opacity: 1;
-}
-
-.login-modal-content {
-  background: var(--ivory);
-  width: 100%;
-  max-width: 420px;
-  padding: 40px 35px;
-  border: 1px solid var(--line);
-  position: relative;
-  transform: translateY(20px);
-  transition: transform 0.3s ease;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-}
-
-.login-modal.open .login-modal-content {
-  transform: translateY(0);
-}
-
-.close-modal {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 28px;
-  cursor: pointer;
-  color: var(--muted);
-  transition: color 0.2s;
-}
-
-.close-modal:hover {
-  color: var(--ink);
-}
-
-.login-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.login-header h2 {
-  font-size: 28px;
-  margin: 10px 0 8px;
-  color: var(--ink);
-}
-
-.login-header p {
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.input-group {
-  display: flex;
-  align-items: center;
-  border: 1px solid var(--line);
-  background: #fff;
-  margin-bottom: 20px;
-  padding: 0 15px;
-  transition: border-color 0.3s;
-}
-
-.input-group:focus-within {
-  border-color: var(--gold);
-}
-
-.country-code {
-  font-size: 14px;
-  color: var(--ink);
-  font-weight: 500;
-  padding-right: 12px;
-  border-right: 1px solid var(--line);
-}
-
-.input-group input {
-  width: 100%;
-  padding: 16px 12px;
-  border: none;
-  outline: none;
-  font-size: 15px;
-  background: transparent;
-  color: var(--ink);
-}
-
-.login-submit-btn {
-  width: 100%;
-  padding: 16px;
-  font-size: 11px;
-  letter-spacing: 2px;
-}
-
-.resend-text {
-  text-align: center;
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 20px;
-}
-
-.resend-text a {
-  color: var(--gold);
-  text-decoration: underline;
-}
-
-/* =========================================
    MOBILE RESPONSIVE
 ========================================= */
 @media (max-width: 650px) {
@@ -445,11 +326,6 @@ html { scroll-behavior: smooth; }
 
   .category-card { height: 450px !important; }
   .category-overlay { padding: 25px !important; }
-
-  .login-modal-content {
-    padding: 30px 20px;
-    width: 90%;
-  }
 }
 </style>
 </head>
@@ -486,8 +362,7 @@ html { scroll-behavior: smooth; }
     <a href="party-wear.html">Party Wear</a>
     <a href="index.html#about">Our Story</a>
     <a href="index.html#contact">Contact</a>
-    <!-- Naya Login Button -->
-    <a href="javascript:void(0)" onclick="openLoginPopup()" style="color: #a47c54; font-weight: 600;">Login</a>
+    <!-- Login button removed -->
   </nav>
 </header>
 
@@ -652,155 +527,8 @@ html { scroll-behavior: smooth; }
 
 </footer>
 
-<!-- =========================================
-     LOGIN POPUP MODAL HTML
-========================================== -->
-<div id="whatsappLoginModal" class="login-modal">
-  <div class="login-modal-content">
-    <span class="close-modal" onclick="closeLoginPopup()">&times;</span>
-    
-    <div class="login-header">
-      <div class="eyebrow">ISARA Account</div>
-      <h2>Login with Phone</h2>
-      <p>Enter your mobile number to receive a secure OTP.</p>
-    </div>
-
-    <!-- Step 1: Mobile Number Form -->
-    <div id="loginStep1">
-      <div class="input-group">
-        <span class="country-code">+91</span>
-        <input type="tel" id="mobileNumber" placeholder="Enter 10-digit number" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-      </div>
-      <button class="btn login-submit-btn" onclick="sendOTP()">Send OTP →</button>
-    </div>
-
-    <!-- Step 2: OTP Form (Hidden initially) -->
-    <div id="loginStep2" style="display: none;">
-      <p style="font-size: 12px; color: #786f66; margin-bottom: 15px;">OTP sent to <strong id="displayNumber"></strong></p>
-      <div class="input-group">
-        <input type="text" id="otpCode" placeholder="Enter 6-digit OTP" maxlength="6" style="text-align: center; letter-spacing: 8px; font-size: 18px;" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-      </div>
-      <button class="btn login-submit-btn" onclick="verifyOTP()">Verify & Login →</button>
-      <p class="resend-text">Didn't receive? <a href="javascript:void(0)" onclick="sendOTP()">Resend OTP</a></p>
-    </div>
-  </div>
-</div>
-
-<!-- Recaptcha ke liye invisible container -->
-<div id="recaptcha-container"></div>
-
 <script src="js/products.js"></script>
 <script src="js/site.js"></script>
-
-<!-- =========================================
-     FIREBASE LOGIN JAVASCRIPT
-========================================== -->
-<script type="module">
-  // Firebase Modules Import karein
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-  // Aapka Firebase Config
-  const firebaseConfig = {
-    apiKey: "AIzaSyBZTkVDMgZ9QhtI_XgWDvpLz82-yo3tTus",
-    authDomain: "isara-650a4.firebaseapp.com",
-    projectId: "isara-650a4",
-    storageBucket: "isara-650a4.firebasestorage.app",
-    messagingSenderId: "787157429434",
-    appId: "1:787157429434:web:c723bc59d05abdbd1c6683",
-    measurementId: "G-8H6GVFVDQ4"
-  };
-
-  // Firebase Initialize
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  // ReCAPTCHA Setup
-  window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-    'size': 'invisible',
-    'callback': (response) => {
-      // reCAPTCHA solved
-    }
-  });
-
-  window.openLoginPopup = function() {
-    const modal = document.getElementById("whatsappLoginModal");
-    if(modal) {
-      modal.classList.add("open");
-      document.body.style.overflow = "hidden"; 
-      document.getElementById("loginStep1").style.display = "block";
-      document.getElementById("loginStep2").style.display = "none";
-      document.getElementById("mobileNumber").value = "";
-      document.getElementById("otpCode").value = "";
-    }
-  }
-
-  window.closeLoginPopup = function() {
-    const modal = document.getElementById("whatsappLoginModal");
-    if(modal) {
-      modal.classList.remove("open");
-      document.body.style.overflow = ""; 
-    }
-  }
-
-  window.sendOTP = function() {
-    let number = document.getElementById("mobileNumber").value;
-    
-    if(number.length !== 10) {
-      alert("Kripya 10 digit ka sahi mobile number daalein.");
-      return;
-    }
-
-    const fullNumber = "+91" + number;
-    const btn = document.querySelector(".login-submit-btn");
-    const originalText = btn.innerText;
-    btn.innerText = "Sending...";
-    btn.disabled = true;
-
-    // Firebase API Call
-    signInWithPhoneNumber(auth, fullNumber, window.recaptchaVerifier)
-      .then((confirmationResult) => {
-        window.confirmationResult = confirmationResult;
-        
-        document.getElementById("displayNumber").innerText = "+91 " + number;
-        document.getElementById("loginStep1").style.display = "none";
-        document.getElementById("loginStep2").style.display = "block";
-        
-        btn.innerText = originalText;
-        btn.disabled = false;
-      }).catch((error) => {
-        console.error("Error:", error);
-        alert("OTP bhejne me error aayi: " + error.message);
-        btn.innerText = originalText;
-        btn.disabled = false;
-      });
-  }
-
-  window.verifyOTP = function() {
-    const otp = document.getElementById("otpCode").value;
-    
-    if(otp.length !== 6) {
-      alert("Kripya 6 digit ka OTP daalein.");
-      return;
-    }
-
-    window.confirmationResult.confirm(otp).then((result) => {
-      // Login Successful
-      alert("Login Successful! Welcome to ISARA.");
-      closeLoginPopup();
-      console.log("User logged in:", result.user.phoneNumber);
-    }).catch((error) => {
-      alert("Galat OTP! Kripya sahi OTP daalein.");
-    });
-  }
-
-  window.onclick = function(event) {
-    const modal = document.getElementById("whatsappLoginModal");
-    if (event.target === modal) {
-      closeLoginPopup();
-    }
-  }
-</script>
 
 </body>
 </html>
