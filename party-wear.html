@@ -41,81 +41,53 @@
 }
 
 /* =========================================
-   GLOBAL & SMOOTH TRANSITIONS
+   GLOBAL & SMOOTH
 ========================================= */
 html { scroll-behavior: smooth; }
-body {
-  background-color: var(--ivory);
-  color: var(--ink);
-  transition: background-color 0.5s ease, color 0.5s ease;
+body { background-color: var(--ivory); color: var(--ink); transition: background-color 0.5s ease, color 0.5s ease; }
+
+/* ANNOUNCEMENT BAR FIX (Always Dark) */
+.announcement {
+  background: #1a1614 !important;
+  color: #f8f3ec !important;
+  border-bottom: 1px solid #2e2823;
 }
 
 /* =========================================
-   BUTTON FIX (Dark Mode Support)
+   BUTTON FIX
 ========================================= */
 .btn {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 1;
-  background: var(--ink) !important;
-  color: var(--ivory) !important;
-  border: 1px solid var(--ink) !important;
+  position: relative; overflow: hidden; transition: all 0.4s ease; z-index: 1;
+  background: var(--ink) !important; color: var(--ivory) !important; border: 1px solid var(--ink) !important;
 }
 .btn::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: var(--gold);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: -1;
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--gold); transform: scaleX(0); transform-origin: right; transition: transform 0.4s ease; z-index: -1;
 }
-.btn:hover::before {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-.btn:hover {
-  color: var(--btn-text) !important;
-  border-color: var(--gold) !important;
-  box-shadow: 0 10px 25px rgba(164, 124, 84, 0.2);
-}
+.btn:hover::before { transform: scaleX(1); transform-origin: left; }
+.btn:hover { color: var(--btn-text) !important; border-color: var(--gold) !important; box-shadow: 0 10px 25px rgba(164, 124, 84, 0.2); }
 
 /* =========================================
    HEADER & THEME TOGGLE
 ========================================= */
-.site-header {
-  background: var(--header-bg) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--line);
-  transition: all 0.4s ease;
-}
+.site-header { background: var(--header-bg) !important; backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); transition: all 0.4s ease; }
 .brand-signature { display: flex; align-items: center; gap: 14px; text-decoration: none; }
 .header-signature-line { width: 30px; height: 1px; background: var(--gold); transition: width 0.4s ease; }
-.brand-signature:hover .header-signature-line { width: 45px; }
 .header-signature-text { display: flex; flex-direction: column; align-items: center; }
-.header-signature-logo { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500; letter-spacing: 6px; line-height: 1; color: var(--ink); margin-right: -6px; }
+.header-signature-logo { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500; letter-spacing: 6px; color: var(--ink); margin-right: -6px; }
 .header-signature-caption { font-family: 'DM Sans', sans-serif; font-size: 7.5px; font-weight: 600; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); margin-top: 5px; margin-right: -3.5px; }
 .main-nav a { position: relative; color: var(--ink); transition: color 0.3s ease; }
 .main-nav a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0; background-color: var(--gold); transition: width 0.4s ease; }
 .main-nav a:hover::after { width: 100%; }
-
-.theme-toggle {
-  background: transparent; border: 1px solid var(--line); border-radius: 50%;
-  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
-  cursor: pointer; color: var(--ink); transition: all 0.3s ease; margin-left: 5px; padding: 0;
-}
+.theme-toggle { background: transparent; border: 1px solid var(--line); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); transition: all 0.3s ease; margin-left: 5px; padding: 0; }
 .theme-toggle:hover { border-color: var(--gold); color: var(--gold); transform: rotate(15deg); }
 
 /* =========================================
-   PARTY PAGE STYLES
+   PAGE STYLES
 ========================================= */
 .page-hero { background: var(--sand); padding: 65px 0; text-align: center; transition: background 0.5s ease; }
 .page-hero h1 { font-size: clamp(42px,6vw,68px); margin:8px 0; font-family: "Playfair Display",serif; font-weight: 400; color: var(--ink); }
 .page-hero p { color: var(--muted); font-size:13px; }
-
 .party-intro { text-align:center; padding:65px 20px 40px; }
 .party-intro h2 { font:400 clamp(32px,5vw,48px) "Playfair Display",serif; margin:12px 0; color: var(--ink); }
 .party-intro p { color: var(--muted); font-size:14px; }
@@ -153,11 +125,28 @@ body.viewer-open { overflow:hidden; }
 .party-contact h2 { font:400 clamp(30px,5vw,44px) "Playfair Display",serif; margin:10px 0; color: var(--ink); }
 .party-contact p { color: var(--muted); margin-bottom:22px; }
 
+/* =========================================
+   FOOTER FIX
+========================================= */
+.footer { background: #1a1614 !important; color: #d6ccc1 !important; padding: 50px 6% 25px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 35px; max-width: 1200px; margin: auto; }
+.footer .brand { display: inline-block; color: #ffffff !important; margin-bottom: 12px; font-size: 26px; font-family: 'Playfair Display', serif; letter-spacing: 5px; }
+.footer p, .footer a { font-size: 11px; color: #a89f95 !important; }
+.footer a:hover { color: var(--gold) !important; }
+.footer h4 { font: 18px "Playfair Display", Georgia, serif; color: #ffffff !important; margin-bottom: 12px; }
+.footer-links { display: grid; gap: 8px; }
+.copyright { text-align: center; border-top: 1px solid #2e2823 !important; margin: 35px auto 0; padding-top: 18px; font-size: 10px; color: #786f66 !important; }
+
 @media(max-width:750px) {
   .design-card { grid-template-columns:1fr; gap:10px; padding:12px; }
   .design-main img { height:470px; }
   .design-info { padding:20px 8px; }
   .design-thumbnails img { height:85px; }
+}
+@media(max-width:650px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid > div:first-child { grid-column: 1/-1; }
+  .theme-toggle { margin: 10px 0 0 0; width: 35px; height: 35px; }
 }
 @media(max-width:500px) {
   .party-intro { padding:45px 18px 28px; }
@@ -174,9 +163,7 @@ body.viewer-open { overflow:hidden; }
 
 <body>
 
-<div class="announcement">
-A considered wardrobe for every celebration · Women's fashion by ISARA
-</div>
+<div class="announcement">A considered wardrobe for every celebration · Women's fashion by ISARA</div>
 
 <header class="site-header">
   <a class="brand-signature" href="index.html">
@@ -187,11 +174,9 @@ A considered wardrobe for every celebration · Women's fashion by ISARA
     </div>
     <span class="header-signature-line"></span>
   </a>
-
   <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation">
     <span></span><span></span><span></span>
   </button>
-
   <nav class="main-nav" id="primary-navigation">
     <a href="index.html">Home</a>
     <a href="index.html#collections">Collections</a>
@@ -199,18 +184,13 @@ A considered wardrobe for every celebration · Women's fashion by ISARA
     <a href="party-wear.html">Party Wear</a>
     <a href="index.html#about">Our Story</a>
     <a href="index.html#contact">Contact</a>
-    
-    <!-- Theme Toggle Button -->
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark/Light Mode">
-      <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-      </svg>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+      <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
     </button>
   </nav>
 </header>
 
 <main>
-
 <section class="page-hero">
   <div class="container">
     <div class="eyebrow" style="color:var(--gold);">The occasion edit</div>
@@ -238,7 +218,6 @@ A considered wardrobe for every celebration · Women's fashion by ISARA
         <button onclick="changeDesign(3,this)"><img src="assets/assets/IMG_20261105_194328.jpg.jpeg" alt="Design 4"></button>
       </div>
     </div>
-
     <div class="design-info">
       <div class="eyebrow">ISARA · PARTY WEAR</div>
       <div class="design-number">DESIGN NO. 01</div>
@@ -256,32 +235,31 @@ A considered wardrobe for every celebration · Women's fashion by ISARA
   <p>For prices, availability and styling enquiries, contact us.</p>
   <a class="btn" href="https://wa.me/919746699702" target="_blank" rel="noopener">Enquire on WhatsApp →</a>
 </section>
-
 </main>
 
-<footer class="footer" style="background:var(--ink); transition:background 0.5s ease;">
+<footer class="footer">
   <div class="footer-grid">
     <div>
-      <a class="brand" href="index.html" style="color:var(--white);">ISARA</a>
-      <p style="color:var(--muted);">Thoughtfully curated women's fashion, celebrating individuality through graceful design and timeless style.</p>
+      <a class="brand" href="index.html">ISARA</a>
+      <p>Thoughtfully curated women's fashion, celebrating individuality through graceful design and timeless style.</p>
     </div>
     <div>
-      <h4 style="color:var(--white);">Explore</h4>
+      <h4>Explore</h4>
       <div class="footer-links">
-        <a href="ethnic-wear.html" style="color:var(--muted);">Ethnic Wear</a>
-        <a href="party-wear.html" style="color:var(--muted);">Party Wear</a>
-        <a href="index.html#about" style="color:var(--muted);">About ISARA</a>
+        <a href="ethnic-wear.html">Ethnic Wear</a>
+        <a href="party-wear.html">Party Wear</a>
+        <a href="index.html#about">About ISARA</a>
       </div>
     </div>
     <div>
-      <h4 style="color:var(--white);">Connect</h4>
+      <h4>Connect</h4>
       <div class="footer-links">
-        <a href="index.html#contact" style="color:var(--muted);">Contact</a>
-        <a href="https://wa.me/919746699702" style="color:var(--muted);">WhatsApp Enquiry</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="https://wa.me/919746699702" target="_blank" rel="noopener">WhatsApp Enquiry</a>
       </div>
     </div>
   </div>
-  <div class="copyright" style="color:var(--muted); border-color:var(--line);">© 2026 ISARA. All Rights Reserved.</div>
+  <div class="copyright">© 2026 ISARA. All Rights Reserved.</div>
 </footer>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
@@ -296,62 +274,46 @@ A considered wardrobe for every celebration · Women's fashion by ISARA
 <script src="js/site.js"></script>
 
 <script>
-// Theme Logic
-const themeToggleBtn = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
-const htmlElement = document.documentElement;
-const sunIcon = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
-const moonIcon = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const htmlElement = document.documentElement;
+  const sunIcon = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
+  const moonIcon = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
 
-if (localStorage.getItem('isara-theme') === 'dark') {
-  htmlElement.setAttribute('data-theme', 'dark');
-  themeIcon.innerHTML = moonIcon;
-}
-themeToggleBtn.addEventListener('click', () => {
-  if (htmlElement.getAttribute('data-theme') === 'dark') {
-    htmlElement.removeAttribute('data-theme');
-    localStorage.setItem('isara-theme', 'light');
-    themeIcon.innerHTML = sunIcon;
-  } else {
+  if (localStorage.getItem('isara-theme') === 'dark') {
     htmlElement.setAttribute('data-theme', 'dark');
-    localStorage.setItem('isara-theme', 'dark');
     themeIcon.innerHTML = moonIcon;
   }
-});
+  themeToggleBtn.addEventListener('click', () => {
+    if (htmlElement.getAttribute('data-theme') === 'dark') {
+      htmlElement.removeAttribute('data-theme'); localStorage.setItem('isara-theme', 'light'); themeIcon.innerHTML = sunIcon;
+    } else {
+      htmlElement.setAttribute('data-theme', 'dark'); localStorage.setItem('isara-theme', 'dark'); themeIcon.innerHTML = moonIcon;
+    }
+  });
 
-// Gallery Logic
-const designPhotos = [
-  "assets/assets/IMG_20261105_194316.jpg.jpeg",
-  "assets/assets/IMG_20261105_194324.jpg.jpeg",
-  "assets/assets/IMG_20261105_194327.jpg.jpeg",
-  "assets/assets/IMG_20261105_194328.jpg.jpeg"
-];
-let currentPhoto = 0;
+  const designPhotos = [
+    "assets/assets/IMG_20261105_194316.jpg.jpeg", "assets/assets/IMG_20261105_194324.jpg.jpeg",
+    "assets/assets/IMG_20261105_194327.jpg.jpeg", "assets/assets/IMG_20261105_194328.jpg.jpeg"
+  ];
+  let currentPhoto = 0;
 
-function changeDesign(index, button) {
-  currentPhoto = index;
-  document.getElementById("mainDesignImage").src = designPhotos[index];
-  document.querySelectorAll(".design-thumbnails button").forEach(btn => btn.classList.remove("active"));
-  button.classList.add("active");
-}
-function openViewer(index) { currentPhoto = index; updateViewer(); document.getElementById("lightbox").classList.add("open"); document.body.classList.add("viewer-open"); }
-function closeViewer() { document.getElementById("lightbox").classList.remove("open"); document.body.classList.remove("viewer-open"); }
-function moveViewer(direction) { currentPhoto = (currentPhoto + direction + designPhotos.length) % designPhotos.length; updateViewer(); }
-function updateViewer() { document.getElementById("lightboxImage").src = designPhotos[currentPhoto]; document.getElementById("lightboxCount").textContent = (currentPhoto + 1) + " / " + designPhotos.length; }
+  function changeDesign(index, button) {
+    currentPhoto = index; document.getElementById("mainDesignImage").src = designPhotos[index];
+    document.querySelectorAll(".design-thumbnails button").forEach(btn => btn.classList.remove("active")); button.classList.add("active");
+  }
+  function openViewer(index) { currentPhoto = index; updateViewer(); document.getElementById("lightbox").classList.add("open"); document.body.classList.add("viewer-open"); }
+  function closeViewer() { document.getElementById("lightbox").classList.remove("open"); document.body.classList.remove("viewer-open"); }
+  function moveViewer(direction) { currentPhoto = (currentPhoto + direction + designPhotos.length) % designPhotos.length; updateViewer(); }
+  function updateViewer() { document.getElementById("lightboxImage").src = designPhotos[currentPhoto]; document.getElementById("lightboxCount").textContent = (currentPhoto + 1) + " / " + designPhotos.length; }
 
-document.addEventListener("keydown", function(event) {
-  const viewer = document.getElementById("lightbox");
-  if (!viewer.classList.contains("open")) return;
-  if (event.key === "Escape") closeViewer();
-  if (event.key === "ArrowRight") moveViewer(1);
-  if (event.key === "ArrowLeft") moveViewer(-1);
-});
-let touchStartX = 0;
-document.getElementById("lightbox").addEventListener("touchstart", function(event) { touchStartX = event.changedTouches[0].screenX; }, {passive:true});
-document.getElementById("lightbox").addEventListener("touchend", function(event) {
-  const difference = event.changedTouches[0].screenX - touchStartX;
-  if (Math.abs(difference) > 50) moveViewer(difference < 0 ? 1 : -1);
-}, {passive:true});
+  document.addEventListener("keydown", function(event) {
+    const viewer = document.getElementById("lightbox"); if (!viewer.classList.contains("open")) return;
+    if (event.key === "Escape") closeViewer(); if (event.key === "ArrowRight") moveViewer(1); if (event.key === "ArrowLeft") moveViewer(-1);
+  });
+  let touchStartX = 0;
+  document.getElementById("lightbox").addEventListener("touchstart", function(event) { touchStartX = event.changedTouches[0].screenX; }, {passive:true});
+  document.getElementById("lightbox").addEventListener("touchend", function(event) { if (Math.abs(event.changedTouches[0].screenX - touchStartX) > 50) moveViewer(event.changedTouches[0].screenX - touchStartX < 0 ? 1 : -1); }, {passive:true});
 </script>
 </body>
 </html>
