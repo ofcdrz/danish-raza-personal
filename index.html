@@ -80,13 +80,13 @@ img { max-width: 100%; display: block; }
 .section-head p { color: var(--muted); font-size: 13px; }
 .eyebrow { font-size: 10px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; font-weight: 600; display: block; }
 
-/* ================= COLLECTIONS (CARDS FIXED HEIGHT) ================= */
+/* ================= COLLECTIONS (CARDS) ================= */
 .category-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; }
 .category-card { 
   position: relative !important; 
   display: block !important; 
   width: 100% !important; 
-  height: 540px !important; /* Screenshot ke hisaab se perfect height */
+  height: 540px !important; 
   overflow: hidden !important; 
   background: var(--sand); 
   transition: transform 0.6s ease, box-shadow 0.6s ease; 
@@ -98,10 +98,16 @@ img { max-width: 100%; display: block; }
   width: 100% !important; 
   height: 100% !important; 
   object-fit: cover !important; 
-  object-position: center 20% !important; /* Photo ke face ko frame mein rakhne ke liye */
+  object-position: center 20% !important; /* Ethnic Wear Position */
   transition: transform 1.2s ease !important; 
   z-index: 1; 
 }
+
+/* PARTY WEAR PHOTO POSITION FIX (Thoda upar shift karne ke liye) */
+.category-card[href="party-wear.html"] > img {
+  object-position: center 45% !important; 
+}
+
 .category-card:hover > img { transform: scale(1.08); }
 .category-overlay { position: absolute !important; inset: 0 !important; display: flex !important; flex-direction: column; justify-content: flex-end !important; align-items: flex-start; padding: 35px !important; background: linear-gradient(to top, rgba(20,15,12,0.9), rgba(20,15,12,0.3) 45%, transparent) !important; z-index: 2; }
 .category-overlay h3 { margin: 0 0 10px; color: #fff; font-size: 1.8rem; font-family: 'Playfair Display', serif; font-weight: 400; transition: transform 0.4s ease; }
@@ -142,7 +148,7 @@ img { max-width: 100%; display: block; }
   .theme-toggle { margin: 10px 0 0 0; }
   .hero-copy h1 { font-size: 2.8rem; }
   .category-grid { grid-template-columns: 1fr; }
-  .category-card { height: 480px !important; } /* Mobile ke liye height thodi kam ki hai */
+  .category-card { height: 480px !important; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-grid > div:first-child { grid-column: 1/-1; }
   .hero-media img { animation: none; }
@@ -275,12 +281,10 @@ img { max-width: 100%; display: block; }
 <script src="js/products.js"></script>
 <script src="js/site.js"></script>
 <script>
-  // Mobile Menu Toggle
   document.getElementById('menu-toggle').addEventListener('click', function() {
     document.getElementById('main-nav').classList.toggle('active');
   });
 
-  // Theme Toggle Logic
   const themeToggleBtn = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
   const htmlElement = document.documentElement;
