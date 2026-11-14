@@ -13,11 +13,23 @@
 /* ================= VARIABLES & RESET ================= */
 :root {
   --ivory: #faf8f4; --sand: #eee7dc; --ink: #28231f; --muted: #786f66; --gold: #a77c55; --line: #e6ded3; --white: #ffffff;
-  --header-bg: rgba(250, 248, 244, 0.85); --btn-text: #ffffff;
+  
+  /* Glassmorphism Variables - Light */
+  --glass-bg: rgba(255, 255, 255, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  --header-bg: rgba(250, 248, 244, 0.7); 
+  --btn-text: #ffffff;
 }
 [data-theme="dark"] {
   --ivory: #12100e; --sand: #1a1715; --ink: #f4f1ec; --muted: #a89f95; --gold: #c49a72; --line: #2e2823; --white: #1c1815;
-  --header-bg: rgba(18, 16, 14, 0.85); --btn-text: #12100e;
+  
+  /* Glassmorphism Variables - Dark */
+  --glass-bg: rgba(30, 25, 22, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --header-bg: rgba(18, 16, 14, 0.7); 
+  --btn-text: #12100e;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
@@ -29,7 +41,13 @@ img { max-width: 100%; display: block; }
 
 /* ================= ANNOUNCEMENT & HEADER ================= */
 .announcement { background: #1a1614 !important; color: #f8f3ec !important; text-align: center; padding: 8px 15px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid #2e2823; }
-.site-header { height: 82px; padding: 0 6%; display: flex; align-items: center; justify-content: space-between; background: var(--header-bg); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 1000; transition: all 0.4s ease; }
+.site-header { 
+  height: 82px; padding: 0 6%; display: flex; align-items: center; justify-content: space-between; 
+  background: var(--header-bg); 
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border); 
+  position: sticky; top: 0; z-index: 1000; transition: all 0.4s ease; 
+}
 .brand-signature { display: flex; align-items: center; gap: 14px; text-decoration: none; }
 .header-signature-line { width: 30px; height: 1px; background: var(--gold); transition: width 0.4s ease; }
 .brand-signature:hover .header-signature-line { width: 50px; }
@@ -41,17 +59,30 @@ img { max-width: 100%; display: block; }
 .main-nav a { font-size: 10px; letter-spacing: 1.7px; text-transform: uppercase; position: relative; color: var(--ink); transition: color 0.3s ease; }
 .main-nav a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0; background: var(--gold); transition: width 0.4s ease; }
 .main-nav a:hover::after { width: 100%; }
-.theme-toggle { background: transparent; border: 1px solid var(--line); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); transition: all 0.3s ease; margin-left: 5px; padding: 0; }
-.theme-toggle:hover { border-color: var(--gold); color: var(--gold); transform: rotate(15deg); }
+
+/* Glassy Theme Toggle */
+.theme-toggle { 
+  background: var(--glass-bg); 
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border); 
+  box-shadow: var(--glass-shadow);
+  border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); transition: all 0.3s ease; margin-left: 5px; padding: 0; 
+}
+.theme-toggle:hover { border-color: var(--gold); color: var(--gold); transform: rotate(15deg) scale(1.05); }
 .menu-toggle { display: none; border: 0; background: none; font-size: 24px; cursor: pointer; color: var(--ink); }
 
 /* ================= BUTTONS ================= */
-.btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 24px; background: var(--ink) !important; color: var(--ivory) !important; border: 1px solid var(--ink) !important; font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase; position: relative; overflow: hidden; z-index: 1; transition: all 0.4s ease; cursor: pointer; }
+.btn { 
+  display: inline-flex; align-items: center; justify-content: center; padding: 14px 24px; 
+  background: var(--ink) !important; color: var(--ivory) !important; border: 1px solid var(--ink) !important; 
+  font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase; position: relative; overflow: hidden; z-index: 1; transition: all 0.4s ease; cursor: pointer; 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
 .btn::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--gold); transform: scaleX(0); transform-origin: right; transition: transform 0.4s ease; z-index: -1; }
 .btn:hover::before { transform: scaleX(1); transform-origin: left; }
-.btn:hover { color: var(--btn-text) !important; border-color: var(--gold) !important; box-shadow: 0 10px 20px rgba(164, 124, 84, 0.2); }
+.btn:hover { color: var(--btn-text) !important; border-color: var(--gold) !important; box-shadow: 0 10px 20px rgba(164, 124, 84, 0.3); transform: translateY(-2px); }
 
-/* ================= HERO SECTION (FIXED SIZE) ================= */
+/* ================= HERO SECTION ================= */
 .hero { display: grid; grid-template-columns: 1fr 1fr; height: 520px; background: var(--sand); transition: background 0.5s ease; overflow: hidden; }
 .hero-copy { padding: 40px 10% 40px 14%; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; position: relative; }
 .hero-copy .eyebrow { letter-spacing: 5px; color: var(--gold); font-weight: 600; margin-bottom: 20px; font-size: 10px; text-transform: uppercase; }
@@ -79,19 +110,44 @@ img { max-width: 100%; display: block; }
 .section-head p { color: var(--muted); font-size: 13px; }
 .eyebrow { font-size: 10px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; font-weight: 600; display: block; }
 
-/* ================= COLLECTIONS (CARDS) ================= */
+/* ================= COLLECTIONS (GLASSY CARDS) ================= */
 .category-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; }
-.category-card { position: relative !important; display: block !important; width: 100% !important; height: 540px !important; overflow: hidden !important; background: var(--sand); transition: transform 0.6s ease, box-shadow 0.6s ease; }
-.category-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+.category-card { position: relative !important; display: block !important; width: 100% !important; height: 540px !important; overflow: hidden !important; background: var(--sand); border-radius: 12px; transition: transform 0.6s ease, box-shadow 0.6s ease; }
+.category-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
 .category-card > img { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center 20% !important; transition: transform 1.2s ease !important; z-index: 1; }
 .category-card[href="party-wear.html"] > img { object-position: center 45% !important; }
 .category-card:hover > img { transform: scale(1.08); }
-.category-overlay { position: absolute !important; inset: 0 !important; display: flex !important; flex-direction: column; justify-content: flex-end !important; align-items: flex-start; padding: 35px !important; background: linear-gradient(to top, rgba(20,15,12,0.9), rgba(20,15,12,0.3) 45%, transparent) !important; z-index: 2; }
-.category-overlay h3 { margin: 0 0 10px; color: #fff; font-size: 1.8rem; font-family: 'Playfair Display', serif; font-weight: 400; transition: transform 0.4s ease; }
-.category-card:hover .category-overlay h3 { transform: translateY(-5px); }
-.category-overlay p { margin: 0 0 25px; color: #e0d6cd; font-size: 14px; }
-.category-overlay .btn { display: inline-flex; width: fit-content; padding: 12px 24px; background: transparent !important; border: 1px solid #fff !important; color: #fff !important; }
-.category-card:hover .category-overlay .btn { background: var(--ink) !important; color: var(--ivory) !important; border-color: var(--ink) !important; }
+
+/* Yahan Glassmorphism Apply kiya gaya hai */
+.category-overlay { 
+  position: absolute !important; 
+  bottom: 20px !important; 
+  left: 20px !important; 
+  right: 20px !important; 
+  display: flex !important; 
+  flex-direction: column; 
+  align-items: flex-start; 
+  padding: 25px !important; 
+  background: var(--glass-bg) !important; 
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+  border-radius: 8px;
+  z-index: 2; 
+  transition: all 0.4s ease;
+}
+.category-card:hover .category-overlay {
+  background: rgba(255, 255, 255, 0.6) !important;
+}
+[data-theme="dark"] .category-card:hover .category-overlay {
+  background: rgba(50, 45, 42, 0.7) !important;
+}
+
+.category-overlay h3 { margin: 0 0 10px; color: var(--ink); font-size: 1.8rem; font-family: 'Playfair Display', serif; font-weight: 500; transition: transform 0.4s ease; }
+.category-card:hover .category-overlay h3 { transform: translateY(-3px); }
+.category-overlay p { margin: 0 0 20px; color: var(--ink); font-size: 13px; opacity: 0.8; }
+.category-overlay .btn { display: inline-flex; width: fit-content; padding: 12px 24px; background: var(--ink) !important; border: 1px solid var(--ink) !important; color: var(--ivory) !important; }
+.category-card:hover .category-overlay .btn { background: var(--gold) !important; color: #fff !important; border-color: var(--gold) !important; }
 
 /* ================= STORY BAND & NEWSLETTER ================= */
 .story-band { background: var(--ink); color: var(--ivory); text-align: center; padding: 82px 8%; transition: background 0.5s ease; }
@@ -125,6 +181,7 @@ img { max-width: 100%; display: block; }
   .hero-copy h1 { font-size: 2.5rem; }
   .category-grid { grid-template-columns: 1fr; }
   .category-card { height: 480px !important; }
+  .category-overlay { bottom: 15px !important; left: 15px !important; right: 15px !important; padding: 20px !important; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-grid > div:first-child { grid-column: 1/-1; }
 }
@@ -185,6 +242,7 @@ img { max-width: 100%; display: block; }
     <div class="category-grid">
       <a class="category-card" href="ethnic-wear.html">
         <img src="assets/assets/Ethnic%20Wear.jpg" alt="Ethnic Wear" loading="lazy">
+        <!-- Glassy Overlay -->
         <div class="category-overlay">
           <h3>Ethnic Wear</h3>
           <p>Timeless elegance for every celebration.</p>
@@ -193,6 +251,7 @@ img { max-width: 100%; display: block; }
       </a>
       <a class="category-card" href="party-wear.html">
         <img src="assets/assets/IMG_20261105_194316.jpg.jpeg" alt="Party Wear" loading="lazy">
+        <!-- Glassy Overlay -->
         <div class="category-overlay">
           <h3>Party Wear</h3>
           <p>Refined looks for special occasions.</p>
