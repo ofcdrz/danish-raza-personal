@@ -80,11 +80,28 @@ img { max-width: 100%; display: block; }
 .section-head p { color: var(--muted); font-size: 13px; }
 .eyebrow { font-size: 10px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; font-weight: 600; display: block; }
 
-/* ================= COLLECTIONS (CARDS) ================= */
+/* ================= COLLECTIONS (CARDS FIXED) ================= */
 .category-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; }
-.category-card { position: relative !important; display: block !important; height: 520px !important; overflow: hidden !important; background: var(--sand); transition: transform 0.6s ease, box-shadow 0.6s ease; }
+.category-card { 
+  position: relative !important; 
+  display: block !important; 
+  width: 100% !important; 
+  aspect-ratio: 4 / 5; /* FIX: Shape ko perfect banane ke liye */
+  overflow: hidden !important; 
+  background: var(--sand); 
+  transition: transform 0.6s ease, box-shadow 0.6s ease; 
+}
 .category-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
-.category-card > img { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; object-fit: cover !important; transition: transform 1.2s ease !important; z-index: 1; }
+.category-card > img { 
+  position: absolute !important; 
+  inset: 0 !important; 
+  width: 100% !important; 
+  height: 100% !important; 
+  object-fit: cover !important; 
+  object-position: center 20% !important; /* FIX: Photo upar se center hogi */
+  transition: transform 1.2s ease !important; 
+  z-index: 1; 
+}
 .category-card:hover > img { transform: scale(1.08); }
 .category-overlay { position: absolute !important; inset: 0 !important; display: flex !important; flex-direction: column; justify-content: flex-end !important; align-items: flex-start; padding: 35px !important; background: linear-gradient(to top, rgba(20,15,12,0.9), rgba(20,15,12,0.3) 45%, transparent) !important; z-index: 2; }
 .category-overlay h3 { margin: 0 0 10px; color: #fff; font-size: 1.8rem; font-family: 'Playfair Display', serif; font-weight: 400; transition: transform 0.4s ease; }
@@ -125,7 +142,6 @@ img { max-width: 100%; display: block; }
   .theme-toggle { margin: 10px 0 0 0; }
   .hero-copy h1 { font-size: 2.8rem; }
   .category-grid { grid-template-columns: 1fr; }
-  .category-card { height: 450px !important; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-grid > div:first-child { grid-column: 1/-1; }
   .hero-media img { animation: none; }
