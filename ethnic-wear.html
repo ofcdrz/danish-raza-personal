@@ -25,6 +25,7 @@
   --line: #e6ded3;
   --white: #ffffff;
   --header-bg: rgba(255, 255, 255, 0.85);
+  --btn-text: #ffffff;
 }
 
 [data-theme="dark"] {
@@ -36,6 +37,7 @@
   --line: #2e2823;
   --white: #1c1815;
   --header-bg: rgba(18, 16, 14, 0.85);
+  --btn-text: #12100e;
 }
 
 /* =========================================
@@ -46,6 +48,38 @@ body {
   background-color: var(--ivory);
   color: var(--ink);
   transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* =========================================
+   BUTTON FIX
+========================================= */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+  background: var(--ink) !important;
+  color: var(--ivory) !important;
+  border: 1px solid var(--ink) !important;
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+.btn:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.btn:hover {
+  color: var(--btn-text) !important;
+  border-color: var(--gold) !important;
+  box-shadow: 0 10px 25px rgba(164, 124, 84, 0.2);
 }
 
 /* =========================================
@@ -166,7 +200,6 @@ A considered wardrobe for every celebration · Women's fashion by ISARA
     <a href="index.html#about">Our Story</a>
     <a href="index.html#contact">Contact</a>
     
-    <!-- Theme Toggle Button -->
     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark/Light Mode">
       <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
@@ -263,7 +296,6 @@ A considered wardrobe for every celebration · Women's fashion by ISARA
 <script src="js/site.js"></script>
 
 <script>
-// Theme Logic
 const themeToggleBtn = document.getElementById('theme-toggle');
 const themeIcon = document.getElementById('theme-icon');
 const htmlElement = document.documentElement;
@@ -286,7 +318,6 @@ themeToggleBtn.addEventListener('click', () => {
   }
 });
 
-// Gallery Logic
 const designPhotos = [
   "assets/assets/IMG_20261106_183032.jpg.jpeg",
   "assets/assets/IMG_20261105_185917.jpg.jpeg",
