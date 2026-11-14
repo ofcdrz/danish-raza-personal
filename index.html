@@ -80,13 +80,13 @@ img { max-width: 100%; display: block; }
 .section-head p { color: var(--muted); font-size: 13px; }
 .eyebrow { font-size: 10px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; font-weight: 600; display: block; }
 
-/* ================= COLLECTIONS (CARDS FIXED) ================= */
+/* ================= COLLECTIONS (CARDS FIXED HEIGHT) ================= */
 .category-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; }
 .category-card { 
   position: relative !important; 
   display: block !important; 
   width: 100% !important; 
-  aspect-ratio: 4 / 5; /* FIX: Shape ko perfect banane ke liye */
+  height: 540px !important; /* Screenshot ke hisaab se perfect height */
   overflow: hidden !important; 
   background: var(--sand); 
   transition: transform 0.6s ease, box-shadow 0.6s ease; 
@@ -98,7 +98,7 @@ img { max-width: 100%; display: block; }
   width: 100% !important; 
   height: 100% !important; 
   object-fit: cover !important; 
-  object-position: center 20% !important; /* FIX: Photo upar se center hogi */
+  object-position: center 20% !important; /* Photo ke face ko frame mein rakhne ke liye */
   transition: transform 1.2s ease !important; 
   z-index: 1; 
 }
@@ -142,6 +142,7 @@ img { max-width: 100%; display: block; }
   .theme-toggle { margin: 10px 0 0 0; }
   .hero-copy h1 { font-size: 2.8rem; }
   .category-grid { grid-template-columns: 1fr; }
+  .category-card { height: 480px !important; } /* Mobile ke liye height thodi kam ki hai */
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-grid > div:first-child { grid-column: 1/-1; }
   .hero-media img { animation: none; }
