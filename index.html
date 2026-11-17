@@ -102,7 +102,7 @@ img { max-width: 100%; display: block; }
 .section-head p { color: var(--muted); font-size: 13px; }
 .eyebrow { font-size: 10px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; font-weight: 600; display: block; }
 
-/* ================= PRODUCT GRID (For Admin Products) ================= */
+/* ================= PRODUCT GRID ================= */
 .product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 25px; }
 .product-card { min-width: 0; background: var(--white); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; transition: transform 0.4s ease, box-shadow 0.4s ease; }
 .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
@@ -258,7 +258,7 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<!-- ADMIN PRODUCTS YAHAN DIKHENGE -->
+<!-- ADMIN PRODUCTS YAHAN DIKHENGE (Abhi ke liye khali rahega) -->
 <section class="section" style="background: var(--white); transition: background 0.5s ease;">
   <div class="container">
     <div class="section-head">
@@ -336,14 +336,15 @@ img { max-width: 100%; display: block; }
   });
 </script>
 
-<!-- SUPABASE DATABASE CONNECTION -->
+<!-- SUPABASE DATABASE CONNECTION (Home Page - Hide Products) -->
 <script type="module">
   const SUPABASE_URL = 'https://mnghsyllrmlzkkbpmsbx.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_iNdQQLJ_ukM8Lb2CEZtoBQ_JA50m-w8';
 
   async function fetchProducts() {
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=created_at.desc`, {
+      // Yahan humne &limit=0 laga diya hai, jisse koi product home page par nahi aayega
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=created_at.desc&limit=0`, {
         method: 'GET',
         headers: {
           'apikey': SUPABASE_KEY,
@@ -357,8 +358,9 @@ img { max-width: 100%; display: block; }
       if (!productContainer) return;
       productContainer.innerHTML = ''; 
 
+      // Agar koi product nahi hai (jo ki limit=0 ki wajah se hoga), toh section hide kar dein
       if (products.length === 0) {
-        productContainer.innerHTML = '<p style="text-align:center; width:100%; color:var(--muted);">No designs added yet. Go to Admin panel to add products.</p>';
+        productContainer.parentElement.parentElement.style.display = 'none';
         return;
       }
 
