@@ -10,9 +10,7 @@
 
 <style>
 /* ================= VARIABLES & RESET ================= */
-:root {
-  --ivory: #faf8f4; --sand: #eee7dc; --ink: #28231f; --muted: #786f66; --gold: #a77c55; --line: #e6ded3; --white: #ffffff; --danger: #e74c3c;
-}
+:root { --ivory: #faf8f4; --sand: #eee7dc; --ink: #28231f; --muted: #786f66; --gold: #a77c55; --line: #e6ded3; --white: #ffffff; --danger: #e74c3c; --blue: #3498db; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background-color: var(--ivory); color: var(--ink); font-family: "DM Sans", sans-serif; line-height: 1.65; }
 a { text-decoration: none; color: inherit; }
@@ -69,8 +67,14 @@ input:checked + .slider:before { transform: translateX(24px); }
 .product-table th, .product-table td { padding: 15px; text-align: left; border-bottom: 1px solid var(--line); }
 .product-table th { font-size: 12px; text-transform: uppercase; color: var(--muted); letter-spacing: 1px; }
 .product-table img { width: 60px; height: 60px; object-fit: cover; border-radius: 4px; border: 1px solid var(--line); }
-.delete-btn { background: var(--danger); color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; transition: background 0.3s; }
-.delete-btn:hover { background: #c0392b; }
+
+/* Action Buttons */
+.action-btn { padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; border: none; color: white; transition: background 0.3s; margin-right: 5px; }
+.btn-edit { background: var(--blue); }
+.btn-edit:hover { background: #2980b9; }
+.btn-delete { background: var(--danger); }
+.btn-delete:hover { background: #c0392b; }
+
 .status-badge { font-size: 11px; padding: 3px 8px; border-radius: 12px; background: #e8f5e9; color: #2e7d32; font-weight: bold; }
 .status-badge.hidden { background: #ffebee; color: #c62828; }
 
@@ -78,9 +82,7 @@ input:checked + .slider:before { transform: translateX(24px); }
 #toast { position: fixed; bottom: 20px; right: 20px; background: var(--ink); color: white; padding: 15px 25px; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 10000; }
 #toast.show { opacity: 1; }
 
-@media (max-width: 900px) {
-  .admin-container { grid-template-columns: 1fr; }
-}
+@media (max-width: 900px) { .admin-container { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -106,10 +108,12 @@ input:checked + .slider:before { transform: translateX(24px); }
   </header>
 
   <div class="admin-container">
-    <!-- ADD PRODUCT FORM -->
+    <!-- ADD / EDIT PRODUCT FORM -->
     <div class="form-section">
-      <h2>Add New Product</h2>
+      <h2 id="formTitle">Add New Product</h2>
       <form id="productForm">
+        <input type="hidden" id="productId" value="">
+        
         <div class="form-group">
           <label>Product Name</label>
           <input type="text" id="name" required placeholder="e.g. Elegant Suit">
@@ -138,11 +142,20 @@ input:checked + .slider:before { transform: translateX(24px); }
             <option value="Party">Party Wear</option>
           </select>
         </div>
+
+        <!-- NAYA: Photo Size Input -->
         <div class="form-group">
-          <label>Product Image</label>
-          <input type="file" id="image" accept="image/*" required>
+          <label>Photo Height (Size) in pixels</label>
+          <input type="text" id="image_size" placeholder="e.g. 350 (default), 450, 500" value="350">
         </div>
+        
+        <div class="form-group" id="imageInputGroup">
+          <label>Product Image</label>
+          <input type="file" id="image" accept="image/*">
+        </div>
+        
         <button type="submit" class="btn-submit" id="submitBtn">Upload & Save</button>
+        <button type="button" id="cancelEditBtn" style="display:none; width:100%; padding:10px; background:#ccc; color:#333; border:none; margin-top:10px; cursor:pointer;">Cancel Edit</button>
       </form>
     </div>
 
@@ -161,8 +174,8 @@ input:checked + .slider:before { transform: translateX(24px); }
             <tr>
               <th>Image</th>
               <th>Name</th>
+              <th>Size (Height)</th>
               <th>Price</th>
-              <th>Visibility</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -179,51 +192,23 @@ input:checked + .slider:before { transform: translateX(24px); }
 
 <!-- ================= SCRIPTS ================= -->
 <script>
-  // Login Logic
   const CORRECT_PASSWORD = "isara123"; 
-
-  if(sessionStorage.getItem('isara_admin_logged_in') === 'true') {
-    showAdminApp();
-  }
-
+  if(sessionStorage.getItem('isara_admin_logged_in') === 'true') { showAdminApp(); }
   function checkPassword() {
     const input = document.getElementById('admin-password').value;
     const errorMsg = document.getElementById('login-error');
-    
-    if(input === CORRECT_PASSWORD) {
-      sessionStorage.setItem('isara_admin_logged_in', 'true');
-      showAdminApp();
-    } else {
-      errorMsg.style.display = 'block';
-      document.getElementById('admin-password').value = '';
-    }
+    if(input === CORRECT_PASSWORD) { sessionStorage.setItem('isara_admin_logged_in', 'true'); showAdminApp(); } 
+    else { errorMsg.style.display = 'block'; document.getElementById('admin-password').value = ''; }
   }
+  function showAdminApp() { document.getElementById('login-screen').style.display = 'none'; document.getElementById('admin-app').style.display = 'block'; }
+  function logout() { sessionStorage.removeItem('isara_admin_logged_in'); window.location.reload(); }
+  document.getElementById('admin-password').addEventListener('keypress', function(e) { if(e.key === 'Enter') checkPassword(); });
 
-  function showAdminApp() {
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('admin-app').style.display = 'block';
-  }
-
-  function logout() {
-    sessionStorage.removeItem('isara_admin_logged_in');
-    window.location.reload();
-  }
-
-  document.getElementById('admin-password').addEventListener('keypress', function(e) {
-    if(e.key === 'Enter') checkPassword();
-  });
-
-  // Toggle Text Logic
   const showPriceCheckbox = document.getElementById('showPrice');
   const showPriceText = document.getElementById('showPriceText');
   showPriceCheckbox.addEventListener('change', function() {
-    if(this.checked) {
-      showPriceText.innerText = "Yes (Price Dikhegi)";
-      showPriceText.style.color = "var(--ink)";
-    } else {
-      showPriceText.innerText = "No (On Enquiry Dikhega)";
-      showPriceText.style.color = "var(--gold)";
-    }
+    if(this.checked) { showPriceText.innerText = "Yes (Price Dikhegi)"; showPriceText.style.color = "var(--ink)"; } 
+    else { showPriceText.innerText = "No (On Enquiry Dikhega)"; showPriceText.style.color = "var(--gold)"; }
   });
 </script>
 
@@ -237,36 +222,22 @@ input:checked + .slider:before { transform: translateX(24px); }
   const productList = document.getElementById('productList');
   
   let currentCategory = 'Ethnic'; 
+  let isEditing = false;
 
   window.switchTab = function(category, btn) {
     currentCategory = category;
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+    resetForm(); 
     loadProducts(category);
   }
 
   async function apiRequest(endpoint, method = 'GET', body = null, isFormData = false) {
-    const headers = {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`
-    };
-    
-    if (!isFormData && body) {
-      headers['Content-Type'] = 'application/json';
-      headers['Prefer'] = 'return=minimal';
-    }
-
-    const response = await fetch(endpoint, {
-      method: method,
-      headers: headers,
-      body: body ? (isFormData ? body : JSON.stringify(body)) : null
-    });
-
+    const headers = { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` };
+    if (!isFormData && body) { headers['Content-Type'] = 'application/json'; headers['Prefer'] = 'return=minimal'; }
+    const response = await fetch(endpoint, { method, headers, body: body ? (isFormData ? body : JSON.stringify(body)) : null });
     if (!response.ok) throw new Error('API Error');
-    
-    if (method === 'DELETE') return true;
-    if (method === 'POST' && endpoint.includes('products')) return true;
-    
+    if (method === 'DELETE' || method === 'POST' || method === 'PATCH') return true;
     return await response.json();
   }
 
@@ -274,7 +245,6 @@ input:checked + .slider:before { transform: translateX(24px); }
     productList.innerHTML = '<tr><td colspan="5" style="text-align:center;">Loading...</td></tr>';
     try {
       const data = await apiRequest(`${SUPABASE_URL}/products?category=eq.${category}&select=*&order=created_at.desc`);
-      
       productList.innerHTML = '';
       
       if (data.length === 0) {
@@ -284,119 +254,119 @@ input:checked + .slider:before { transform: translateX(24px); }
 
       data.forEach(product => {
         const tr = document.createElement('tr');
-        
-        // Visibility Badge
-        let visibilityBadge = product.show_price 
-            ? `<span class="status-badge">Price Visible</span>` 
-            : `<span class="status-badge hidden">Hidden (Enquiry)</span>`;
-        
-        // Price display
-        let priceDisplay = product.show_price 
-            ? `<span style="color:var(--gold); font-weight:600;">${product.price}</span>` 
-            : `<span style="color:var(--muted); font-style:italic;">On Enquiry</span>`;
+        let priceDisplay = product.show_price ? `<span style="color:var(--gold); font-weight:600;">${product.price}</span>` : `<span style="color:var(--muted); font-style:italic;">On Enquiry</span>`;
 
         tr.innerHTML = `
           <td><img src="${product.image_url}" alt="img"></td>
           <td style="font-weight:600;">${product.name}</td>
+          <td>${product.image_size ? product.image_size + 'px' : '350px'}</td>
           <td>${priceDisplay}</td>
-          <td>${visibilityBadge}</td>
-          <td><button class="delete-btn" onclick="deleteProduct(${product.id})">Delete</button></td>
+          <td>
+            <button class="action-btn btn-edit" onclick='editProduct(${JSON.stringify(product)})'>Edit</button>
+            <button class="action-btn btn-delete" onclick="deleteProduct(${product.id}, '${product.image_url}')">Delete</button>
+          </td>
         `;
         productList.appendChild(tr);
       });
-    } catch (error) {
-      showToast('Error loading products');
-      console.error(error);
-    }
+    } catch (error) { showToast('Error loading products'); console.error(error); }
   }
+
+  window.editProduct = function(product) {
+    isEditing = true;
+    document.getElementById('formTitle').innerText = "Edit Product";
+    document.getElementById('productId').value = product.id;
+    document.getElementById('name').value = product.name;
+    document.getElementById('price').value = product.price;
+    document.getElementById('category').value = product.category;
+    
+    // Set Size (default to 350 if null)
+    document.getElementById('image_size').value = product.image_size || 350;
+
+    document.getElementById('showPrice').checked = product.show_price;
+    document.getElementById('showPriceText').innerText = product.show_price ? "Yes (Price Dikhegi)" : "No (On Enquiry Dikhega)";
+
+    document.getElementById('image').required = false;
+    document.getElementById('imageInputGroup').style.display = 'none'; 
+    
+    submitBtn.innerText = 'Update Product';
+    document.getElementById('cancelEditBtn').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function resetForm() {
+    isEditing = false;
+    document.getElementById('formTitle').innerText = "Add New Product";
+    form.reset();
+    document.getElementById('productId').value = '';
+    document.getElementById('image_size').value = 350;
+    document.getElementById('image').required = true;
+    document.getElementById('imageInputGroup').style.display = 'block';
+    submitBtn.innerText = 'Upload & Save';
+    document.getElementById('cancelEditBtn').style.display = 'none';
+    document.getElementById('showPriceText').innerText = "Yes (Price Dikhegi)";
+  }
+
+  document.getElementById('cancelEditBtn').addEventListener('click', resetForm);
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+    const id = document.getElementById('productId').value;
     const name = document.getElementById('name').value;
     const price = document.getElementById('price').value || "On Enquiry";
     const showPrice = document.getElementById('showPrice').checked;
     const category = document.getElementById('category').value;
+    const imageSize = document.getElementById('image_size').value || "350"; // Default 350
     const imageFile = document.getElementById('image').files[0];
 
-    if (!imageFile) return showToast('Please select an image');
-
     submitBtn.disabled = true;
-    submitBtn.innerText = 'Uploading...';
-
-    try {
-      const fileName = `product-${Date.now()}.jpg`;
-      const uploadUrl = `${BASE_URL}/storage/v1/object/product-images/${fileName}`;
-      
-      await apiRequest(uploadUrl, 'POST', imageFile, true);
-
-      const imageUrl = `${BASE_URL}/storage/v1/object/public/product-images/${fileName}`;
-
-      submitBtn.innerText = 'Saving Data...';
-      const dbUrl = `${SUPABASE_URL}/products`;
-      
-      await apiRequest(dbUrl, 'POST', {
-        name: name,
-        price: price,
-        show_price: showPrice, // Send boolean true/false
-        category: category,
-        image_url: imageUrl
-      });
-
-      showToast('✅ Product Added Successfully!');
-      form.reset();
-      document.getElementById('showPriceText').innerText = "Yes (Price Dikhegi)";
-      
-      if (category !== currentCategory) {
-         document.querySelectorAll('.tab-btn').forEach(b => {
-             if(b.innerText.includes(category)) b.click();
-         });
-      } else {
-         loadProducts(currentCategory); 
-      }
-
-    } catch (error) {
-      showToast('❌ Error: Please check console');
-      console.error(error);
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.innerText = 'Upload & Save';
-    }
-  });
-
-  window.deleteProduct = async function(id) {
-    if (!confirm('Are you sure you want to delete this product?')) return;
     
     try {
+      if (isEditing) {
+        submitBtn.innerText = 'Updating...';
+        const dbUrl = `${SUPABASE_URL}/products?id=eq.${id}`;
+        await apiRequest(dbUrl, 'PATCH', {
+          name: name, price: price, show_price: showPrice, category: category, image_size: imageSize
+        });
+        showToast('✅ Product Updated Successfully!');
+      } else {
+        if (!imageFile) return showToast('Please select an image');
+        submitBtn.innerText = 'Uploading...';
+        
+        const fileName = `product-${Date.now()}.jpg`;
+        await apiRequest(`${BASE_URL}/storage/v1/object/product-images/${fileName}`, 'POST', imageFile, true);
+        const imageUrl = `${BASE_URL}/storage/v1/object/public/product-images/${fileName}`;
+
+        submitBtn.innerText = 'Saving Data...';
+        await apiRequest(`${SUPABASE_URL}/products`, 'POST', {
+          name: name, price: price, show_price: showPrice, category: category, image_url: imageUrl, image_size: imageSize
+        });
+        showToast('✅ Product Added Successfully!');
+      }
+
+      resetForm();
+      loadProducts(category === currentCategory ? currentCategory : category); 
+
+    } catch (error) { showToast('❌ Error: Please check console'); console.error(error); } 
+    finally { submitBtn.disabled = false; }
+  });
+
+  window.deleteProduct = async function(id, imageUrl) {
+    if (!confirm('Are you sure you want to delete this product?')) return;
+    try {
       await apiRequest(`${SUPABASE_URL}/products?id=eq.${id}`, 'DELETE');
+      if (imageUrl) {
+        const fileName = imageUrl.split('/').pop();
+        try { await apiRequest(`${BASE_URL}/storage/v1/object/product-images/${fileName}`, 'DELETE'); } catch(err) { console.log("Image might already be deleted"); }
+      }
       showToast('🗑️ Product Deleted');
       loadProducts(currentCategory); 
-    } catch (error) {
-      showToast('Error deleting product');
-    }
+    } catch (error) { showToast('Error deleting product'); }
   }
 
-  function showToast(message) {
-    const toast = document.getElementById('toast');
-    toast.innerText = message;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 3000);
-  }
+  function showToast(message) { const toast = document.getElementById('toast'); toast.innerText = message; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 3000); }
 
-  document.getElementById('admin-password').addEventListener('keypress', function(e) {
-    if(e.key === 'Enter') {
-        setTimeout(() => {
-            if(document.getElementById('admin-app').style.display === 'block') {
-                loadProducts('Ethnic');
-            }
-        }, 500);
-    }
-  });
-  
-  if(sessionStorage.getItem('isara_admin_logged_in') === 'true') {
-    loadProducts('Ethnic');
-  }
-
+  document.getElementById('admin-password').addEventListener('keypress', function(e) { if(e.key === 'Enter') { setTimeout(() => { if(document.getElementById('admin-app').style.display === 'block') loadProducts('Ethnic'); }, 500); } });
+  if(sessionStorage.getItem('isara_admin_logged_in') === 'true') { loadProducts('Ethnic'); }
 </script>
 
 </body>
