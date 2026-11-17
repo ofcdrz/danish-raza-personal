@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ... (Aapka purana CSS waisa hi rahega, maine ise short kar diya hai space ke liye, aap ise replace kar dein) ... */
+/* ... (Yeh CSS aapke pehle wale admin panel jaisi hi hai) ... */
 :root { --ivory: #faf8f4; --sand: #eee7dc; --ink: #28231f; --muted: #786f66; --gold: #a77c55; --line: #e6ded3; --white: #ffffff; --danger: #e74c3c; --blue: #3498db; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background-color: var(--ivory); color: var(--ink); font-family: "DM Sans", sans-serif; line-height: 1.65; }
@@ -99,10 +99,19 @@ input:checked + .slider:before { transform: translateX(24px); }
             <option value="Party">Party Wear</option>
           </select>
         </div>
+        
+        <!-- NAYA: Photo Size Input -->
         <div class="form-group">
-          <label>Photo Height (px)</label>
-          <input type="text" id="image_size" value="350">
+          <label>Photo Size (Height in px)</label>
+          <select id="image_size">
+            <option value="350">Small (350px)</option>
+            <option value="450">Medium (450px)</option>
+            <option value="550">Large (550px)</option>
+            <option value="650">Extra Large (650px)</option>
+          </select>
+          <small style="display:block; margin-top:5px; color:var(--muted); font-size:11px;">Website par photo kitni badi dikhegi.</small>
         </div>
+
         <div class="form-group" id="imageInputGroup">
           <label>Product Image</label>
           <input type="file" id="image" accept="image/*">
@@ -141,9 +150,7 @@ input:checked + .slider:before { transform: translateX(24px); }
   
   const showPriceCheckbox = document.getElementById('showPrice');
   const showPriceText = document.getElementById('showPriceText');
-  showPriceCheckbox.addEventListener('change', function() {
-    showPriceText.innerText = this.checked ? "Yes" : "No";
-  });
+  showPriceCheckbox.addEventListener('change', function() { showPriceText.innerText = this.checked ? "Yes" : "No"; });
 </script>
 
 <script type="module">
@@ -238,7 +245,7 @@ input:checked + .slider:before { transform: translateX(24px); }
     const price = document.getElementById('price').value || "On Enquiry";
     const showPrice = document.getElementById('showPrice').checked;
     const category = document.getElementById('category').value;
-    const imageSize = document.getElementById('image_size').value || "350";
+    const imageSize = document.getElementById('image_size').value; // Ab yahan size aa rahi hai
     const imageFile = document.getElementById('image').files[0];
 
     submitBtn.disabled = true;
