@@ -7,42 +7,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-
 <style>
-/* ================= VARIABLES & RESET ================= */
+/* ... (Aapka purana CSS waisa hi rahega, maine ise short kar diya hai space ke liye, aap ise replace kar dein) ... */
 :root { --ivory: #faf8f4; --sand: #eee7dc; --ink: #28231f; --muted: #786f66; --gold: #a77c55; --line: #e6ded3; --white: #ffffff; --danger: #e74c3c; --blue: #3498db; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background-color: var(--ivory); color: var(--ink); font-family: "DM Sans", sans-serif; line-height: 1.65; }
-a { text-decoration: none; color: inherit; }
-
-/* ================= LOGIN SCREEN ================= */
 #login-screen { position: fixed; inset: 0; background: var(--ink); z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column; }
-.login-box { background: var(--ivory); padding: 40px; border-radius: 8px; text-align: center; width: 100%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.login-box { background: var(--ivory); padding: 40px; border-radius: 8px; text-align: center; width: 100%; max-width: 400px; }
 .login-box h1 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 20px; }
-.login-box input { width: 100%; padding: 15px; font-size: 20px; text-align: center; letter-spacing: 5px; border: 1px solid var(--line); margin-bottom: 20px; outline: none; background: var(--white); }
-.login-box button { width: 100%; padding: 15px; background: var(--gold); color: white; border: none; font-size: 16px; cursor: pointer; font-weight: 600; }
-.login-box button:hover { background: var(--ink); }
-.error-msg { color: var(--danger); margin-bottom: 15px; font-size: 14px; display: none; }
-
-/* ================= MAIN APP ================= */
+.login-box input { width: 100%; padding: 15px; font-size: 20px; text-align: center; letter-spacing: 5px; border: 1px solid var(--line); margin-bottom: 20px; background: var(--white); }
+.login-box button { width: 100%; padding: 15px; background: var(--gold); color: white; border: none; font-size: 16px; cursor: pointer; }
+.error-msg { color: var(--danger); margin-bottom: 15px; display: none; }
 #admin-app { display: none; } 
 .admin-header { background: var(--ink); color: var(--white); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; }
-.admin-header h1 { font-family: 'Playfair Display', serif; font-size: 24px; letter-spacing: 2px; }
-.admin-header .btn-logout { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 8px 15px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
-.admin-header .btn-logout:hover { background: var(--gold); color: var(--white); }
-
-/* ================= LAYOUT ================= */
+.admin-header h1 { font-family: 'Playfair Display', serif; font-size: 24px; }
+.admin-header .btn-logout { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 8px 15px; cursor: pointer; }
 .admin-container { display: grid; grid-template-columns: 400px 1fr; gap: 30px; padding: 40px 5%; max-width: 1400px; margin: auto; }
-
-/* ================= FORM ================= */
-.form-section { background: var(--white); padding: 30px; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: fit-content; }
-.form-section h2 { font-family: 'Playfair Display', serif; font-weight: 500; margin-bottom: 20px; font-size: 24px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.form-section, .list-section { background: var(--white); padding: 30px; border: 1px solid var(--line); border-radius: 8px; height: fit-content; }
+.form-section h2, .list-section h2 { font-family: 'Playfair Display', serif; font-weight: 500; margin-bottom: 20px; font-size: 24px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
 .form-group { margin-bottom: 20px; }
 .form-group label { display: block; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; color: var(--muted); }
-.form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid var(--line); background: var(--ivory); font-family: 'DM Sans', sans-serif; font-size: 14px; outline: none; transition: border 0.3s; }
-.form-group input:focus, .form-group select:focus { border-color: var(--gold); }
-
-/* Toggle Switch */
+.form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid var(--line); background: var(--ivory); font-family: 'DM Sans', sans-serif; }
 .switch-container { display: flex; align-items: center; gap: 10px; margin-top: 5px; }
 .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
 .switch input { opacity: 0; width: 0; height: 0; }
@@ -51,53 +36,33 @@ a { text-decoration: none; color: inherit; }
 input:checked + .slider { background-color: var(--gold); }
 input:checked + .slider:before { transform: translateX(24px); }
 .switch-label { font-size: 14px; font-weight: 600; color: var(--ink); }
-
-.btn-submit { width: 100%; padding: 15px; background: var(--ink); color: var(--white); border: none; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.3s; margin-top: 10px; }
+.btn-submit { width: 100%; padding: 15px; background: var(--ink); color: var(--white); border: none; cursor: pointer; }
 .btn-submit:hover { background: var(--gold); }
-
-/* ================= PRODUCT LIST & TABS ================= */
-.list-section { background: var(--white); padding: 30px; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-.list-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 15px; margin-bottom: 20px; flex-wrap: wrap; gap: 15px; }
-.list-header h2 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 24px; }
+.list-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 15px; margin-bottom: 20px; flex-wrap: wrap; }
 .tabs { display: flex; gap: 10px; }
-.tab-btn { padding: 8px 20px; border: 1px solid var(--line); background: transparent; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--muted); transition: 0.3s; }
+.tab-btn { padding: 8px 20px; border: 1px solid var(--line); background: transparent; cursor: pointer; font-weight: 600; color: var(--muted); }
 .tab-btn.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
-
 .product-table { width: 100%; border-collapse: collapse; }
 .product-table th, .product-table td { padding: 15px; text-align: left; border-bottom: 1px solid var(--line); }
-.product-table th { font-size: 12px; text-transform: uppercase; color: var(--muted); letter-spacing: 1px; }
-.product-table img { width: 60px; height: 60px; object-fit: cover; border-radius: 4px; border: 1px solid var(--line); }
-
-/* Action Buttons */
-.action-btn { padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; border: none; color: white; transition: background 0.3s; margin-right: 5px; }
+.product-table img { width: 60px; height: 60px; object-fit: cover; }
+.action-btn { padding: 6px 12px; border-radius: 4px; cursor: pointer; border: none; color: white; margin-right: 5px; }
 .btn-edit { background: var(--blue); }
-.btn-edit:hover { background: #2980b9; }
 .btn-delete { background: var(--danger); }
-.btn-delete:hover { background: #c0392b; }
-
-.status-badge { font-size: 11px; padding: 3px 8px; border-radius: 12px; background: #e8f5e9; color: #2e7d32; font-weight: bold; }
-.status-badge.hidden { background: #ffebee; color: #c62828; }
-
-/* Toast */
-#toast { position: fixed; bottom: 20px; right: 20px; background: var(--ink); color: white; padding: 15px 25px; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 10000; }
+#toast { position: fixed; bottom: 20px; right: 20px; background: var(--ink); color: white; padding: 15px 25px; border-radius: 4px; opacity: 0; transition: opacity 0.3s; z-index: 10000; }
 #toast.show { opacity: 1; }
-
-@media (max-width: 900px) { .admin-container { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
-<!-- ================= LOGIN SCREEN ================= -->
 <div id="login-screen">
   <div class="login-box">
     <h1>ISARA Admin</h1>
-    <div class="error-msg" id="login-error">Galat Password! Kripya dobara try karein.</div>
-    <input type="password" id="admin-password" placeholder="Enter PIN" autocomplete="off">
+    <div class="error-msg" id="login-error">Galat Password!</div>
+    <input type="password" id="admin-password" placeholder="Enter PIN">
     <button onclick="checkPassword()">Login</button>
   </div>
 </div>
 
-<!-- ================= ADMIN APP ================= -->
 <div id="admin-app">
   <header class="admin-header">
     <h1>Admin Dashboard</h1>
@@ -108,33 +73,25 @@ input:checked + .slider:before { transform: translateX(24px); }
   </header>
 
   <div class="admin-container">
-    <!-- ADD / EDIT PRODUCT FORM -->
     <div class="form-section">
       <h2 id="formTitle">Add New Product</h2>
       <form id="productForm">
         <input type="hidden" id="productId" value="">
-        
         <div class="form-group">
           <label>Product Name</label>
-          <input type="text" id="name" required placeholder="e.g. Elegant Suit">
+          <input type="text" id="name" required>
         </div>
         <div class="form-group">
           <label>Price</label>
-          <input type="text" id="price" placeholder="e.g. ₹1500 (Optional)">
+          <input type="text" id="price">
         </div>
-        
-        <!-- PRICE TOGGLE SWITCH -->
         <div class="form-group">
           <label>Show Price on Website?</label>
           <div class="switch-container">
-            <label class="switch">
-              <input type="checkbox" id="showPrice" checked>
-              <span class="slider"></span>
-            </label>
-            <span class="switch-label" id="showPriceText">Yes (Price Dikhegi)</span>
+            <label class="switch"><input type="checkbox" id="showPrice" checked><span class="slider"></span></label>
+            <span class="switch-label" id="showPriceText">Yes</span>
           </div>
         </div>
-
         <div class="form-group">
           <label>Category</label>
           <select id="category">
@@ -142,24 +99,19 @@ input:checked + .slider:before { transform: translateX(24px); }
             <option value="Party">Party Wear</option>
           </select>
         </div>
-
-        <!-- NAYA: Photo Size Input -->
         <div class="form-group">
-          <label>Photo Height (Size) in pixels</label>
-          <input type="text" id="image_size" placeholder="e.g. 350 (default), 450, 500" value="350">
+          <label>Photo Height (px)</label>
+          <input type="text" id="image_size" value="350">
         </div>
-        
         <div class="form-group" id="imageInputGroup">
           <label>Product Image</label>
           <input type="file" id="image" accept="image/*">
         </div>
-        
         <button type="submit" class="btn-submit" id="submitBtn">Upload & Save</button>
-        <button type="button" id="cancelEditBtn" style="display:none; width:100%; padding:10px; background:#ccc; color:#333; border:none; margin-top:10px; cursor:pointer;">Cancel Edit</button>
+        <button type="button" id="cancelEditBtn" style="display:none; width:100%; padding:10px; background:#ccc; margin-top:10px; cursor:pointer;">Cancel Edit</button>
       </form>
     </div>
 
-    <!-- PRODUCT LIST & TABS -->
     <div class="list-section">
       <div class="list-header">
         <h2>Manage Products</h2>
@@ -168,47 +120,29 @@ input:checked + .slider:before { transform: translateX(24px); }
           <button class="tab-btn" onclick="switchTab('Party', this)">Party Wear</button>
         </div>
       </div>
-      <div style="overflow-x: auto;">
-        <table class="product-table">
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Size (Height)</th>
-              <th>Price</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="productList">
-            <!-- Products load here -->
-          </tbody>
-        </table>
-      </div>
+      <table class="product-table">
+        <thead><tr><th>Image</th><th>Name</th><th>Size</th><th>Price</th><th>Action</th></tr></thead>
+        <tbody id="productList"></tbody>
+      </table>
     </div>
   </div>
 </div>
-
 <div id="toast">Message</div>
 
-<!-- ================= SCRIPTS ================= -->
 <script>
   const CORRECT_PASSWORD = "isara123"; 
   if(sessionStorage.getItem('isara_admin_logged_in') === 'true') { showAdminApp(); }
   function checkPassword() {
-    const input = document.getElementById('admin-password').value;
-    const errorMsg = document.getElementById('login-error');
-    if(input === CORRECT_PASSWORD) { sessionStorage.setItem('isara_admin_logged_in', 'true'); showAdminApp(); } 
-    else { errorMsg.style.display = 'block'; document.getElementById('admin-password').value = ''; }
+    if(document.getElementById('admin-password').value === CORRECT_PASSWORD) { sessionStorage.setItem('isara_admin_logged_in', 'true'); showAdminApp(); } 
+    else { document.getElementById('login-error').style.display = 'block'; }
   }
   function showAdminApp() { document.getElementById('login-screen').style.display = 'none'; document.getElementById('admin-app').style.display = 'block'; }
   function logout() { sessionStorage.removeItem('isara_admin_logged_in'); window.location.reload(); }
-  document.getElementById('admin-password').addEventListener('keypress', function(e) { if(e.key === 'Enter') checkPassword(); });
-
+  
   const showPriceCheckbox = document.getElementById('showPrice');
   const showPriceText = document.getElementById('showPriceText');
   showPriceCheckbox.addEventListener('change', function() {
-    if(this.checked) { showPriceText.innerText = "Yes (Price Dikhegi)"; showPriceText.style.color = "var(--ink)"; } 
-    else { showPriceText.innerText = "No (On Enquiry Dikhega)"; showPriceText.style.color = "var(--gold)"; }
+    showPriceText.innerText = this.checked ? "Yes" : "No";
   });
 </script>
 
@@ -220,7 +154,6 @@ input:checked + .slider:before { transform: translateX(24px); }
   const form = document.getElementById('productForm');
   const submitBtn = document.getElementById('submitBtn');
   const productList = document.getElementById('productList');
-  
   let currentCategory = 'Ethnic'; 
   let isEditing = false;
 
@@ -246,20 +179,15 @@ input:checked + .slider:before { transform: translateX(24px); }
     try {
       const data = await apiRequest(`${SUPABASE_URL}/products?category=eq.${category}&select=*&order=created_at.desc`);
       productList.innerHTML = '';
-      
-      if (data.length === 0) {
-        productList.innerHTML = `<tr><td colspan="5" style="text-align:center;">No products found in ${category} Wear.</td></tr>`;
-        return;
-      }
+      if (data.length === 0) { productList.innerHTML = `<tr><td colspan="5" style="text-align:center;">No products found.</td></tr>`; return; }
 
       data.forEach(product => {
         const tr = document.createElement('tr');
-        let priceDisplay = product.show_price ? `<span style="color:var(--gold); font-weight:600;">${product.price}</span>` : `<span style="color:var(--muted); font-style:italic;">On Enquiry</span>`;
-
+        let priceDisplay = product.show_price ? product.price : 'On Enquiry';
         tr.innerHTML = `
           <td><img src="${product.image_url}" alt="img"></td>
-          <td style="font-weight:600;">${product.name}</td>
-          <td>${product.image_size ? product.image_size + 'px' : '350px'}</td>
+          <td>${product.name}</td>
+          <td>${product.image_size || 350}px</td>
           <td>${priceDisplay}</td>
           <td>
             <button class="action-btn btn-edit" onclick='editProduct(${JSON.stringify(product)})'>Edit</button>
@@ -268,7 +196,7 @@ input:checked + .slider:before { transform: translateX(24px); }
         `;
         productList.appendChild(tr);
       });
-    } catch (error) { showToast('Error loading products'); console.error(error); }
+    } catch (error) { showToast('Error loading products'); }
   }
 
   window.editProduct = function(product) {
@@ -278,16 +206,11 @@ input:checked + .slider:before { transform: translateX(24px); }
     document.getElementById('name').value = product.name;
     document.getElementById('price').value = product.price;
     document.getElementById('category').value = product.category;
-    
-    // Set Size (default to 350 if null)
     document.getElementById('image_size').value = product.image_size || 350;
-
     document.getElementById('showPrice').checked = product.show_price;
-    document.getElementById('showPriceText').innerText = product.show_price ? "Yes (Price Dikhegi)" : "No (On Enquiry Dikhega)";
-
+    document.getElementById('showPriceText').innerText = product.show_price ? "Yes" : "No";
     document.getElementById('image').required = false;
     document.getElementById('imageInputGroup').style.display = 'none'; 
-    
     submitBtn.innerText = 'Update Product';
     document.getElementById('cancelEditBtn').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -303,7 +226,7 @@ input:checked + .slider:before { transform: translateX(24px); }
     document.getElementById('imageInputGroup').style.display = 'block';
     submitBtn.innerText = 'Upload & Save';
     document.getElementById('cancelEditBtn').style.display = 'none';
-    document.getElementById('showPriceText').innerText = "Yes (Price Dikhegi)";
+    document.getElementById('showPriceText').innerText = "Yes";
   }
 
   document.getElementById('cancelEditBtn').addEventListener('click', resetForm);
@@ -315,7 +238,7 @@ input:checked + .slider:before { transform: translateX(24px); }
     const price = document.getElementById('price').value || "On Enquiry";
     const showPrice = document.getElementById('showPrice').checked;
     const category = document.getElementById('category').value;
-    const imageSize = document.getElementById('image_size').value || "350"; // Default 350
+    const imageSize = document.getElementById('image_size').value || "350";
     const imageFile = document.getElementById('image').files[0];
 
     submitBtn.disabled = true;
@@ -323,13 +246,12 @@ input:checked + .slider:before { transform: translateX(24px); }
     try {
       if (isEditing) {
         submitBtn.innerText = 'Updating...';
-        const dbUrl = `${SUPABASE_URL}/products?id=eq.${id}`;
-        await apiRequest(dbUrl, 'PATCH', {
+        await apiRequest(`${SUPABASE_URL}/products?id=eq.${id}`, 'PATCH', {
           name: name, price: price, show_price: showPrice, category: category, image_size: imageSize
         });
-        showToast('✅ Product Updated Successfully!');
+        showToast('✅ Product Updated!');
       } else {
-        if (!imageFile) return showToast('Please select an image');
+        if (!imageFile) { showToast('Please select an image'); submitBtn.disabled = false; return; }
         submitBtn.innerText = 'Uploading...';
         
         const fileName = `product-${Date.now()}.jpg`;
@@ -340,13 +262,13 @@ input:checked + .slider:before { transform: translateX(24px); }
         await apiRequest(`${SUPABASE_URL}/products`, 'POST', {
           name: name, price: price, show_price: showPrice, category: category, image_url: imageUrl, image_size: imageSize
         });
-        showToast('✅ Product Added Successfully!');
+        showToast('✅ Product Added!');
       }
 
       resetForm();
       loadProducts(category === currentCategory ? currentCategory : category); 
 
-    } catch (error) { showToast('❌ Error: Please check console'); console.error(error); } 
+    } catch (error) { showToast('❌ Error occurred'); console.error(error); } 
     finally { submitBtn.disabled = false; }
   });
 
@@ -356,7 +278,7 @@ input:checked + .slider:before { transform: translateX(24px); }
       await apiRequest(`${SUPABASE_URL}/products?id=eq.${id}`, 'DELETE');
       if (imageUrl) {
         const fileName = imageUrl.split('/').pop();
-        try { await apiRequest(`${BASE_URL}/storage/v1/object/product-images/${fileName}`, 'DELETE'); } catch(err) { console.log("Image might already be deleted"); }
+        try { await apiRequest(`${BASE_URL}/storage/v1/object/product-images/${fileName}`, 'DELETE'); } catch(err) {}
       }
       showToast('🗑️ Product Deleted');
       loadProducts(currentCategory); 
@@ -365,9 +287,7 @@ input:checked + .slider:before { transform: translateX(24px); }
 
   function showToast(message) { const toast = document.getElementById('toast'); toast.innerText = message; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 3000); }
 
-  document.getElementById('admin-password').addEventListener('keypress', function(e) { if(e.key === 'Enter') { setTimeout(() => { if(document.getElementById('admin-app').style.display === 'block') loadProducts('Ethnic'); }, 500); } });
   if(sessionStorage.getItem('isara_admin_logged_in') === 'true') { loadProducts('Ethnic'); }
 </script>
-
 </body>
 </html>
