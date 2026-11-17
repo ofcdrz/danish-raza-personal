@@ -11,44 +11,71 @@
 <style>
 /* ================= VARIABLES & RESET ================= */
 :root {
-  --ivory: #faf8f4; --sand: #eee7dc; --ink: #28231f; --muted: #786f66; --gold: #a77c55; --line: #e6ded3; --white: #ffffff;
+  --ivory: #faf8f4; --sand: #eee7dc; --ink: #28231f; --muted: #786f66; --gold: #a77c55; --line: #e6ded3; --white: #ffffff; --danger: #e74c3c;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background-color: var(--ivory); color: var(--ink); font-family: "DM Sans", sans-serif; line-height: 1.65; }
 a { text-decoration: none; color: inherit; }
 
-/* ================= HEADER ================= */
+/* ================= LOGIN SCREEN ================= */
+#login-screen { position: fixed; inset: 0; background: var(--ink); z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+.login-box { background: var(--ivory); padding: 40px; border-radius: 8px; text-align: center; width: 100%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.login-box h1 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 20px; }
+.login-box input { width: 100%; padding: 15px; font-size: 20px; text-align: center; letter-spacing: 5px; border: 1px solid var(--line); margin-bottom: 20px; outline: none; background: var(--white); }
+.login-box button { width: 100%; padding: 15px; background: var(--gold); color: white; border: none; font-size: 16px; cursor: pointer; font-weight: 600; }
+.login-box button:hover { background: var(--ink); }
+.error-msg { color: var(--danger); margin-bottom: 15px; font-size: 14px; display: none; }
+
+/* ================= MAIN APP ================= */
+#admin-app { display: none; } 
 .admin-header { background: var(--ink); color: var(--white); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; }
 .admin-header h1 { font-family: 'Playfair Display', serif; font-size: 24px; letter-spacing: 2px; }
-.admin-header a { color: var(--gold); font-size: 14px; border: 1px solid var(--gold); padding: 8px 15px; border-radius: 4px; transition: all 0.3s; }
-.admin-header a:hover { background: var(--gold); color: var(--white); }
+.admin-header .btn-logout { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 8px 15px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
+.admin-header .btn-logout:hover { background: var(--gold); color: var(--white); }
 
 /* ================= LAYOUT ================= */
 .admin-container { display: grid; grid-template-columns: 400px 1fr; gap: 30px; padding: 40px 5%; max-width: 1400px; margin: auto; }
 
 /* ================= FORM ================= */
-.form-section { background: var(--white); padding: 30px; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.form-section { background: var(--white); padding: 30px; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: fit-content; }
 .form-section h2 { font-family: 'Playfair Display', serif; font-weight: 500; margin-bottom: 20px; font-size: 24px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
 .form-group { margin-bottom: 20px; }
 .form-group label { display: block; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; color: var(--muted); }
 .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid var(--line); background: var(--ivory); font-family: 'DM Sans', sans-serif; font-size: 14px; outline: none; transition: border 0.3s; }
 .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
+
+/* Toggle Switch */
+.switch-container { display: flex; align-items: center; gap: 10px; margin-top: 5px; }
+.switch { position: relative; display: inline-block; width: 50px; height: 26px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 26px; }
+.slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--gold); }
+input:checked + .slider:before { transform: translateX(24px); }
+.switch-label { font-size: 14px; font-weight: 600; color: var(--ink); }
+
 .btn-submit { width: 100%; padding: 15px; background: var(--ink); color: var(--white); border: none; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.3s; margin-top: 10px; }
 .btn-submit:hover { background: var(--gold); }
-.btn-submit:disabled { background: var(--muted); cursor: not-allowed; }
 
-/* ================= PRODUCT LIST ================= */
+/* ================= PRODUCT LIST & TABS ================= */
 .list-section { background: var(--white); padding: 30px; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-.list-section h2 { font-family: 'Playfair Display', serif; font-weight: 500; margin-bottom: 20px; font-size: 24px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.list-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 15px; margin-bottom: 20px; flex-wrap: wrap; gap: 15px; }
+.list-header h2 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 24px; }
+.tabs { display: flex; gap: 10px; }
+.tab-btn { padding: 8px 20px; border: 1px solid var(--line); background: transparent; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--muted); transition: 0.3s; }
+.tab-btn.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
 .product-table { width: 100%; border-collapse: collapse; }
 .product-table th, .product-table td { padding: 15px; text-align: left; border-bottom: 1px solid var(--line); }
 .product-table th { font-size: 12px; text-transform: uppercase; color: var(--muted); letter-spacing: 1px; }
 .product-table img { width: 60px; height: 60px; object-fit: cover; border-radius: 4px; border: 1px solid var(--line); }
-.delete-btn { background: #ff4d4d; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; transition: background 0.3s; }
-.delete-btn:hover { background: #cc0000; }
+.delete-btn { background: var(--danger); color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; transition: background 0.3s; }
+.delete-btn:hover { background: #c0392b; }
+.status-badge { font-size: 11px; padding: 3px 8px; border-radius: 12px; background: #e8f5e9; color: #2e7d32; font-weight: bold; }
+.status-badge.hidden { background: #ffebee; color: #c62828; }
 
 /* Toast */
-#toast { position: fixed; bottom: 20px; right: 20px; background: var(--ink); color: white; padding: 15px 25px; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 9999; }
+#toast { position: fixed; bottom: 20px; right: 20px; background: var(--ink); color: white; padding: 15px 25px; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 10000; }
 #toast.show { opacity: 1; }
 
 @media (max-width: 900px) {
@@ -58,66 +85,149 @@ a { text-decoration: none; color: inherit; }
 </head>
 <body>
 
-<header class="admin-header">
-  <h1>ISARA Admin</h1>
-  <a href="index.html" target="_blank">View Website →</a>
-</header>
-
-<div class="admin-container">
-  <!-- ADD PRODUCT FORM -->
-  <div class="form-section">
-    <h2>Add New Product</h2>
-    <form id="productForm">
-      <div class="form-group">
-        <label>Product Name</label>
-        <input type="text" id="name" required placeholder="e.g. Elegant Ethnic Wear">
-      </div>
-      <div class="form-group">
-        <label>Price</label>
-        <input type="text" id="price" required placeholder="e.g. ₹1500 or On Enquiry">
-      </div>
-      <div class="form-group">
-        <label>Category</label>
-        <select id="category">
-          <option value="Ethnic">Ethnic Wear</option>
-          <option value="Party">Party Wear</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Product Image</label>
-        <input type="file" id="image" accept="image/*" required>
-      </div>
-      <button type="submit" class="btn-submit" id="submitBtn">Upload & Save Product</button>
-    </form>
+<!-- ================= LOGIN SCREEN ================= -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>ISARA Admin</h1>
+    <div class="error-msg" id="login-error">Galat Password! Kripya dobara try karein.</div>
+    <input type="password" id="admin-password" placeholder="Enter PIN" autocomplete="off">
+    <button onclick="checkPassword()">Login</button>
   </div>
+</div>
 
-  <!-- PRODUCT LIST -->
-  <div class="list-section">
-    <h2>Current Products</h2>
-    <div style="overflow-x: auto;">
-      <table class="product-table">
-        <thead>
-          <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="productList">
-          <!-- Products will load here -->
-        </tbody>
-      </table>
+<!-- ================= ADMIN APP ================= -->
+<div id="admin-app">
+  <header class="admin-header">
+    <h1>Admin Dashboard</h1>
+    <div>
+      <a href="index.html" target="_blank" style="color:var(--gold); margin-right:15px; font-size:14px;">View Website →</a>
+      <button class="btn-logout" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <div class="admin-container">
+    <!-- ADD PRODUCT FORM -->
+    <div class="form-section">
+      <h2>Add New Product</h2>
+      <form id="productForm">
+        <div class="form-group">
+          <label>Product Name</label>
+          <input type="text" id="name" required placeholder="e.g. Elegant Suit">
+        </div>
+        <div class="form-group">
+          <label>Price</label>
+          <input type="text" id="price" placeholder="e.g. ₹1500 (Optional)">
+        </div>
+        
+        <!-- PRICE TOGGLE SWITCH -->
+        <div class="form-group">
+          <label>Show Price on Website?</label>
+          <div class="switch-container">
+            <label class="switch">
+              <input type="checkbox" id="showPrice" checked>
+              <span class="slider"></span>
+            </label>
+            <span class="switch-label" id="showPriceText">Yes (Price Dikhegi)</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Category</label>
+          <select id="category">
+            <option value="Ethnic">Ethnic Wear</option>
+            <option value="Party">Party Wear</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Product Image</label>
+          <input type="file" id="image" accept="image/*" required>
+        </div>
+        <button type="submit" class="btn-submit" id="submitBtn">Upload & Save</button>
+      </form>
+    </div>
+
+    <!-- PRODUCT LIST & TABS -->
+    <div class="list-section">
+      <div class="list-header">
+        <h2>Manage Products</h2>
+        <div class="tabs">
+          <button class="tab-btn active" onclick="switchTab('Ethnic', this)">Ethnic Wear</button>
+          <button class="tab-btn" onclick="switchTab('Party', this)">Party Wear</button>
+        </div>
+      </div>
+      <div style="overflow-x: auto;">
+        <table class="product-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Visibility</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="productList">
+            <!-- Products load here -->
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
 
 <div id="toast">Message</div>
 
-<!-- Supabase Script -->
+<!-- ================= SCRIPTS ================= -->
+<script>
+  // Login Logic
+  const CORRECT_PASSWORD = "isara123"; 
+
+  if(sessionStorage.getItem('isara_admin_logged_in') === 'true') {
+    showAdminApp();
+  }
+
+  function checkPassword() {
+    const input = document.getElementById('admin-password').value;
+    const errorMsg = document.getElementById('login-error');
+    
+    if(input === CORRECT_PASSWORD) {
+      sessionStorage.setItem('isara_admin_logged_in', 'true');
+      showAdminApp();
+    } else {
+      errorMsg.style.display = 'block';
+      document.getElementById('admin-password').value = '';
+    }
+  }
+
+  function showAdminApp() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-app').style.display = 'block';
+  }
+
+  function logout() {
+    sessionStorage.removeItem('isara_admin_logged_in');
+    window.location.reload();
+  }
+
+  document.getElementById('admin-password').addEventListener('keypress', function(e) {
+    if(e.key === 'Enter') checkPassword();
+  });
+
+  // Toggle Text Logic
+  const showPriceCheckbox = document.getElementById('showPrice');
+  const showPriceText = document.getElementById('showPriceText');
+  showPriceCheckbox.addEventListener('change', function() {
+    if(this.checked) {
+      showPriceText.innerText = "Yes (Price Dikhegi)";
+      showPriceText.style.color = "var(--ink)";
+    } else {
+      showPriceText.innerText = "No (On Enquiry Dikhega)";
+      showPriceText.style.color = "var(--gold)";
+    }
+  });
+</script>
+
 <script type="module">
-  // 1. Supabase details
   const SUPABASE_URL = 'https://mnghsyllrmlzkkbpmsbx.supabase.co/rest/v1';
   const SUPABASE_KEY = 'sb_publishable_iNdQQLJ_ukM8Lb2CEZtoBQ_JA50m-w8';
   const BASE_URL = 'https://mnghsyllrmlzkkbpmsbx.supabase.co';
@@ -125,6 +235,15 @@ a { text-decoration: none; color: inherit; }
   const form = document.getElementById('productForm');
   const submitBtn = document.getElementById('submitBtn');
   const productList = document.getElementById('productList');
+  
+  let currentCategory = 'Ethnic'; 
+
+  window.switchTab = function(category, btn) {
+    currentCategory = category;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    loadProducts(category);
+  }
 
   async function apiRequest(endpoint, method = 'GET', body = null, isFormData = false) {
     const headers = {
@@ -145,30 +264,42 @@ a { text-decoration: none; color: inherit; }
 
     if (!response.ok) throw new Error('API Error');
     
-    // For DELETE and POST requests (when no data is expected to return)
     if (method === 'DELETE') return true;
     if (method === 'POST' && endpoint.includes('products')) return true;
     
     return await response.json();
   }
 
-  async function loadProducts() {
+  async function loadProducts(category) {
+    productList.innerHTML = '<tr><td colspan="5" style="text-align:center;">Loading...</td></tr>';
     try {
-      const data = await apiRequest(`${SUPABASE_URL}/products?select=*&order=created_at.desc`);
+      const data = await apiRequest(`${SUPABASE_URL}/products?category=eq.${category}&select=*&order=created_at.desc`);
+      
       productList.innerHTML = '';
       
       if (data.length === 0) {
-        productList.innerHTML = '<tr><td colspan="5" style="text-align:center;">No products found.</td></tr>';
+        productList.innerHTML = `<tr><td colspan="5" style="text-align:center;">No products found in ${category} Wear.</td></tr>`;
         return;
       }
 
       data.forEach(product => {
         const tr = document.createElement('tr');
+        
+        // Visibility Badge
+        let visibilityBadge = product.show_price 
+            ? `<span class="status-badge">Price Visible</span>` 
+            : `<span class="status-badge hidden">Hidden (Enquiry)</span>`;
+        
+        // Price display
+        let priceDisplay = product.show_price 
+            ? `<span style="color:var(--gold); font-weight:600;">${product.price}</span>` 
+            : `<span style="color:var(--muted); font-style:italic;">On Enquiry</span>`;
+
         tr.innerHTML = `
           <td><img src="${product.image_url}" alt="img"></td>
           <td style="font-weight:600;">${product.name}</td>
-          <td>${product.category}</td>
-          <td>${product.price}</td>
+          <td>${priceDisplay}</td>
+          <td>${visibilityBadge}</td>
           <td><button class="delete-btn" onclick="deleteProduct(${product.id})">Delete</button></td>
         `;
         productList.appendChild(tr);
@@ -183,14 +314,15 @@ a { text-decoration: none; color: inherit; }
     e.preventDefault();
     
     const name = document.getElementById('name').value;
-    const price = document.getElementById('price').value;
+    const price = document.getElementById('price').value || "On Enquiry";
+    const showPrice = document.getElementById('showPrice').checked;
     const category = document.getElementById('category').value;
     const imageFile = document.getElementById('image').files[0];
 
     if (!imageFile) return showToast('Please select an image');
 
     submitBtn.disabled = true;
-    submitBtn.innerText = 'Uploading Image...';
+    submitBtn.innerText = 'Uploading...';
 
     try {
       const fileName = `product-${Date.now()}.jpg`;
@@ -200,26 +332,35 @@ a { text-decoration: none; color: inherit; }
 
       const imageUrl = `${BASE_URL}/storage/v1/object/public/product-images/${fileName}`;
 
-      submitBtn.innerText = 'Saving Product...';
+      submitBtn.innerText = 'Saving Data...';
       const dbUrl = `${SUPABASE_URL}/products`;
       
       await apiRequest(dbUrl, 'POST', {
         name: name,
         price: price,
+        show_price: showPrice, // Send boolean true/false
         category: category,
         image_url: imageUrl
       });
 
       showToast('✅ Product Added Successfully!');
       form.reset();
-      loadProducts(); 
+      document.getElementById('showPriceText').innerText = "Yes (Price Dikhegi)";
+      
+      if (category !== currentCategory) {
+         document.querySelectorAll('.tab-btn').forEach(b => {
+             if(b.innerText.includes(category)) b.click();
+         });
+      } else {
+         loadProducts(currentCategory); 
+      }
 
     } catch (error) {
       showToast('❌ Error: Please check console');
       console.error(error);
     } finally {
       submitBtn.disabled = false;
-      submitBtn.innerText = 'Upload & Save Product';
+      submitBtn.innerText = 'Upload & Save';
     }
   });
 
@@ -229,7 +370,7 @@ a { text-decoration: none; color: inherit; }
     try {
       await apiRequest(`${SUPABASE_URL}/products?id=eq.${id}`, 'DELETE');
       showToast('🗑️ Product Deleted');
-      loadProducts();
+      loadProducts(currentCategory); 
     } catch (error) {
       showToast('Error deleting product');
     }
@@ -242,7 +383,20 @@ a { text-decoration: none; color: inherit; }
     setTimeout(() => toast.classList.remove('show'), 3000);
   }
 
-  loadProducts();
+  document.getElementById('admin-password').addEventListener('keypress', function(e) {
+    if(e.key === 'Enter') {
+        setTimeout(() => {
+            if(document.getElementById('admin-app').style.display === 'block') {
+                loadProducts('Ethnic');
+            }
+        }, 500);
+    }
+  });
+  
+  if(sessionStorage.getItem('isara_admin_logged_in') === 'true') {
+    loadProducts('Ethnic');
+  }
+
 </script>
 
 </body>
