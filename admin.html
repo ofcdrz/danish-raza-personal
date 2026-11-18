@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ISARA | Admin Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root { --ivory: #faf8f4; --sand: #eee7dc; --ink: #28231f; --muted: #786f66; --gold: #a77c55; --line: #e6ded3; --white: #ffffff; --danger: #e74c3c; --blue: #3498db; }
@@ -102,10 +101,10 @@ input:checked + .slider:before { transform: translateX(24px); }
           <label>Main Photo Size (Height in px)</label>
           <input type="number" id="image_size" value="650">
         </div>
-        <div class="form-group" id="imageInputGroup">
+        <div class="form-group">
           <label>Photos (Select Multiple for Gallery)</label>
           <input type="file" id="images" accept="image/*" multiple>
-          <small style="color:var(--muted); font-size:11px;">Pehli photo main photo banegi, baaki thumbnails.</small>
+          <small style="color:var(--muted); font-size:11px; display:block; margin-top:5px;">Edit karte waqt agar photo nahi badalni, toh isko khaali chhod dein.</small>
         </div>
         <button type="submit" class="btn-submit" id="submitBtn">Upload & Save</button>
         <button type="button" id="cancelEditBtn" style="display:none; width:100%; padding:10px; background:#ccc; margin-top:10px; cursor:pointer;">Cancel Edit</button>
@@ -150,6 +149,7 @@ input:checked + .slider:before { transform: translateX(24px); }
   const productList = document.getElementById('productList');
   let currentCategory = 'Ethnic'; 
   let isEditing = false;
+  let currentImageString = "";
 
   window.switchTab = function(category, btn) {
     currentCategory = category;
@@ -174,9 +174,12 @@ input:checked + .slider:before { transform: translateX(24px); }
       productList.innerHTML = '';
       data.forEach(product => {
         let priceDisplay = product.show_price ? product.price : 'On Enquiry';
+        // Main image nikalna (comma se pehle wala)
+        const mainImage = product.image_url ? product.image_url.split(',')[0] : '';
+        
         productList.innerHTML += `
           <tr>
-            <td><img src="${product.image_url}" alt="img"></td>
+            <td><img src="${mainImage}" alt="img"></td>
             <td>${product.name}</td>
             <td>${product.image_size || 650}px</td>
             <td>${priceDisplay}</td>
@@ -192,6 +195,8 @@ input:checked + .slider:before { transform: translateX(24px); }
 
   window.editProduct = function(product) {
     isEditing = true;
+    currentImageString = product.image_url; // Save current images
+    
     document.getElementById('formTitle').innerText = "Edit Product";
     document.getElementById('productId').value = product.id;
     document.getElementById('name').value = product.name;
@@ -200,7 +205,8 @@ input:checked + .slider:before { transform: translateX(24px); }
     document.getElementById('category').value = product.category;
     document.getElementById('image_size').value = product.image_size || 650;
     document.getElementById('showPrice').checked = product.show_price;
-    document.getElementById('imageInputGroup').style.display = 'none'; 
+    
+    document.getElementById('images').value = ''; // Clear file input
     document.getElementById('submitBtn').innerText = 'Update Product';
     document.getElementById('cancelEditBtn').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -208,11 +214,12 @@ input:checked + .slider:before { transform: translateX(24px); }
 
   function resetForm() {
     isEditing = false;
+    currentImageString = "";
     document.getElementById('formTitle').innerText = "Add New Product";
     form.reset();
     document.getElementById('productId').value = '';
     document.getElementById('image_size').value = 650;
-    document.getElementById('imageInputGroup').style.display = 'block';
+    document.getElementById('images').required = true;
     document.getElementById('submitBtn').innerText = 'Upload & Save';
     document.getElementById('cancelEditBtn').style.display = 'none';
   }
@@ -232,32 +239,30 @@ input:checked + .slider:before { transform: translateX(24px); }
     document.getElementById('submitBtn').disabled = true;
     
     try {
-      if (isEditing) {
-        document.getElementById('submitBtn').innerText = 'Updating...';
-        await apiRequest(`${SUPABASE_URL}/products?id=eq.${id}`, 'PATCH', {
-          name: name, description: description, price: price, show_price: showPrice, category: category, image_size: imageSize
-        });
-        showToast('✅ Updated!');
-      } else {
-        if (imageFiles.length === 0) { showToast('Select at least one image'); document.getElementById('submitBtn').disabled = false; return; }
-        
+      let finalImageUrl = currentImageString;
+
+      // Agar nayi photo select ki gayi hai, toh upload karein
+      if (imageFiles.length > 0) {
         document.getElementById('submitBtn').innerText = 'Uploading Images...';
         let uploadedUrls = [];
-        
-        // Upload all selected images
         for (let i = 0; i < imageFiles.length; i++) {
           const fileName = `product-${Date.now()}-${i}.jpg`;
           await apiRequest(`${BASE_URL}/storage/v1/object/product-images/${fileName}`, 'POST', imageFiles[i], true);
           uploadedUrls.push(`${BASE_URL}/storage/v1/object/public/product-images/${fileName}`);
         }
+        finalImageUrl = uploadedUrls.join(',');
+      }
 
-        // Join URLs with a comma (we'll split them on the frontend)
-        const mainImageUrl = uploadedUrls[0];
-        const allImagesString = uploadedUrls.join(',');
-
+      if (isEditing) {
+        document.getElementById('submitBtn').innerText = 'Updating...';
+        await apiRequest(`${SUPABASE_URL}/products?id=eq.${id}`, 'PATCH', {
+          name: name, description: description, price: price, show_price: showPrice, category: category, image_size: imageSize, image_url: finalImageUrl
+        });
+        showToast('✅ Updated!');
+      } else {
         document.getElementById('submitBtn').innerText = 'Saving Data...';
         await apiRequest(`${SUPABASE_URL}/products`, 'POST', {
-          name: name, description: description, price: price, show_price: showPrice, category: category, image_url: allImagesString, image_size: imageSize
+          name: name, description: description, price: price, show_price: showPrice, category: category, image_url: finalImageUrl, image_size: imageSize
         });
         showToast('✅ Product Added!');
       }
@@ -271,7 +276,6 @@ input:checked + .slider:before { transform: translateX(24px); }
     if (!confirm('Are you sure?')) return;
     try {
       await apiRequest(`${SUPABASE_URL}/products?id=eq.${id}`, 'DELETE');
-      // Delete images
       if (imageUrlString) {
         const urls = imageUrlString.split(',');
         for(let url of urls) {
