@@ -5,105 +5,82 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ISARA | Party Wear Collection</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-/* ================= VARIABLES & RESET ================= */
 :root { --ivory: #faf8f4; --sand: #eee7dc; --ink: #28231f; --muted: #786f66; --gold: #a77c55; --line: #e6ded3; --white: #ffffff; --header-bg: rgba(250, 248, 244, 0.85); --btn-text: #ffffff; }
 [data-theme="dark"] { --ivory: #12100e; --sand: #1a1715; --ink: #f4f1ec; --muted: #a89f95; --gold: #c49a72; --line: #2e2823; --white: #1c1815; --header-bg: rgba(18, 16, 14, 0.85); --btn-text: #12100e; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; }
 body { background-color: var(--ivory); color: var(--ink); font-family: "DM Sans", sans-serif; line-height: 1.65; transition: background 0.5s ease, color 0.5s ease; overflow-x: hidden; }
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; display: block; }
 .container { width: min(1200px, 88%); margin: auto; }
-
-/* ================= ANNOUNCEMENT & HEADER ================= */
 .announcement { background: #1a1614 !important; color: #f8f3ec !important; text-align: center; padding: 8px 15px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid #2e2823; }
-.site-header { height: 82px; padding: 0 6%; display: flex; align-items: center; justify-content: space-between; background: var(--header-bg); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 1000; transition: all 0.4s ease; }
+.site-header { height: 82px; padding: 0 6%; display: flex; align-items: center; justify-content: space-between; background: var(--header-bg); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 1000; }
 .brand-signature { display: flex; align-items: center; gap: 14px; text-decoration: none; }
-.header-signature-line { width: 30px; height: 1px; background: var(--gold); transition: width 0.4s ease; }
-.brand-signature:hover .header-signature-line { width: 50px; }
+.header-signature-line { width: 30px; height: 1px; background: var(--gold); }
 .header-signature-text { display: flex; flex-direction: column; align-items: center; }
 .header-signature-logo { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500; letter-spacing: 6px; color: var(--ink); margin-right: -6px; }
 .header-signature-caption { font-family: 'DM Sans', sans-serif; font-size: 7.5px; font-weight: 600; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); margin-top: 5px; margin-right: -3.5px; }
 .main-nav { display: flex; align-items: center; gap: 28px; }
-.main-nav a { font-size: 10px; letter-spacing: 1.7px; text-transform: uppercase; position: relative; color: var(--ink); transition: color 0.3s ease; }
+.main-nav a { font-size: 10px; letter-spacing: 1.7px; text-transform: uppercase; position: relative; color: var(--ink); }
 .main-nav a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0; background: var(--gold); transition: width 0.4s ease; }
 .main-nav a:hover::after { width: 100%; }
-.theme-toggle { background: transparent; border: 1px solid var(--line); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); transition: all 0.3s ease; margin-left: 5px; padding: 0; }
-.theme-toggle:hover { border-color: var(--gold); color: var(--gold); transform: rotate(15deg); }
+.theme-toggle { background: transparent; border: 1px solid var(--line); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); margin-left: 5px; padding: 0; }
 .menu-toggle { display: none; border: 0; background: none; font-size: 24px; cursor: pointer; color: var(--ink); }
-
-/* ================= BUTTONS ================= */
-.btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 24px; background: var(--ink) !important; color: var(--ivory) !important; border: 1px solid var(--ink) !important; font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase; position: relative; overflow: hidden; z-index: 1; transition: all 0.4s ease; cursor: pointer; }
-.btn::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--gold); transform: scaleX(0); transform-origin: right; transition: transform 0.4s ease; z-index: -1; }
-.btn:hover::before { transform: scaleX(1); transform-origin: left; }
-.btn:hover { color: var(--btn-text) !important; border-color: var(--gold) !important; box-shadow: 0 10px 20px rgba(164, 124, 84, 0.2); }
-
-/* ================= PAGE STYLES ================= */
-.page-hero { background: var(--sand); padding: 65px 0; text-align: center; transition: background 0.5s ease; }
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 24px; background: var(--ink) !important; color: var(--ivory) !important; border: 1px solid var(--ink) !important; font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+.btn:hover { color: var(--btn-text) !important; border-color: var(--gold) !important; background: var(--gold) !important; }
+.page-hero { background: var(--sand); padding: 65px 0; text-align: center; }
 .page-hero h1 { font-size: clamp(42px,6vw,68px); margin:8px 0; font-family: "Playfair Display",serif; font-weight: 400; color: var(--ink); }
 .page-hero p { color: var(--muted); font-size:13px; }
 .eyebrow { font-size: 10px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; font-weight: 600; display: block; }
 .party-intro { text-align:center; padding:65px 20px 40px; }
 .party-intro h2 { font:400 clamp(32px,5vw,48px) "Playfair Display",serif; margin:12px 0; color: var(--ink); }
 .party-intro p { color: var(--muted); font-size:14px; }
-
 .design-container { width:min(1100px,90%); margin:0 auto 85px; }
-.design-card { display:grid; grid-template-columns:1.1fr .9fr; gap:35px; align-items:start; background: var(--white); padding:22px; border:1px solid var(--line); transition: background 0.5s ease, border 0.5s ease; }
+.design-card { display:grid; grid-template-columns:1.1fr .9fr; gap:35px; align-items:start; background: var(--white); padding:22px; border:1px solid var(--line); }
 .design-main { cursor:zoom-in; overflow:hidden; background: var(--sand); }
-.design-main img { width:100%; height:650px; object-fit:cover; display:block; transition:transform .5s ease; }
-.design-main:hover img { transform:scale(1.02); }
+.design-main img { width:100%; object-fit:cover; display:block; }
 .design-thumbnails { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:12px; }
-.design-thumbnails button { border:2px solid transparent; padding:0; background: var(--sand); cursor:pointer; overflow:hidden; transition: border 0.3s; }
+.design-thumbnails button { border:2px solid transparent; padding:0; background: var(--sand); cursor:pointer; overflow:hidden; }
 .design-thumbnails button.active { border-color: var(--gold); }
 .design-thumbnails img { width:100%; height:110px; object-fit:cover; display:block; }
-
 .design-info { padding:35px 15px; }
 .design-info .eyebrow { margin-bottom:12px; }
 .design-info h2 { font:400 clamp(30px,4vw,43px) "Playfair Display",serif; line-height:1.2; color: var(--ink); }
 .design-info p { color: var(--muted); font-size:13px; line-height:2; margin:18px 0; }
 .design-number { color: var(--gold); font-size:11px; letter-spacing:2px; margin-bottom:15px; }
 .design-info .btn { margin-top:12px; }
-
-/* Lightbox */
-.lightbox { display:none; position:fixed; inset:0; z-index:9999; background:rgba(12,12,12,.96); align-items:center; justify-content:center; padding:65px 65px 45px; }
+.lightbox { display:none; position:fixed; inset:0; z-index:9999; background:rgba(12,12,12,.96); align-items:center; justify-content:center; padding:65px; }
 .lightbox.open { display:flex; }
-.lightbox img { max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+.lightbox img { max-width:100%; max-height:100%; object-fit:contain; }
 .lightbox-close,.lightbox-prev,.lightbox-next { position:absolute; border:0; background:rgba(255,255,255,.13); color:white; cursor:pointer; display:flex; align-items:center; justify-content:center; }
 .lightbox-close { top:18px; right:22px; width:44px; height:44px; border-radius:50%; font-size:27px; }
 .lightbox-prev,.lightbox-next { top:50%; transform:translateY(-50%); width:48px; height:58px; border-radius:5px; font-size:30px; }
 .lightbox-prev { left:15px; } .lightbox-next { right:15px; }
-.lightbox-count { position:absolute; bottom:18px; color:white; font-size:13px; letter-spacing:2px; }
+.lightbox-count { position:absolute; bottom:18px; color:white; font-size:13px; }
 body.viewer-open { overflow:hidden; }
-.party-contact { text-align:center; background: var(--sand); padding:65px 20px; transition: background 0.5s ease; }
+.party-contact { text-align:center; background: var(--sand); padding:65px 20px; }
 .party-contact h2 { font:400 clamp(30px,5vw,44px) "Playfair Display",serif; margin:10px 0; color: var(--ink); }
 .party-contact p { color: var(--muted); margin-bottom:22px; }
-
-/* ================= FOOTER ================= */
 .footer { background: #1a1614 !important; color: #d6ccc1 !important; padding: 50px 6% 25px; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 35px; max-width: 1200px; margin: auto; }
 .footer .brand { display: inline-block; color: #ffffff !important; margin-bottom: 12px; font-size: 26px; font-family: 'Playfair Display', serif; letter-spacing: 5px; }
 .footer p, .footer a { font-size: 11px; color: #a89f95 !important; }
-.footer a:hover { color: var(--gold) !important; }
 .footer h4 { font: 18px "Playfair Display", Georgia, serif; color: #ffffff !important; margin-bottom: 12px; }
 .footer-links { display: grid; gap: 8px; }
 .copyright { text-align: center; border-top: 1px solid #2e2823 !important; margin: 35px auto 0; padding-top: 18px; font-size: 10px; color: #786f66 !important; }
-
-/* ================= RESPONSIVE ================= */
-@media(max-width: 750px) { .design-card { grid-template-columns:1fr; gap:10px; padding:12px; } .design-main img { height:470px; } .design-info { padding:20px 8px; } .design-thumbnails img { height:85px; } }
+@media(max-width: 750px) { .design-card { grid-template-columns:1fr; padding:12px; } .design-thumbnails img { height:85px; } }
 @media(max-width: 650px) {
   .site-header { height: auto; padding: 15px 6%; flex-wrap: wrap; }
   .menu-toggle { display: block; }
   .main-nav { display: none; width: 100%; padding: 15px 0; flex-direction: column; align-items: flex-start; gap: 15px; }
   .main-nav.active { display: flex; }
-  .theme-toggle { margin: 10px 0 0 0; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-grid > div:first-child { grid-column: 1/-1; }
 }
-@media(max-width: 500px) { .party-intro { padding:45px 18px 28px; } .design-container { width:93%; margin-bottom:55px; } .design-main img { height:390px; } .design-thumbnails { gap:7px; } .design-thumbnails img { height:75px; } .lightbox { padding:55px 8px 45px; } .lightbox-prev { left:5px; } .lightbox-next { right:5px; } .lightbox-prev,.lightbox-next { width:36px; height:48px; } }
+@media(max-width: 500px) { .design-thumbnails { gap:7px; } .design-thumbnails img { height:75px; } .lightbox { padding:55px 8px; } .lightbox-prev { left:5px; } .lightbox-next { right:5px; } }
 </style>
 </head>
 <body>
@@ -150,9 +127,7 @@ body.viewer-open { overflow:hidden; }
 
 <section class="design-container">
   <div class="design-card" id="dynamic-design-card">
-    <div style="grid-column: 1 / -1; text-align: center; padding: 50px; color: var(--muted);">
-      Loading designs...
-    </div>
+    <div style="grid-column: 1 / -1; text-align: center; padding: 50px; color: var(--muted);">Loading designs...</div>
   </div>
 </section>
 
@@ -217,6 +192,7 @@ body.viewer-open { overflow:hidden; }
 
   let designPhotos = [];
   let currentPhoto = 0;
+  let allProducts = [];
 
   window.openViewer = function(index) { if(designPhotos.length === 0) return; currentPhoto = index; updateViewer(); document.getElementById("lightbox").classList.add("open"); document.body.classList.add("viewer-open"); }
   window.closeViewer = function() { document.getElementById("lightbox").classList.remove("open"); document.body.classList.remove("viewer-open"); }
@@ -225,34 +201,34 @@ body.viewer-open { overflow:hidden; }
 
   async function fetchPartyProducts() {
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/products?category=eq.Party&select=*&order=created_at.desc`, {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/products?category=eq.Party&select=*&order=created_at.desc&t=${Date.now()}`, {
         method: 'GET', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
       });
       
-      const products = await response.json();
+      allProducts = await response.json();
       const designCard = document.getElementById('dynamic-design-card');
 
-      if (products.length === 0) {
-        designCard.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 50px; color: var(--muted); width: 100%;">No party wear designs found. Please add them from Admin Panel.</div>';
+      if (allProducts.length === 0) {
+        designCard.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 50px; color: var(--muted); width: 100%;">No party wear designs found.</div>';
         return;
       }
 
-      designPhotos = products.map(p => p.image_url);
-      const mainProduct = products[0];
-
+      const mainProduct = allProducts[0];
+      designPhotos = mainProduct.image_url.split(',');
+      
       let thumbsHTML = '';
-      products.forEach((product, index) => {
+      designPhotos.forEach((url, index) => {
         const activeClass = index === 0 ? 'active' : '';
-        thumbsHTML += `<button class="${activeClass}" onclick="changeDesign(${index},this)"><img src="${product.image_url}" alt="${product.name}"></button>`;
+        thumbsHTML += `<button class="${activeClass}" onclick="changeDesign(0, ${index}, this)"><img src="${url}" alt="Design"></button>`;
       });
 
-      // Yahan price check lagaya gaya hai
       let mainPrice = mainProduct.show_price ? mainProduct.price : 'On Enquiry';
+      let mainSize = mainProduct.image_size ? mainProduct.image_size : '650'; 
 
       designCard.innerHTML = `
         <div>
           <div class="design-main" onclick="openViewer(0)">
-            <img id="mainDesignImage" src="${mainProduct.image_url}" alt="${mainProduct.name}">
+            <img id="mainDesignImage" src="${designPhotos[0]}" style="height: ${mainSize}px !important; width: 100%; object-fit: cover;" alt="${mainProduct.name}">
           </div>
           <div class="design-thumbnails">${thumbsHTML}</div>
         </div>
@@ -260,32 +236,40 @@ body.viewer-open { overflow:hidden; }
           <div class="eyebrow">ISARA · PARTY WEAR</div>
           <div class="design-number">NEW ARRIVAL</div>
           <h2>${mainProduct.name}</h2>
-          <p>A distinctive look for special occasions and celebrations.</p>
+          <p>${mainProduct.description || 'A distinctive look for special occasions and celebrations.'}</p>
           <p><strong>Price:</strong> ${mainPrice}</p>
           <a class="btn" href="https://wa.me/919746699702?text=Hello%20ISARA%2C%20I%20am%20interested%20in%20${encodeURIComponent(mainProduct.name)}" target="_blank" rel="noopener">Enquire on WhatsApp →</a>
         </div>
       `;
 
-      window.changeDesign = function(index, button) {
-        currentPhoto = index; 
-        document.getElementById("mainDesignImage").src = products[index].image_url;
+      window.changeDesign = function(productIndex, imageIndex, button) {
+        const product = allProducts[productIndex];
+        const images = product.image_url.split(',');
         
-        let newPrice = products[index].show_price ? products[index].price : 'On Enquiry';
+        document.getElementById("mainDesignImage").src = images[imageIndex];
+        let newSize = product.image_size ? product.image_size : '650';
+        document.getElementById("mainDesignImage").style.height = newSize + 'px';
+        
+        let newPrice = product.show_price ? product.price : 'On Enquiry';
         
         const infoDiv = document.querySelector('.design-info');
         infoDiv.innerHTML = `
           <div class="eyebrow">ISARA · PARTY WEAR</div>
           <div class="design-number">NEW ARRIVAL</div>
-          <h2>${products[index].name}</h2>
-          <p>A distinctive look for special occasions and celebrations.</p>
+          <h2>${product.name}</h2>
+          <p>${product.description || 'A distinctive look for special occasions and celebrations.'}</p>
           <p><strong>Price:</strong> ${newPrice}</p>
-          <a class="btn" href="https://wa.me/919746699702?text=Hello%20ISARA%2C%20I%20am%20interested%20in%20${encodeURIComponent(products[index].name)}" target="_blank" rel="noopener">Enquire on WhatsApp →</a>
+          <a class="btn" href="https://wa.me/919746699702?text=Hello%20ISARA%2C%20I%20am%20interested%20in%20${encodeURIComponent(product.name)}" target="_blank" rel="noopener">Enquire on WhatsApp →</a>
         `;
+        
+        designPhotos = images;
+        currentPhoto = imageIndex;
+
         document.querySelectorAll(".design-thumbnails button").forEach(btn => btn.classList.remove("active")); 
         button.classList.add("active");
       }
 
-    } catch (error) { console.error('Error:', error); document.getElementById('dynamic-design-card').innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 50px; color: red;">Error loading designs.</div>'; }
+    } catch (error) { console.error('Error:', error); document.getElementById('dynamic-design-card').innerHTML = '<div style="text-align: center; padding: 50px; color: red;">Error loading designs.</div>'; }
   }
 
   document.addEventListener("keydown", function(event) { const viewer = document.getElementById("lightbox"); if (!viewer.classList.contains("open")) return; if (event.key === "Escape") closeViewer(); if (event.key === "ArrowRight") moveViewer(1); if (event.key === "ArrowLeft") moveViewer(-1); });
@@ -295,6 +279,5 @@ body.viewer-open { overflow:hidden; }
 
   fetchPartyProducts();
 </script>
-
 </body>
 </html>
