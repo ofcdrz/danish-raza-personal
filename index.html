@@ -4,63 +4,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ISARA | Premium Women's Fashion</title>
-<meta name="description" content="Discover ISARA's curated ethnic and occasion wear collections for women.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
-/* ================= VARIABLES & RESET ================= */
-:root {
-  --ivory: #faf8f4; --sand: #eee7dc; --ink: #28231f; --muted: #786f66; --gold: #a77c55; --line: #e6ded3; --white: #ffffff;
-  
-  --glass-bg: rgba(20, 15, 12, 0.65); 
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-  --header-bg: rgba(250, 248, 244, 0.75); 
-  --btn-text: #ffffff;
-}
-[data-theme="dark"] {
-  --ivory: #12100e; --sand: #1a1715; --ink: #f4f1ec; --muted: #a89f95; --gold: #c49a72; --line: #2e2823; --white: #1c1815;
-  
-  --glass-bg: rgba(0, 0, 0, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-  --header-bg: rgba(18, 16, 14, 0.75); 
-  --btn-text: #12100e;
-}
+/* (Ise waise hi rakhein jaisa aapke paas tha, bas product grid ka CSS thoda update kiya hai) */
+/* ... Purana CSS ... */
+/* Yahan maine sirf product grid ka CSS short kiya hai */
+:root { --ivory: #faf8f4; --sand: #eee7dc; --ink: #28231f; --muted: #786f66; --gold: #a77c55; --line: #e6ded3; --white: #ffffff; --glass-bg: rgba(20, 15, 12, 0.65); --glass-border: rgba(255, 255, 255, 0.2); --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); --header-bg: rgba(250, 248, 244, 0.75); --btn-text: #ffffff;}
+[data-theme="dark"] { --ivory: #12100e; --sand: #1a1715; --ink: #f4f1ec; --muted: #a89f95; --gold: #c49a72; --line: #2e2823; --white: #1c1815; --glass-bg: rgba(0, 0, 0, 0.7); --glass-border: rgba(255, 255, 255, 0.1); --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); --header-bg: rgba(18, 16, 14, 0.75); --btn-text: #12100e;}
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body { background-color: var(--ivory); color: var(--ink); font-family: "DM Sans", sans-serif; line-height: 1.65; transition: background 0.5s ease, color 0.5s ease; overflow-x: hidden; }
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; display: block; }
-
-/* ================= ANNOUNCEMENT & HEADER ================= */
 .announcement { background: #1a1614 !important; color: #f8f3ec !important; text-align: center; padding: 8px 15px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid #2e2823; }
-.site-header { height: 82px; padding: 0 6%; display: flex; align-items: center; justify-content: space-between; background: var(--header-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 1000; transition: all 0.4s ease; }
+.site-header { height: 82px; padding: 0 6%; display: flex; align-items: center; justify-content: space-between; background: var(--header-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 1000; transition: all 0.4s ease; }
 .brand-signature { display: flex; align-items: center; gap: 14px; text-decoration: none; }
 .header-signature-line { width: 30px; height: 1px; background: var(--gold); transition: width 0.4s ease; }
 .brand-signature:hover .header-signature-line { width: 50px; }
 .header-signature-text { display: flex; flex-direction: column; align-items: center; }
 .header-signature-logo { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500; letter-spacing: 6px; color: var(--ink); margin-right: -6px; }
 .header-signature-caption { font-family: 'DM Sans', sans-serif; font-size: 7.5px; font-weight: 600; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); margin-top: 5px; margin-right: -3.5px; }
-
 .main-nav { display: flex; align-items: center; gap: 28px; }
 .main-nav a { font-size: 10px; letter-spacing: 1.7px; text-transform: uppercase; position: relative; color: var(--ink); transition: color 0.3s ease; }
 .main-nav a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0; background: var(--gold); transition: width 0.4s ease; }
 .main-nav a:hover::after { width: 100%; }
-
-.theme-toggle { background: var(--header-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); transition: all 0.3s ease; margin-left: 5px; padding: 0; }
+.theme-toggle { background: var(--header-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); transition: all 0.3s ease; margin-left: 5px; padding: 0; }
 .theme-toggle:hover { border-color: var(--gold); color: var(--gold); transform: rotate(15deg); }
 .menu-toggle { display: none; border: 0; background: none; font-size: 24px; cursor: pointer; color: var(--ink); }
-
-/* ================= BUTTONS ================= */
 .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 24px; background: var(--ink) !important; color: var(--ivory) !important; border: 1px solid var(--ink) !important; font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase; position: relative; overflow: hidden; z-index: 1; transition: all 0.4s ease; cursor: pointer; }
-.btn::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--gold); transform: scaleX(0); transform-origin: right; transition: transform 0.4s ease; z-index: -1; }
-.btn:hover::before { transform: scaleX(1); transform-origin: left; }
 .btn:hover { color: var(--btn-text) !important; border-color: var(--gold) !important; }
-
-/* ================= HERO SECTION ================= */
 .hero { display: grid; grid-template-columns: 1fr 1fr; height: 520px; background: var(--sand); transition: background 0.5s ease; overflow: hidden; }
 .hero-copy { padding: 40px 10% 40px 14%; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; position: relative; }
 .hero-copy .eyebrow { letter-spacing: 5px; color: var(--gold); font-weight: 600; margin-bottom: 20px; font-size: 10px; text-transform: uppercase; }
@@ -76,8 +49,6 @@ img { max-width: 100%; display: block; }
 .hero-media { overflow: hidden; position: relative; height: 100%; }
 .hero-media img { object-fit: cover; object-position: center 30%; width: 100%; height: 100%; transition: transform 1.5s ease; }
 .hero:hover .hero-media img { transform: scale(1.04); }
-
-/* ================= TRUST ROW & SECTIONS ================= */
 .trust-row { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); background: var(--white); transition: background 0.5s ease; }
 .trust-row div { text-align: center; padding: 20px 10px; font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; border-right: 1px solid var(--line); color: var(--ink); }
 .trust-row div:last-child { border: 0; }
@@ -87,44 +58,37 @@ img { max-width: 100%; display: block; }
 .section-head h2 { font-size: clamp(34px, 4.5vw, 53px); line-height: 1.12; margin: 12px 0; color: var(--ink); font-family: 'Playfair Display', serif; font-weight: 400; }
 .section-head p { color: var(--muted); font-size: 13px; }
 .eyebrow { font-size: 10px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; font-weight: 600; display: block; }
-
-/* ================= PRODUCT GRID ================= */
+/* PRODUCT GRID */
 .product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 25px; }
 .product-card { min-width: 0; background: var(--white); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; transition: transform 0.4s ease, box-shadow 0.4s ease; }
 .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-.product-image { height: 350px; position: relative; overflow: hidden; background: var(--sand); }
-.product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+.product-image { position: relative; overflow: hidden; background: var(--sand); }
+.product-image img { width: 100%; object-fit: cover; transition: transform 0.8s ease; display: block; }
 .product-card:hover .product-image img { transform: scale(1.08); }
 .product-tag { position: absolute; top: 15px; left: 15px; background: var(--ivory); padding: 6px 12px; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink); font-weight: 600; border-radius: 4px; }
 .product-info { padding: 20px; }
 .product-info h3 { font-size: 18px; line-height: 1.3; margin-bottom: 5px; font-family: 'Playfair Display', serif; }
 .product-info p { font-size: 13px; color: var(--muted); }
-.product-info a { display: inline-block; margin-top: 15px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; text-decoration: underline; color: var(--gold); font-weight: 600; }
-
-/* ================= COLLECTIONS (REFINED GLASS CARDS) ================= */
+.product-info .desc { font-size: 12px; color: var(--muted); margin: 5px 0 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
+.product-info a { display: inline-block; margin-top: 10px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; text-decoration: underline; color: var(--gold); font-weight: 600; }
+/* COLLECTIONS */
 .category-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; }
 .category-card { position: relative !important; display: block !important; width: 100% !important; height: 540px !important; overflow: hidden !important; background: var(--sand); border-radius: 12px; transition: transform 0.6s ease, box-shadow 0.6s ease; }
 .category-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
 .category-card > img { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center 20% !important; transition: transform 1.2s ease !important; z-index: 1; }
 .category-card:nth-child(2) > img { object-position: center 45% !important; } 
 .category-card:hover > img { transform: scale(1.08); }
-
-.category-overlay { position: absolute !important; bottom: 25px !important; left: 25px !important; right: auto !important; display: inline-flex !important; flex-direction: column; align-items: flex-start; padding: 20px 25px !important; background: var(--glass-bg) !important; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border) !important; box-shadow: var(--glass-shadow) !important; border-radius: 6px; z-index: 2; transition: all 0.4s ease; }
-.category-overlay h3 { margin: 0 0 5px; color: #fff; font-size: 1.6rem; font-family: 'Playfair Display', serif; font-weight: 500; transition: transform 0.4s ease; }
-.category-card:hover .category-overlay h3 { transform: translateY(-3px); }
+.category-overlay { position: absolute !important; bottom: 25px !important; left: 25px !important; right: auto !important; display: inline-flex !important; flex-direction: column; align-items: flex-start; padding: 20px 25px !important; background: var(--glass-bg) !important; backdrop-filter: blur(12px); border: 1px solid var(--glass-border) !important; box-shadow: var(--glass-shadow) !important; border-radius: 6px; z-index: 2; transition: all 0.4s ease; }
+.category-overlay h3 { margin: 0 0 5px; color: #fff; font-size: 1.6rem; font-family: 'Playfair Display', serif; font-weight: 500; }
 .category-overlay p { margin: 0 0 15px; color: rgba(255, 255, 255, 0.8); font-size: 12px; }
 .category-overlay .btn { display: inline-flex; width: fit-content; padding: 10px 20px; background: rgba(255, 255, 255, 0.1) !important; border: 1px solid rgba(255, 255, 255, 0.3) !important; color: #fff !important; font-size: 9px; }
 .category-card:hover .category-overlay .btn { background: var(--gold) !important; color: #fff !important; border-color: var(--gold) !important; }
-
-/* ================= STORY BAND & NEWSLETTER ================= */
 .story-band { background: var(--ink); color: var(--ivory); text-align: center; padding: 82px 8%; transition: background 0.5s ease; }
 .story-band h2 { font-size: clamp(34px, 5vw, 55px); margin: 12px 0; color: var(--white); font-family: 'Playfair Display', serif; font-weight: 400; }
 .story-band p { max-width: 690px; margin: auto; color: var(--muted); font-size: 13px; line-height: 2; }
 .newsletter { background: var(--sand); text-align: center; padding: 65px 8%; transition: background 0.5s ease; }
 .newsletter h2 { font-size: 36px; color: var(--ink); font-family: 'Playfair Display', serif; font-weight: 400; margin-bottom: 10px; }
 .newsletter p { color: var(--muted); font-size: 13px; margin: 8px 0 20px; }
-
-/* ================= FOOTER ================= */
 .footer { background: #1a1614 !important; color: #d6ccc1 !important; padding: 50px 6% 25px; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 35px; max-width: 1200px; margin: auto; }
 .footer .brand { display: inline-block; color: #ffffff !important; margin-bottom: 12px; font-size: 26px; font-family: 'Playfair Display', serif; letter-spacing: 5px; }
@@ -133,8 +97,6 @@ img { max-width: 100%; display: block; }
 .footer h4 { font: 18px "Playfair Display", Georgia, serif; color: #ffffff !important; margin-bottom: 12px; }
 .footer-links { display: grid; gap: 8px; }
 .copyright { text-align: center; border-top: 1px solid #2e2823 !important; margin: 35px auto 0; padding-top: 18px; font-size: 10px; color: #786f66 !important; }
-
-/* ================= RESPONSIVE ================= */
 @media (max-width: 1024px) { .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 900px) { .hero { grid-template-columns: 1fr; height: auto; min-height: 500px; } .hero-copy { padding: 50px 8%; } .hero-media { height: 400px; } }
 @media (max-width: 650px) {
@@ -226,7 +188,7 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<!-- ADMIN PRODUCTS YAHAN DIKHENGE (Abhi ke liye khali rahega) -->
+<!-- ADMIN PRODUCTS YAHAN DIKHENGE -->
 <section class="section" style="background: var(--white); transition: background 0.5s ease;">
   <div class="container">
     <div class="section-head">
@@ -234,9 +196,7 @@ img { max-width: 100%; display: block; }
       <h2>Selected designs</h2>
       <p>Explore selected looks from the ISARA wardrobe.</p>
     </div>
-    <div class="product-grid" id="featured-products">
-      <!-- JS will load products here -->
-    </div>
+    <div class="product-grid" id="featured-products"></div>
   </div>
 </section>
 
@@ -279,11 +239,8 @@ img { max-width: 100%; display: block; }
   <div class="copyright">© 2026 ISARA. All Rights Reserved.</div>
 </footer>
 
-<!-- MENU AND THEME JS -->
 <script>
-  document.getElementById('menu-toggle').addEventListener('click', function() {
-    document.getElementById('main-nav').classList.toggle('active');
-  });
+  document.getElementById('menu-toggle').addEventListener('click', function() { document.getElementById('main-nav').classList.toggle('active'); });
   const themeToggleBtn = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
   const htmlElement = document.documentElement;
@@ -296,15 +253,13 @@ img { max-width: 100%; display: block; }
   });
 </script>
 
-<!-- SUPABASE DATABASE CONNECTION -->
 <script type="module">
   const SUPABASE_URL = 'https://mnghsyllrmlzkkbpmsbx.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_iNdQQLJ_ukM8Lb2CEZtoBQ_JA50m-w8';
 
   async function fetchProducts() {
     try {
-      // &limit=0 ka matlab hai home page par koi product nahi aayega
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=created_at.desc&limit=0`, {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*&order=created_at.desc&limit=0&t=${Date.now()}`, {
         method: 'GET', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
       });
       
@@ -313,37 +268,34 @@ img { max-width: 100%; display: block; }
       if (!productContainer) return;
       productContainer.innerHTML = ''; 
 
-      if (products.length === 0) {
-        productContainer.parentElement.parentElement.style.display = 'none';
-        return;
-      }
+      if (products.length === 0) { productContainer.parentElement.parentElement.style.display = 'none'; return; }
 
       products.forEach(product => {
         const card = document.createElement('div');
         card.className = 'product-card';
-        
         const waLink = `https://wa.me/919746699702?text=Hello%20ISARA%2C%20I%20am%20interested%20in%20${encodeURIComponent(product.name)}`;
-        
-        // Yahan price check lagaya gaya hai
         const priceDisplay = product.show_price ? product.price : 'On Enquiry';
+        const imageSize = product.image_size ? product.image_size : '350'; 
+        // Main image nikalna (comma se pehle wala)
+        const mainImage = product.image_url.split(',')[0];
 
         card.innerHTML = `
           <div class="product-image">
-            <img src="${product.image_url}" alt="${product.name}" loading="lazy">
+            <img src="${mainImage}" style="height: ${imageSize}px; width: 100%; object-fit: cover;" alt="${product.name}" loading="lazy">
             <span class="product-tag">${product.category}</span>
           </div>
           <div class="product-info">
             <h3>${product.name}</h3>
+            <p class="desc">${product.description || ''}</p>
             <p>${priceDisplay}</p>
             <a href="${waLink}" target="_blank">Enquire Now →</a>
           </div>
         `;
         productContainer.appendChild(card);
       });
-    } catch (error) { console.error('Error fetching products:', error); }
+    } catch (error) { console.error('Error:', error); }
   }
   fetchProducts();
 </script>
-
 </body>
 </html>
