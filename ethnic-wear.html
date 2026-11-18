@@ -201,24 +201,27 @@ body.viewer-open { overflow:hidden; }
 
   async function fetchEthnicProducts() {
     try {
+      // Fetching ONLY columns that actually exist
       const response = await fetch(`${SUPABASE_URL}/rest/v1/products?category=eq.Ethnic&select=*&order=created_at.desc&t=${Date.now()}`, {
         method: 'GET', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
       });
       
-      if (!response.ok) throw new Error("Database error");
+      if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
       
       allProducts = await response.json();
       const designCard = document.getElementById('dynamic-design-card');
 
       if (allProducts.length === 0) {
-        designCard.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 50px; color: var(--muted); width: 100%;">No ethnic wear designs found.</div>';
+        designCard.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 50px; color: var(--muted); width: 100%;">No ethnic wear designs found. Add from Admin Panel.</div>';
         return;
       }
 
       const mainProduct = allProducts[0];
       
-      // SAFETY CHECK: Agar single image hai toh array mein convert karein
-      designPhotos = typeof mainProduct.image_url === 'string' ? mainProduct.image_url.split(',') : [mainProduct.image_url];
+      // SAFETY CHECK: Purane products mein comma nahi hoga
+      designPhotos = (mainProduct.image_url && mainProduct.image_url.includes(',')) 
+                     ? mainProduct.image_url.split(',') 
+                     : [mainProduct.image_url || 'assets/assets/Ethnic%20Wear.jpg'];
       
       let thumbsHTML = '';
       designPhotos.forEach((url, index) => {
@@ -248,7 +251,7 @@ body.viewer-open { overflow:hidden; }
 
       window.changeDesign = function(productIndex, imageIndex, button) {
         const product = allProducts[productIndex];
-        const images = typeof product.image_url === 'string' ? product.image_url.split(',') : [product.image_url];
+        const images = product.image_url.includes(',') ? product.image_url.split(',') : [product.image_url];
         
         document.getElementById("mainDesignImage").src = images[imageIndex];
         let newSize = product.image_size ? product.image_size : '650';
@@ -274,8 +277,8 @@ body.viewer-open { overflow:hidden; }
       }
 
     } catch (error) { 
-        console.error('Error:', error); 
-        document.getElementById('dynamic-design-card').innerHTML = '<div style="text-align: center; padding: 50px; color: red;">Error loading designs. Please check Supabase columns.</div>'; 
+        console.error('Actual Error:', error); 
+        document.getElementById('dynamic-design-card').innerHTML = `<div style="text-align: center; padding: 50px; color: red; font-weight:bold;">Error: ${error.message}</div>`; 
     }
   }
 
