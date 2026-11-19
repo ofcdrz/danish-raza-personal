@@ -201,8 +201,8 @@ body.viewer-open { overflow:hidden; }
 
   async function fetchEthnicProducts() {
     try {
-      // Fetching ONLY columns that actually exist
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/products?category=eq.Ethnic&select=*&order=created_at.desc&t=${Date.now()}`, {
+      // Yahan se &t=${Date.now()} hata diya gaya hai
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/products?category=eq.Ethnic&select=*&order=created_at.desc`, {
         method: 'GET', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
       });
       
@@ -218,7 +218,7 @@ body.viewer-open { overflow:hidden; }
 
       const mainProduct = allProducts[0];
       
-      // SAFETY CHECK: Purane products mein comma nahi hoga
+      // Safety Check for image_url
       designPhotos = (mainProduct.image_url && mainProduct.image_url.includes(',')) 
                      ? mainProduct.image_url.split(',') 
                      : [mainProduct.image_url || 'assets/assets/Ethnic%20Wear.jpg'];
