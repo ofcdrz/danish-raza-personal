@@ -103,7 +103,8 @@ input:checked + .slider:before { transform: translateX(24px); }
         </div>
         <div class="form-group">
           <label>Photos (Select Multiple for Gallery)</label>
-          <input type="file" id="images" accept="image/*" multiple>
+          <!-- Yahan multiple attribute hai -->
+          <input type="file" id="images" accept="image/*" multiple required>
           <small style="color:var(--muted); font-size:11px; display:block; margin-top:5px;">Edit karte waqt agar photo nahi badalni, toh isko khaali chhod dein.</small>
         </div>
         <button type="submit" class="btn-submit" id="submitBtn">Upload & Save</button>
@@ -176,7 +177,6 @@ input:checked + .slider:before { transform: translateX(24px); }
       productList.innerHTML = '';
       data.forEach(product => {
         let priceDisplay = product.show_price ? product.price : 'On Enquiry';
-        // Show main image only in table
         const mainImage = product.image_url ? product.image_url.split(',')[0] : 'assets/assets/Ethnic%20Wear.jpg';
         
         productList.innerHTML += `
@@ -197,7 +197,7 @@ input:checked + .slider:before { transform: translateX(24px); }
 
   window.editProduct = function(product) {
     isEditing = true;
-    currentImageString = product.image_url; // Save current images to keep if not updated
+    currentImageString = product.image_url;
     
     document.getElementById('formTitle').innerText = "Edit Product";
     document.getElementById('productId').value = product.id;
@@ -208,7 +208,7 @@ input:checked + .slider:before { transform: translateX(24px); }
     document.getElementById('image_size').value = product.image_size || 650;
     document.getElementById('showPrice').checked = product.show_price;
     
-    document.getElementById('images').value = ''; // Clear file input
+    document.getElementById('images').value = ''; 
     document.getElementById('submitBtn').innerText = 'Update Product';
     document.getElementById('cancelEditBtn').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -247,11 +247,14 @@ input:checked + .slider:before { transform: translateX(24px); }
       if (imageFiles.length > 0) {
         document.getElementById('submitBtn').innerText = 'Uploading Images...';
         let uploadedUrls = [];
+        
+        // Har photo ko ek-ek karke upload karein
         for (let i = 0; i < imageFiles.length; i++) {
           const fileName = `product-${Date.now()}-${i}.jpg`;
           await apiRequest(`${BASE_URL}/storage/v1/object/product-images/${fileName}`, 'POST', imageFiles[i], true);
           uploadedUrls.push(`${BASE_URL}/storage/v1/object/public/product-images/${fileName}`);
         }
+        // Saari photo ke link ko comma (,) se jod dein
         finalImageUrl = uploadedUrls.join(',');
       }
 
