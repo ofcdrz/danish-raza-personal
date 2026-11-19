@@ -11,38 +11,41 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background-color: var(--ivory); color: var(--ink); font-family: "DM Sans", sans-serif; line-height: 1.65; }
 
-/* Login Screen */
+/* Login */
 #login-screen { position: fixed; inset: 0; background: var(--ink); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
-.login-box { background: var(--ivory); padding: 40px; border-radius: 8px; text-align: center; width: 100%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.login-box { background: var(--ivory); padding: 40px; border-radius: 8px; text-align: center; width: 100%; max-width: 400px; }
 .login-box h1 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 20px; }
 .login-box input { width: 100%; padding: 15px; font-size: 18px; text-align: center; border: 1px solid var(--line); margin-bottom: 20px; background: var(--white); outline: none; border-radius: 4px; }
 .login-box button { width: 100%; padding: 15px; background: var(--gold); color: white; border: none; font-size: 16px; cursor: pointer; border-radius: 4px; font-weight: 600; }
 
-/* Main Layout */
+/* Header & Grid */
 #admin-app { display: none; } 
 .admin-header { background: var(--ink); color: var(--white); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; }
 .admin-header h1 { font-family: 'Playfair Display', serif; font-size: 22px; }
 .admin-header .btn-logout { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 8px 15px; cursor: pointer; border-radius: 4px; }
-.admin-container { display: grid; grid-template-columns: 450px 1fr; gap: 30px; padding: 40px 5%; max-width: 1400px; margin: auto; }
-
-@media (max-width: 960px) {
-  .admin-container { grid-template-columns: 1fr; padding: 20px; }
-}
+.admin-container { display: grid; grid-template-columns: 460px 1fr; gap: 30px; padding: 40px 5%; max-width: 1400px; margin: auto; }
+@media (max-width: 960px) { .admin-container { grid-template-columns: 1fr; padding: 20px; } }
 
 .form-section, .list-section { background: var(--white); padding: 30px; border: 1px solid var(--line); border-radius: 8px; height: fit-content; }
 .form-section h2, .list-section h2 { font-family: 'Playfair Display', serif; margin-bottom: 20px; font-size: 24px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
 .form-group { margin-bottom: 18px; }
 .form-group label { display: block; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; color: var(--muted); }
-.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--line); background: var(--ivory); font-family: 'DM Sans', sans-serif; outline: none; border-radius: 4px; }
-.form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+.form-group input[type="text"], .form-group input[type="number"], .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--line); background: var(--ivory); font-family: 'DM Sans', sans-serif; outline: none; border-radius: 4px; }
 .form-group textarea { height: 80px; resize: vertical; }
 
-/* Image Preview Box */
-.preview-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
-.preview-item { position: relative; width: 65px; height: 65px; border-radius: 4px; overflow: hidden; border: 1px solid var(--line); }
-.preview-item img { width: 100%; height: 100%; object-fit: cover; }
+/* Custom Multi-Photo Uploader */
+.upload-box { border: 2px dashed var(--gold); background: var(--ivory); padding: 15px; text-align: center; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+.upload-box:hover { background: var(--sand); }
+.upload-box span { font-size: 14px; font-weight: 600; color: var(--ink); display: block; }
+.upload-box small { font-size: 11px; color: var(--muted); }
 
-/* Toggle Switch */
+.preview-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.preview-item { position: relative; width: 72px; height: 72px; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); }
+.preview-item img { width: 100%; height: 100%; object-fit: cover; }
+.preview-item .remove-img-btn { position: absolute; top: 3px; right: 3px; width: 20px; height: 20px; background: rgba(231, 76, 60, 0.95); color: white; border: none; border-radius: 50%; font-size: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; }
+.preview-item .cover-tag { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(40, 35, 31, 0.8); color: white; font-size: 9px; text-align: center; padding: 2px 0; text-transform: uppercase; }
+
+/* Switch */
 .switch-container { display: flex; align-items: center; gap: 10px; }
 .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
 .switch input { opacity: 0; width: 0; height: 0; }
@@ -52,11 +55,11 @@ input:checked + .slider { background-color: var(--gold); }
 input:checked + .slider:before { transform: translateX(24px); }
 
 /* Buttons */
-.btn-submit { width: 100%; padding: 15px; background: var(--ink); color: var(--white); border: none; cursor: pointer; margin-top:10px; font-weight:600; letter-spacing:1px; border-radius: 4px; transition: 0.2s; }
+.btn-submit { width: 100%; padding: 15px; background: var(--ink); color: var(--white); border: none; cursor: pointer; margin-top:10px; font-weight:600; letter-spacing:1px; border-radius: 4px; }
 .btn-submit:disabled { background: var(--muted); cursor: not-allowed; }
 .btn-cancel { display:none; width:100%; padding:12px; background:#e0e0e0; color: var(--ink); margin-top:10px; cursor:pointer; border:none; border-radius: 4px; font-weight: 600; }
 
-/* Product List Table */
+/* Table */
 .list-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 15px; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
 .list-header h2 { border: none; margin: 0; padding: 0; }
 .tabs { display: flex; gap: 10px; }
@@ -66,13 +69,13 @@ input:checked + .slider:before { transform: translateX(24px); }
 .product-table th, .product-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: middle; }
 .img-badge-wrap { position: relative; display: inline-block; }
 .product-table img { width: 55px; height: 55px; object-fit: cover; border-radius: 4px; display: block; }
-.img-count-badge { position: absolute; bottom: -5px; right: -5px; background: var(--ink); color: white; font-size: 10px; padding: 2px 6px; border-radius: 10px; font-weight: 600; }
+.img-count-badge { position: absolute; bottom: -5px; right: -5px; background: var(--gold); color: white; font-size: 10px; padding: 2px 6px; border-radius: 10px; font-weight: 600; }
 .action-btn { padding: 6px 12px; border-radius: 4px; cursor: pointer; border: none; color: white; margin-right: 5px; font-size: 12px; }
 .btn-edit { background: var(--blue); }
 .btn-delete { background: var(--danger); }
 
 /* Toast */
-#toast { position: fixed; bottom: 20px; right: 20px; background: var(--ink); color: white; padding: 15px 25px; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 10000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+#toast { position: fixed; bottom: 20px; right: 20px; background: var(--ink); color: white; padding: 15px 25px; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 10000; max-width: 350px; }
 #toast.show { opacity: 1; }
 </style>
 </head>
@@ -96,7 +99,7 @@ input:checked + .slider:before { transform: translateX(24px); }
   </header>
 
   <div class="admin-container">
-    <!-- FORM SECTION -->
+    <!-- FORM -->
     <div class="form-section">
       <h2 id="formTitle">Add New Product</h2>
       <form id="productForm">
@@ -109,21 +112,18 @@ input:checked + .slider:before { transform: translateX(24px); }
         
         <div class="form-group">
           <label>Description</label>
-          <textarea id="description" placeholder="Fabric, work, and styling details..."></textarea>
+          <textarea id="description" placeholder="Product details..."></textarea>
         </div>
         
         <div class="form-group">
           <label>Price</label>
-          <input type="text" id="price" placeholder="e.g. ₹14,500 (Leave empty for On Enquiry)">
+          <input type="text" id="price" placeholder="e.g. ₹14,500">
         </div>
         
         <div class="form-group">
-          <label>Show Price on Website?</label>
+          <label>Show Price?</label>
           <div class="switch-container">
-            <label class="switch">
-              <input type="checkbox" id="showPrice" checked>
-              <span class="slider"></span>
-            </label>
+            <label class="switch"><input type="checkbox" id="showPrice" checked><span class="slider"></span></label>
             <span id="priceStatusText" style="font-size:13px; color:var(--muted);">Yes, show price</span>
           </div>
         </div>
@@ -142,12 +142,16 @@ input:checked + .slider:before { transform: translateX(24px); }
         </div>
         
         <div class="form-group">
-          <label>Photos (Ctrl/Cmd dabakar multiple select karein)</label>
-          <input type="file" id="images" accept="image/*" multiple required>
-          <small id="imageHelpText" style="color:var(--muted); font-size:11px; display:block; margin-top:5px;">
-            Pehli photo main cover banegi, baaki gallery mein dikhengi.
-          </small>
-          <!-- Selected ya Existing Photos ka Preview -->
+          <label>Product Photos (Multiple Allowed)</label>
+          <!-- Hidden file input -->
+          <input type="file" id="images" accept="image/*" multiple style="display:none;">
+          
+          <div class="upload-box" onclick="document.getElementById('images').click()">
+            <span>+ Click to Add Photos</span>
+            <small>Ek saath ya baar-baar click karke multiple photos jodein</small>
+          </div>
+          
+          <!-- Preview Grid with Remove (×) button -->
           <div id="imagePreview" class="preview-grid"></div>
         </div>
         
@@ -156,7 +160,7 @@ input:checked + .slider:before { transform: translateX(24px); }
       </form>
     </div>
 
-    <!-- LIST SECTION -->
+    <!-- LIST -->
     <div class="list-section">
       <div class="list-header">
         <h2>Manage Products</h2>
@@ -169,7 +173,7 @@ input:checked + .slider:before { transform: translateX(24px); }
         <table class="product-table">
           <thead>
             <tr>
-              <th>Image</th>
+              <th>Photos</th>
               <th>Name</th>
               <th>Size</th>
               <th>Price</th>
@@ -188,23 +192,14 @@ input:checked + .slider:before { transform: translateX(24px); }
 <script>
   const CORRECT_PASSWORD = "isara123"; 
   if(sessionStorage.getItem('isara_admin_logged_in') === 'true') { showAdminApp(); }
-  
   function checkPassword() {
     if(document.getElementById('admin-password').value === CORRECT_PASSWORD) { 
       sessionStorage.setItem('isara_admin_logged_in', 'true'); 
       showAdminApp(); 
-    } else { 
-      alert("Galat PIN!"); 
-    }
+    } else { alert("Galat PIN!"); }
   }
-  function showAdminApp() { 
-    document.getElementById('login-screen').style.display = 'none'; 
-    document.getElementById('admin-app').style.display = 'block'; 
-  }
-  function logout() { 
-    sessionStorage.removeItem('isara_admin_logged_in'); 
-    window.location.reload(); 
-  }
+  function showAdminApp() { document.getElementById('login-screen').style.display = 'none'; document.getElementById('admin-app').style.display = 'block'; }
+  function logout() { sessionStorage.removeItem('isara_admin_logged_in'); window.location.reload(); }
 </script>
 
 <script type="module">
@@ -220,38 +215,53 @@ input:checked + .slider:before { transform: translateX(24px); }
 
   let currentCategory = 'Ethnic'; 
   let isEditing = false;
-  let currentImageString = "";
-  let loadedProductsMap = {}; // Safe storage for products by ID
+  let loadedProductsMap = {};
 
-  // Toggle label update
+  // Master array for photos: { type: 'url', value: '...' } OR { type: 'file', file: FileObject, preview: 'data:...' }
+  let photoQueue = [];
+  let removedUrlsOnEdit = []; // Edit ke dauran hatayi gayi purani photos
+
   showPriceCheckbox.addEventListener('change', () => {
     document.getElementById('priceStatusText').innerText = showPriceCheckbox.checked ? 'Yes, show price' : 'No, show "On Enquiry"';
   });
 
-  // Live Image Preview jab user files select kare
+  // Nayi photos select karne par queue mein ADD karein (overwrite nahi karega)
   imageInput.addEventListener('change', () => {
-    imagePreview.innerHTML = '';
     const files = Array.from(imageInput.files);
-    if (files.length === 0 && isEditing && currentImageString) {
-      renderPreviewUrls(currentImageString.split(','));
-      return;
-    }
     files.forEach(file => {
       const reader = new FileReader();
       reader.onload = (e) => {
-        imagePreview.innerHTML += `<div class="preview-item"><img src="${e.target.result}" alt="preview"></div>`;
+        photoQueue.push({ type: 'file', file: file, preview: e.target.result });
+        renderPhotoQueue();
       };
       reader.readAsDataURL(file);
     });
+    imageInput.value = ''; // Reset input taaki same file dobara select ho sake
   });
 
-  function renderPreviewUrls(urls) {
+  // Preview Grid Render karna
+  function renderPhotoQueue() {
     imagePreview.innerHTML = '';
-    urls.forEach(url => {
-      if(url.trim()) {
-        imagePreview.innerHTML += `<div class="preview-item"><img src="${url.trim()}" alt="existing"></div>`;
-      }
+    photoQueue.forEach((item, index) => {
+      const src = item.type === 'url' ? item.value : item.preview;
+      const coverLabel = index === 0 ? `<span class="cover-tag">Main Cover</span>` : '';
+      imagePreview.innerHTML += `
+        <div class="preview-item">
+          <img src="${src}" alt="photo">
+          ${coverLabel}
+          <button type="button" class="remove-img-btn" onclick="removePhotoFromQueue(${index})" title="Remove photo">×</button>
+        </div>
+      `;
     });
+  }
+
+  // Kisi bhi individual photo ko queue se hatana
+  window.removePhotoFromQueue = function(index) {
+    const removed = photoQueue.splice(index, 1)[0];
+    if (removed && removed.type === 'url') {
+      removedUrlsOnEdit.push(removed.value);
+    }
+    renderPhotoQueue();
   }
 
   window.switchTab = function(category, btn) {
@@ -270,9 +280,9 @@ input:checked + .slider:before { transform: translateX(24px); }
 
     if (body && contentType === 'application/json') {
       headers['Content-Type'] = 'application/json';
-      headers['Prefer'] = 'return=minimal';
+      headers['Prefer'] = 'return=representation'; // Confirm karta hai ki row actually update/delete hui ya nahi
     } else if (body && contentType) {
-      headers['Content-Type'] = contentType; // File upload ke liye exact mime type
+      headers['Content-Type'] = contentType;
     }
 
     const response = await fetch(endpoint, { 
@@ -283,38 +293,58 @@ input:checked + .slider:before { transform: translateX(24px); }
 
     if (!response.ok) {
       const errText = await response.text();
-      throw new Error(`API Error (${response.status}): ${errText}`);
+      throw new Error(`${response.status}: ${errText}`);
     }
 
-    if (method === 'DELETE' || method === 'POST' || method === 'PATCH') return true;
-    return await response.json();
+    const text = await response.text();
+    return text ? JSON.parse(text) : true;
+  }
+
+  // Supabase Storage se multiple files delete karne ka sahi tarika
+  async function deleteFilesFromStorage(urlsArray) {
+    const fileNames = urlsArray
+      .map(url => url.trim().split('/').pop())
+      .filter(name => name && name.length > 0);
+    
+    if (fileNames.length === 0) return;
+
+    try {
+      await apiRequest(
+        `${BASE_URL}/storage/v1/object/product-images`, 
+        'DELETE', 
+        { prefixes: fileNames }, 
+        'application/json'
+      );
+    } catch (err) {
+      console.warn("Storage delete warning:", err.message);
+    }
   }
 
   async function loadProducts(category) {
-    productList.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px;">Loading products...</td></tr>';
+    productList.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px;">Loading...</td></tr>';
     try {
       const data = await apiRequest(`${SUPABASE_URL}/products?category=eq.${category}&select=*&order=created_at.desc`);
       productList.innerHTML = '';
       loadedProductsMap = {};
 
-      if (data.length === 0) {
-        productList.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px; color:var(--muted);">No products found in this category.</td></tr>';
+      if (!data || data.length === 0) {
+        productList.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px; color:var(--muted);">No products found.</td></tr>';
         return;
       }
 
       data.forEach(product => {
-        loadedProductsMap[product.id] = product; // Store safely
+        loadedProductsMap[product.id] = product;
         const priceDisplay = product.show_price ? product.price : 'On Enquiry';
-        const urls = product.image_url ? product.image_url.split(',').filter(u => u.trim() !== '') : [];
+        const urls = product.image_url ? product.image_url.split(',').map(u => u.trim()).filter(Boolean) : [];
         const mainImage = urls[0] || 'assets/assets/Ethnic%20Wear.jpg';
-        const extraCount = urls.length > 1 ? `<span class="img-count-badge">+${urls.length - 1}</span>` : '';
+        const badge = urls.length > 1 ? `<span class="img-count-badge">${urls.length} Photos</span>` : '';
         
         productList.innerHTML += `
           <tr>
             <td>
               <div class="img-badge-wrap">
                 <img src="${mainImage}" alt="img">
-                ${extraCount}
+                ${badge}
               </div>
             </td>
             <td><strong>${product.name}</strong></td>
@@ -329,7 +359,7 @@ input:checked + .slider:before { transform: translateX(24px); }
       });
     } catch (error) { 
       console.error(error);
-      productList.innerHTML = '<tr><td colspan="5" style="text-align:center; color:red;">Failed to load products.</td></tr>';
+      productList.innerHTML = `<tr><td colspan="5" style="text-align:center; color:red;">Error: ${error.message}</td></tr>`;
     }
   }
 
@@ -338,7 +368,7 @@ input:checked + .slider:before { transform: translateX(24px); }
     if (!product) return;
 
     isEditing = true;
-    currentImageString = product.image_url || '';
+    removedUrlsOnEdit = [];
     
     document.getElementById('formTitle').innerText = "Edit Product";
     document.getElementById('productId').value = product.id;
@@ -350,15 +380,10 @@ input:checked + .slider:before { transform: translateX(24px); }
     showPriceCheckbox.checked = product.show_price;
     document.getElementById('priceStatusText').innerText = product.show_price ? 'Yes, show price' : 'No, show "On Enquiry"';
     
-    // Edit mode mein file input required nahi hona chahiye
-    imageInput.value = ''; 
-    imageInput.required = false; 
-    document.getElementById('imageHelpText').innerText = "Nayi photos select karne par purani photos replace ho jayengi. Khaali chhodne par purani photos bani rahengi.";
-    
-    // Purani photos preview mein dikhayein
-    if (currentImageString) {
-      renderPreviewUrls(currentImageString.split(','));
-    }
+    // Existing URLs ko photoQueue mein load karein taaki user unhe dekh, hata, ya naye jod sake
+    const existingUrls = product.image_url ? product.image_url.split(',').map(u => u.trim()).filter(Boolean) : [];
+    photoQueue = existingUrls.map(url => ({ type: 'url', value: url }));
+    renderPhotoQueue();
 
     document.getElementById('submitBtn').innerText = 'Update Product';
     document.getElementById('cancelEditBtn').style.display = 'block';
@@ -367,36 +392,27 @@ input:checked + .slider:before { transform: translateX(24px); }
 
   function resetForm() {
     isEditing = false;
-    currentImageString = "";
+    photoQueue = [];
+    removedUrlsOnEdit = [];
     document.getElementById('formTitle').innerText = "Add New Product";
     form.reset();
     document.getElementById('productId').value = '';
     document.getElementById('image_size').value = 650;
-    imageInput.required = true;
-    imagePreview.innerHTML = '';
-    document.getElementById('imageHelpText').innerText = "Pehli photo main cover banegi, baaki gallery mein dikhengi.";
+    renderPhotoQueue();
     document.getElementById('priceStatusText').innerText = 'Yes, show price';
     document.getElementById('submitBtn').innerText = 'Upload & Save';
     document.getElementById('cancelEditBtn').style.display = 'none';
   }
   document.getElementById('cancelEditBtn').addEventListener('click', resetForm);
 
-  // Storage se purani files delete karne ka helper function
-  async function deleteStorageFiles(imageUrlString) {
-    if (!imageUrlString) return;
-    const urls = imageUrlString.split(',');
-    for (let url of urls) {
-      const fileName = url.trim().split('/').pop();
-      if (fileName) {
-        try { 
-          await apiRequest(`${BASE_URL}/storage/v1/object/product-images/${fileName}`, 'DELETE'); 
-        } catch(err) { console.warn("Could not delete old file:", fileName); }
-      }
-    }
-  }
-
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    
+    if (photoQueue.length === 0) {
+      showToast('⚠️ Kam se kam 1 photo zaroor add karein!');
+      return;
+    }
+
     const id = document.getElementById('productId').value;
     const name = document.getElementById('name').value.trim();
     const description = document.getElementById('description').value.trim();
@@ -404,55 +420,55 @@ input:checked + .slider:before { transform: translateX(24px); }
     const showPrice = showPriceCheckbox.checked;
     const category = document.getElementById('category').value;
     const imageSize = parseInt(document.getElementById('image_size').value) || 650;
-    const imageFiles = Array.from(imageInput.files);
 
     const submitBtn = document.getElementById('submitBtn');
     submitBtn.disabled = true;
     
     try {
-      let finalImageUrl = currentImageString;
-
-      // Agar nayi photos select ki gayi hain
-      if (imageFiles.length > 0) {
-        submitBtn.innerText = `Uploading ${imageFiles.length} Photo(s)...`;
-        
-        // Saari photos ko ek saath (parallel) upload karein
-        const uploadPromises = imageFiles.map(async (file, index) => {
-          const ext = file.name.split('.').pop() || 'jpg';
-          const fileName = `product-${Date.now()}-${index}.${ext}`;
+      submitBtn.innerText = 'Processing Photos...';
+      
+      // Queue mein maujood purani URLs aur nayi Files dono ko order mein process karein
+      const finalUrls = await Promise.all(photoQueue.map(async (item, index) => {
+        if (item.type === 'url') {
+          return item.value;
+        } else {
+          const ext = item.file.name.split('.').pop() || 'jpg';
+          const fileName = `product-${Date.now()}-${index}-${Math.floor(Math.random()*1000)}.${ext}`;
           await apiRequest(
             `${BASE_URL}/storage/v1/object/product-images/${fileName}`, 
             'POST', 
-            file, 
-            file.type || 'image/jpeg'
+            item.file, 
+            item.file.type || 'image/jpeg'
           );
           return `${BASE_URL}/storage/v1/object/public/product-images/${fileName}`;
-        });
-
-        const uploadedUrls = await Promise.all(uploadPromises);
-        finalImageUrl = uploadedUrls.join(',');
-
-        // Agar edit mode tha aur nayi photos upload ho gayin, toh purani delete kar dein
-        if (isEditing && currentImageString) {
-          await deleteStorageFiles(currentImageString);
         }
-      }
+      }));
+
+      const finalImageUrl = finalUrls.join(',');
 
       if (isEditing) {
-        submitBtn.innerText = 'Updating Product...';
-        await apiRequest(`${SUPABASE_URL}/products?id=eq.${id}`, 'PATCH', {
+        submitBtn.innerText = 'Updating...';
+        const res = await apiRequest(`${SUPABASE_URL}/products?id=eq.${id}`, 'PATCH', {
           name, description, price, show_price: showPrice, category, image_size: imageSize, image_url: finalImageUrl
         });
+        
+        if (Array.isArray(res) && res.length === 0) {
+          throw new Error("Supabase RLS Policy ne Update block kiya hai!");
+        }
+
+        // Jo purani photos edit ke waqt × dabakar hatayi gayin, unhe storage se delete karein
+        if (removedUrlsOnEdit.length > 0) {
+          await deleteFilesFromStorage(removedUrlsOnEdit);
+        }
         showToast('✅ Product Updated!');
       } else {
-        submitBtn.innerText = 'Saving Product...';
+        submitBtn.innerText = 'Saving...';
         await apiRequest(`${SUPABASE_URL}/products`, 'POST', {
           name, description, price, show_price: showPrice, category, image_url: finalImageUrl, image_size: imageSize
         });
-        showToast('✅ Product Added Successfully!');
+        showToast('✅ Product Added!');
       }
 
-      // Jis category mein save kiya hai, usi tab par switch karein
       currentCategory = category;
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.toggle('active', btn.innerText.includes(category));
@@ -461,7 +477,7 @@ input:checked + .slider:before { transform: translateX(24px); }
       resetForm();
       loadProducts(category); 
     } catch (error) { 
-      showToast('❌ Error: ' + error.message); 
+      showToast('❌ ' + error.message); 
       console.error(error); 
     } finally { 
       submitBtn.disabled = false; 
@@ -474,12 +490,20 @@ input:checked + .slider:before { transform: translateX(24px); }
     if (!product || !confirm(`Kya aap "${product.name}" ko delete karna chahte hain?`)) return;
     
     try {
-      await apiRequest(`${SUPABASE_URL}/products?id=eq.${id}`, 'DELETE');
-      await deleteStorageFiles(product.image_url);
-      showToast('🗑️ Product Deleted');
+      const res = await apiRequest(`${SUPABASE_URL}/products?id=eq.${id}`, 'DELETE');
+      
+      if (Array.isArray(res) && res.length === 0) {
+        throw new Error("Delete failed! Supabase mein DELETE policy enable nahi hai.");
+      }
+
+      if (product.image_url) {
+        await deleteFilesFromStorage(product.image_url.split(','));
+      }
+      
+      showToast('🗑️ Product Deleted Successfully!');
       loadProducts(currentCategory); 
     } catch (error) { 
-      showToast('❌ Error deleting product'); 
+      showToast('❌ ' + error.message); 
       console.error(error);
     }
   }
@@ -488,7 +512,7 @@ input:checked + .slider:before { transform: translateX(24px); }
     const toast = document.getElementById('toast'); 
     toast.innerText = msg; 
     toast.classList.add('show'); 
-    setTimeout(() => toast.classList.remove('show'), 3500); 
+    setTimeout(() => toast.classList.remove('show'), 4500); 
   }
 
   if(sessionStorage.getItem('isara_admin_logged_in') === 'true') { 
