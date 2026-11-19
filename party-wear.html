@@ -209,7 +209,7 @@ body.viewer-open { overflow:hidden; }
       
       allProducts = await response.json();
       
-      // SAFETY CHECK: Filter out products that have no image URL
+      // SAFETY CHECK
       allProducts = allProducts.filter(p => p.image_url && p.image_url.trim() !== "" && p.name);
 
       const designCard = document.getElementById('dynamic-design-card');
