@@ -10,21 +10,39 @@
 :root { --ivory: #faf8f4; --sand: #eee7dc; --ink: #28231f; --muted: #786f66; --gold: #a77c55; --line: #e6ded3; --white: #ffffff; --danger: #e74c3c; --blue: #3498db; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background-color: var(--ivory); color: var(--ink); font-family: "DM Sans", sans-serif; line-height: 1.65; }
-#login-screen { position: fixed; inset: 0; background: var(--ink); z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column; }
-.login-box { background: var(--ivory); padding: 40px; border-radius: 8px; text-align: center; width: 100%; max-width: 400px; }
+
+/* Login Screen */
+#login-screen { position: fixed; inset: 0; background: var(--ink); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.login-box { background: var(--ivory); padding: 40px; border-radius: 8px; text-align: center; width: 100%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
 .login-box h1 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 20px; }
-.login-box input { width: 100%; padding: 15px; font-size: 20px; text-align: center; border: 1px solid var(--line); margin-bottom: 20px; background: var(--white); outline: none;}
-.login-box button { width: 100%; padding: 15px; background: var(--gold); color: white; border: none; font-size: 16px; cursor: pointer; }
+.login-box input { width: 100%; padding: 15px; font-size: 18px; text-align: center; border: 1px solid var(--line); margin-bottom: 20px; background: var(--white); outline: none; border-radius: 4px; }
+.login-box button { width: 100%; padding: 15px; background: var(--gold); color: white; border: none; font-size: 16px; cursor: pointer; border-radius: 4px; font-weight: 600; }
+
+/* Main Layout */
 #admin-app { display: none; } 
 .admin-header { background: var(--ink); color: var(--white); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; }
-.admin-header .btn-logout { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 8px 15px; cursor: pointer; }
+.admin-header h1 { font-family: 'Playfair Display', serif; font-size: 22px; }
+.admin-header .btn-logout { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 8px 15px; cursor: pointer; border-radius: 4px; }
 .admin-container { display: grid; grid-template-columns: 450px 1fr; gap: 30px; padding: 40px 5%; max-width: 1400px; margin: auto; }
+
+@media (max-width: 960px) {
+  .admin-container { grid-template-columns: 1fr; padding: 20px; }
+}
+
 .form-section, .list-section { background: var(--white); padding: 30px; border: 1px solid var(--line); border-radius: 8px; height: fit-content; }
 .form-section h2, .list-section h2 { font-family: 'Playfair Display', serif; margin-bottom: 20px; font-size: 24px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
-.form-group { margin-bottom: 20px; }
+.form-group { margin-bottom: 18px; }
 .form-group label { display: block; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; color: var(--muted); }
-.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--line); background: var(--ivory); font-family: 'DM Sans', sans-serif; outline: none; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--line); background: var(--ivory); font-family: 'DM Sans', sans-serif; outline: none; border-radius: 4px; }
+.form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
 .form-group textarea { height: 80px; resize: vertical; }
+
+/* Image Preview Box */
+.preview-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.preview-item { position: relative; width: 65px; height: 65px; border-radius: 4px; overflow: hidden; border: 1px solid var(--line); }
+.preview-item img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Toggle Switch */
 .switch-container { display: flex; align-items: center; gap: 10px; }
 .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
 .switch input { opacity: 0; width: 0; height: 0; }
@@ -32,18 +50,29 @@ body { background-color: var(--ivory); color: var(--ink); font-family: "DM Sans"
 .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
 input:checked + .slider { background-color: var(--gold); }
 input:checked + .slider:before { transform: translateX(24px); }
-.btn-submit { width: 100%; padding: 15px; background: var(--ink); color: var(--white); border: none; cursor: pointer; margin-top:10px; font-weight:600; letter-spacing:1px; }
-.list-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+
+/* Buttons */
+.btn-submit { width: 100%; padding: 15px; background: var(--ink); color: var(--white); border: none; cursor: pointer; margin-top:10px; font-weight:600; letter-spacing:1px; border-radius: 4px; transition: 0.2s; }
+.btn-submit:disabled { background: var(--muted); cursor: not-allowed; }
+.btn-cancel { display:none; width:100%; padding:12px; background:#e0e0e0; color: var(--ink); margin-top:10px; cursor:pointer; border:none; border-radius: 4px; font-weight: 600; }
+
+/* Product List Table */
+.list-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 15px; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+.list-header h2 { border: none; margin: 0; padding: 0; }
 .tabs { display: flex; gap: 10px; }
-.tab-btn { padding: 8px 20px; border: 1px solid var(--line); background: transparent; cursor: pointer; font-weight: 600; color: var(--muted); }
-.tab-btn.active { background: var(--ink); color: var(--white); }
+.tab-btn { padding: 8px 20px; border: 1px solid var(--line); background: transparent; cursor: pointer; font-weight: 600; color: var(--muted); border-radius: 4px; }
+.tab-btn.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
 .product-table { width: 100%; border-collapse: collapse; }
-.product-table th, .product-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--line); }
-.product-table img { width: 50px; height: 50px; object-fit: cover; border-radius: 4px; }
+.product-table th, .product-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.img-badge-wrap { position: relative; display: inline-block; }
+.product-table img { width: 55px; height: 55px; object-fit: cover; border-radius: 4px; display: block; }
+.img-count-badge { position: absolute; bottom: -5px; right: -5px; background: var(--ink); color: white; font-size: 10px; padding: 2px 6px; border-radius: 10px; font-weight: 600; }
 .action-btn { padding: 6px 12px; border-radius: 4px; cursor: pointer; border: none; color: white; margin-right: 5px; font-size: 12px; }
 .btn-edit { background: var(--blue); }
 .btn-delete { background: var(--danger); }
-#toast { position: fixed; bottom: 20px; right: 20px; background: var(--ink); color: white; padding: 15px 25px; border-radius: 4px; opacity: 0; transition: opacity 0.3s; z-index: 10000; }
+
+/* Toast */
+#toast { position: fixed; bottom: 20px; right: 20px; background: var(--ink); color: white; padding: 15px 25px; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 10000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 #toast.show { opacity: 1; }
 </style>
 </head>
@@ -52,44 +81,53 @@ input:checked + .slider:before { transform: translateX(24px); }
 <div id="login-screen">
   <div class="login-box">
     <h1>ISARA Admin</h1>
-    <input type="password" id="admin-password" placeholder="Enter PIN">
+    <input type="password" id="admin-password" placeholder="Enter PIN" onkeypress="if(event.key==='Enter') checkPassword()">
     <button onclick="checkPassword()">Login</button>
   </div>
 </div>
 
 <div id="admin-app">
   <header class="admin-header">
-    <h1>Admin Dashboard</h1>
+    <h1>ISARA Dashboard</h1>
     <div>
-      <a href="index.html" target="_blank" style="color:var(--gold); margin-right:15px; text-decoration:none;">View Website →</a>
+      <a href="index.html" target="_blank" style="color:var(--gold); margin-right:15px; text-decoration:none; font-size:14px;">View Website →</a>
       <button class="btn-logout" onclick="logout()">Logout</button>
     </div>
   </header>
 
   <div class="admin-container">
-    <!-- FORM -->
+    <!-- FORM SECTION -->
     <div class="form-section">
       <h2 id="formTitle">Add New Product</h2>
       <form id="productForm">
         <input type="hidden" id="productId" value="">
+        
         <div class="form-group">
-          <label>Product Name</label>
-          <input type="text" id="name" required>
+          <label>Product Name *</label>
+          <input type="text" id="name" required placeholder="e.g. Royal Silk Lehenga">
         </div>
+        
         <div class="form-group">
           <label>Description</label>
-          <textarea id="description" placeholder="Product details..."></textarea>
+          <textarea id="description" placeholder="Fabric, work, and styling details..."></textarea>
         </div>
+        
         <div class="form-group">
           <label>Price</label>
-          <input type="text" id="price">
+          <input type="text" id="price" placeholder="e.g. ₹14,500 (Leave empty for On Enquiry)">
         </div>
+        
         <div class="form-group">
-          <label>Show Price?</label>
+          <label>Show Price on Website?</label>
           <div class="switch-container">
-            <label class="switch"><input type="checkbox" id="showPrice" checked><span class="slider"></span></label>
+            <label class="switch">
+              <input type="checkbox" id="showPrice" checked>
+              <span class="slider"></span>
+            </label>
+            <span id="priceStatusText" style="font-size:13px; color:var(--muted);">Yes, show price</span>
           </div>
         </div>
+        
         <div class="form-group">
           <label>Category</label>
           <select id="category">
@@ -97,22 +135,28 @@ input:checked + .slider:before { transform: translateX(24px); }
             <option value="Party">Party Wear</option>
           </select>
         </div>
+        
         <div class="form-group">
           <label>Main Photo Size (Height in px)</label>
           <input type="number" id="image_size" value="650">
         </div>
+        
         <div class="form-group">
-          <label>Photos (Select Multiple for Gallery)</label>
-          <!-- Yahan multiple attribute hai -->
+          <label>Photos (Ctrl/Cmd dabakar multiple select karein)</label>
           <input type="file" id="images" accept="image/*" multiple required>
-          <small style="color:var(--muted); font-size:11px; display:block; margin-top:5px;">Edit karte waqt agar photo nahi badalni, toh isko khaali chhod dein.</small>
+          <small id="imageHelpText" style="color:var(--muted); font-size:11px; display:block; margin-top:5px;">
+            Pehli photo main cover banegi, baaki gallery mein dikhengi.
+          </small>
+          <!-- Selected ya Existing Photos ka Preview -->
+          <div id="imagePreview" class="preview-grid"></div>
         </div>
+        
         <button type="submit" class="btn-submit" id="submitBtn">Upload & Save</button>
-        <button type="button" id="cancelEditBtn" style="display:none; width:100%; padding:10px; background:#ccc; margin-top:10px; cursor:pointer; border:none;">Cancel Edit</button>
+        <button type="button" id="cancelEditBtn" class="btn-cancel">Cancel Edit</button>
       </form>
     </div>
 
-    <!-- LIST -->
+    <!-- LIST SECTION -->
     <div class="list-section">
       <div class="list-header">
         <h2>Manage Products</h2>
@@ -123,24 +167,44 @@ input:checked + .slider:before { transform: translateX(24px); }
       </div>
       <div style="overflow-x:auto;">
         <table class="product-table">
-          <thead><tr><th>Image</th><th>Name</th><th>Size</th><th>Price</th><th>Action</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Size</th>
+              <th>Price</th>
+              <th>Action</th>
+            </tr>
+          </thead>
           <tbody id="productList"></tbody>
         </table>
       </div>
     </div>
   </div>
 </div>
+
 <div id="toast">Message</div>
 
 <script>
   const CORRECT_PASSWORD = "isara123"; 
   if(sessionStorage.getItem('isara_admin_logged_in') === 'true') { showAdminApp(); }
+  
   function checkPassword() {
-    if(document.getElementById('admin-password').value === CORRECT_PASSWORD) { sessionStorage.setItem('isara_admin_logged_in', 'true'); showAdminApp(); } 
-    else { alert("Galat PIN!"); }
+    if(document.getElementById('admin-password').value === CORRECT_PASSWORD) { 
+      sessionStorage.setItem('isara_admin_logged_in', 'true'); 
+      showAdminApp(); 
+    } else { 
+      alert("Galat PIN!"); 
+    }
   }
-  function showAdminApp() { document.getElementById('login-screen').style.display = 'none'; document.getElementById('admin-app').style.display = 'block'; }
-  function logout() { sessionStorage.removeItem('isara_admin_logged_in'); window.location.reload(); }
+  function showAdminApp() { 
+    document.getElementById('login-screen').style.display = 'none'; 
+    document.getElementById('admin-app').style.display = 'block'; 
+  }
+  function logout() { 
+    sessionStorage.removeItem('isara_admin_logged_in'); 
+    window.location.reload(); 
+  }
 </script>
 
 <script type="module">
@@ -150,65 +214,152 @@ input:checked + .slider:before { transform: translateX(24px); }
 
   const form = document.getElementById('productForm');
   const productList = document.getElementById('productList');
+  const imageInput = document.getElementById('images');
+  const imagePreview = document.getElementById('imagePreview');
+  const showPriceCheckbox = document.getElementById('showPrice');
+
   let currentCategory = 'Ethnic'; 
   let isEditing = false;
   let currentImageString = "";
+  let loadedProductsMap = {}; // Safe storage for products by ID
+
+  // Toggle label update
+  showPriceCheckbox.addEventListener('change', () => {
+    document.getElementById('priceStatusText').innerText = showPriceCheckbox.checked ? 'Yes, show price' : 'No, show "On Enquiry"';
+  });
+
+  // Live Image Preview jab user files select kare
+  imageInput.addEventListener('change', () => {
+    imagePreview.innerHTML = '';
+    const files = Array.from(imageInput.files);
+    if (files.length === 0 && isEditing && currentImageString) {
+      renderPreviewUrls(currentImageString.split(','));
+      return;
+    }
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imagePreview.innerHTML += `<div class="preview-item"><img src="${e.target.result}" alt="preview"></div>`;
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+
+  function renderPreviewUrls(urls) {
+    imagePreview.innerHTML = '';
+    urls.forEach(url => {
+      if(url.trim()) {
+        imagePreview.innerHTML += `<div class="preview-item"><img src="${url.trim()}" alt="existing"></div>`;
+      }
+    });
+  }
 
   window.switchTab = function(category, btn) {
     currentCategory = category;
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    resetForm(); loadProducts(category);
+    resetForm(); 
+    loadProducts(category);
   }
 
-  async function apiRequest(endpoint, method = 'GET', body = null, isFormData = false) {
-    const headers = { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` };
-    if (!isFormData && body) { headers['Content-Type'] = 'application/json'; headers['Prefer'] = 'return=minimal'; }
-    const response = await fetch(endpoint, { method, headers, body: body ? (isFormData ? body : JSON.stringify(body)) : null });
-    if (!response.ok) throw new Error('API Error');
+  async function apiRequest(endpoint, method = 'GET', body = null, contentType = 'application/json') {
+    const headers = { 
+      'apikey': SUPABASE_KEY, 
+      'Authorization': `Bearer ${SUPABASE_KEY}` 
+    };
+
+    if (body && contentType === 'application/json') {
+      headers['Content-Type'] = 'application/json';
+      headers['Prefer'] = 'return=minimal';
+    } else if (body && contentType) {
+      headers['Content-Type'] = contentType; // File upload ke liye exact mime type
+    }
+
+    const response = await fetch(endpoint, { 
+      method, 
+      headers, 
+      body: body ? (contentType === 'application/json' ? JSON.stringify(body) : body) : null 
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(`API Error (${response.status}): ${errText}`);
+    }
+
     if (method === 'DELETE' || method === 'POST' || method === 'PATCH') return true;
     return await response.json();
   }
 
   async function loadProducts(category) {
-    productList.innerHTML = '<tr><td colspan="5" style="text-align:center;">Loading...</td></tr>';
+    productList.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px;">Loading products...</td></tr>';
     try {
       const data = await apiRequest(`${SUPABASE_URL}/products?category=eq.${category}&select=*&order=created_at.desc`);
       productList.innerHTML = '';
+      loadedProductsMap = {};
+
+      if (data.length === 0) {
+        productList.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px; color:var(--muted);">No products found in this category.</td></tr>';
+        return;
+      }
+
       data.forEach(product => {
-        let priceDisplay = product.show_price ? product.price : 'On Enquiry';
-        const mainImage = product.image_url ? product.image_url.split(',')[0] : 'assets/assets/Ethnic%20Wear.jpg';
+        loadedProductsMap[product.id] = product; // Store safely
+        const priceDisplay = product.show_price ? product.price : 'On Enquiry';
+        const urls = product.image_url ? product.image_url.split(',').filter(u => u.trim() !== '') : [];
+        const mainImage = urls[0] || 'assets/assets/Ethnic%20Wear.jpg';
+        const extraCount = urls.length > 1 ? `<span class="img-count-badge">+${urls.length - 1}</span>` : '';
         
         productList.innerHTML += `
           <tr>
-            <td><img src="${mainImage}" alt="img"></td>
-            <td>${product.name}</td>
+            <td>
+              <div class="img-badge-wrap">
+                <img src="${mainImage}" alt="img">
+                ${extraCount}
+              </div>
+            </td>
+            <td><strong>${product.name}</strong></td>
             <td>${product.image_size || 650}px</td>
             <td>${priceDisplay}</td>
             <td>
-              <button class="action-btn btn-edit" onclick='editProduct(${JSON.stringify(product)})'>Edit</button>
-              <button class="action-btn btn-delete" onclick="deleteProduct(${product.id}, '${product.image_url}')">Delete</button>
+              <button class="action-btn btn-edit" onclick="editProduct(${product.id})">Edit</button>
+              <button class="action-btn btn-delete" onclick="deleteProduct(${product.id})">Delete</button>
             </td>
           </tr>
         `;
       });
-    } catch (error) { console.log(error); }
+    } catch (error) { 
+      console.error(error);
+      productList.innerHTML = '<tr><td colspan="5" style="text-align:center; color:red;">Failed to load products.</td></tr>';
+    }
   }
 
-  window.editProduct = function(product) {
+  window.editProduct = function(id) {
+    const product = loadedProductsMap[id];
+    if (!product) return;
+
     isEditing = true;
-    currentImageString = product.image_url;
+    currentImageString = product.image_url || '';
     
     document.getElementById('formTitle').innerText = "Edit Product";
     document.getElementById('productId').value = product.id;
     document.getElementById('name').value = product.name;
     document.getElementById('description').value = product.description || '';
-    document.getElementById('price').value = product.price;
+    document.getElementById('price').value = product.price === 'On Enquiry' ? '' : product.price;
     document.getElementById('category').value = product.category;
     document.getElementById('image_size').value = product.image_size || 650;
-    document.getElementById('showPrice').checked = product.show_price;
+    showPriceCheckbox.checked = product.show_price;
+    document.getElementById('priceStatusText').innerText = product.show_price ? 'Yes, show price' : 'No, show "On Enquiry"';
     
-    document.getElementById('images').value = ''; 
+    // Edit mode mein file input required nahi hona chahiye
+    imageInput.value = ''; 
+    imageInput.required = false; 
+    document.getElementById('imageHelpText').innerText = "Nayi photos select karne par purani photos replace ho jayengi. Khaali chhodne par purani photos bani rahengi.";
+    
+    // Purani photos preview mein dikhayein
+    if (currentImageString) {
+      renderPreviewUrls(currentImageString.split(','));
+    }
+
     document.getElementById('submitBtn').innerText = 'Update Product';
     document.getElementById('cancelEditBtn').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -221,80 +372,128 @@ input:checked + .slider:before { transform: translateX(24px); }
     form.reset();
     document.getElementById('productId').value = '';
     document.getElementById('image_size').value = 650;
-    document.getElementById('images').required = true;
+    imageInput.required = true;
+    imagePreview.innerHTML = '';
+    document.getElementById('imageHelpText').innerText = "Pehli photo main cover banegi, baaki gallery mein dikhengi.";
+    document.getElementById('priceStatusText').innerText = 'Yes, show price';
     document.getElementById('submitBtn').innerText = 'Upload & Save';
     document.getElementById('cancelEditBtn').style.display = 'none';
   }
   document.getElementById('cancelEditBtn').addEventListener('click', resetForm);
 
+  // Storage se purani files delete karne ka helper function
+  async function deleteStorageFiles(imageUrlString) {
+    if (!imageUrlString) return;
+    const urls = imageUrlString.split(',');
+    for (let url of urls) {
+      const fileName = url.trim().split('/').pop();
+      if (fileName) {
+        try { 
+          await apiRequest(`${BASE_URL}/storage/v1/object/product-images/${fileName}`, 'DELETE'); 
+        } catch(err) { console.warn("Could not delete old file:", fileName); }
+      }
+    }
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const id = document.getElementById('productId').value;
-    const name = document.getElementById('name').value;
-    const description = document.getElementById('description').value;
-    const price = document.getElementById('price').value || "On Enquiry";
-    const showPrice = document.getElementById('showPrice').checked;
+    const name = document.getElementById('name').value.trim();
+    const description = document.getElementById('description').value.trim();
+    const price = document.getElementById('price').value.trim() || "On Enquiry";
+    const showPrice = showPriceCheckbox.checked;
     const category = document.getElementById('category').value;
-    const imageSize = document.getElementById('image_size').value || "650";
-    const imageFiles = document.getElementById('images').files;
+    const imageSize = parseInt(document.getElementById('image_size').value) || 650;
+    const imageFiles = Array.from(imageInput.files);
 
-    document.getElementById('submitBtn').disabled = true;
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
     
     try {
       let finalImageUrl = currentImageString;
 
-      // Agar nayi photo select ki gayi hai, toh upload karein
+      // Agar nayi photos select ki gayi hain
       if (imageFiles.length > 0) {
-        document.getElementById('submitBtn').innerText = 'Uploading Images...';
-        let uploadedUrls = [];
+        submitBtn.innerText = `Uploading ${imageFiles.length} Photo(s)...`;
         
-        // Har photo ko ek-ek karke upload karein
-        for (let i = 0; i < imageFiles.length; i++) {
-          const fileName = `product-${Date.now()}-${i}.jpg`;
-          await apiRequest(`${BASE_URL}/storage/v1/object/product-images/${fileName}`, 'POST', imageFiles[i], true);
-          uploadedUrls.push(`${BASE_URL}/storage/v1/object/public/product-images/${fileName}`);
-        }
-        // Saari photo ke link ko comma (,) se jod dein
+        // Saari photos ko ek saath (parallel) upload karein
+        const uploadPromises = imageFiles.map(async (file, index) => {
+          const ext = file.name.split('.').pop() || 'jpg';
+          const fileName = `product-${Date.now()}-${index}.${ext}`;
+          await apiRequest(
+            `${BASE_URL}/storage/v1/object/product-images/${fileName}`, 
+            'POST', 
+            file, 
+            file.type || 'image/jpeg'
+          );
+          return `${BASE_URL}/storage/v1/object/public/product-images/${fileName}`;
+        });
+
+        const uploadedUrls = await Promise.all(uploadPromises);
         finalImageUrl = uploadedUrls.join(',');
+
+        // Agar edit mode tha aur nayi photos upload ho gayin, toh purani delete kar dein
+        if (isEditing && currentImageString) {
+          await deleteStorageFiles(currentImageString);
+        }
       }
 
       if (isEditing) {
-        document.getElementById('submitBtn').innerText = 'Updating...';
+        submitBtn.innerText = 'Updating Product...';
         await apiRequest(`${SUPABASE_URL}/products?id=eq.${id}`, 'PATCH', {
-          name: name, description: description, price: price, show_price: showPrice, category: category, image_size: imageSize, image_url: finalImageUrl
+          name, description, price, show_price: showPrice, category, image_size: imageSize, image_url: finalImageUrl
         });
-        showToast('✅ Updated!');
+        showToast('✅ Product Updated!');
       } else {
-        document.getElementById('submitBtn').innerText = 'Saving Data...';
+        submitBtn.innerText = 'Saving Product...';
         await apiRequest(`${SUPABASE_URL}/products`, 'POST', {
-          name: name, description: description, price: price, show_price: showPrice, category: category, image_url: finalImageUrl, image_size: imageSize
+          name, description, price, show_price: showPrice, category, image_url: finalImageUrl, image_size: imageSize
         });
-        showToast('✅ Product Added!');
+        showToast('✅ Product Added Successfully!');
       }
+
+      // Jis category mein save kiya hai, usi tab par switch karein
+      currentCategory = category;
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.innerText.includes(category));
+      });
+
       resetForm();
       loadProducts(category); 
-    } catch (error) { showToast('❌ Error'); console.log(error); } 
-    finally { document.getElementById('submitBtn').disabled = false; }
+    } catch (error) { 
+      showToast('❌ Error: ' + error.message); 
+      console.error(error); 
+    } finally { 
+      submitBtn.disabled = false; 
+      submitBtn.innerText = isEditing ? 'Update Product' : 'Upload & Save';
+    }
   });
 
-  window.deleteProduct = async function(id, imageUrlString) {
-    if (!confirm('Are you sure?')) return;
+  window.deleteProduct = async function(id) {
+    const product = loadedProductsMap[id];
+    if (!product || !confirm(`Kya aap "${product.name}" ko delete karna chahte hain?`)) return;
+    
     try {
       await apiRequest(`${SUPABASE_URL}/products?id=eq.${id}`, 'DELETE');
-      if (imageUrlString) {
-        const urls = imageUrlString.split(',');
-        for(let url of urls) {
-            const fileName = url.split('/').pop();
-            try { await apiRequest(`${BASE_URL}/storage/v1/object/product-images/${fileName}`, 'DELETE'); } catch(err) {}
-        }
-      }
-      showToast('🗑️ Deleted');
+      await deleteStorageFiles(product.image_url);
+      showToast('🗑️ Product Deleted');
       loadProducts(currentCategory); 
-    } catch (error) { showToast('Error deleting'); }
+    } catch (error) { 
+      showToast('❌ Error deleting product'); 
+      console.error(error);
+    }
   }
 
-  function showToast(msg) { const toast = document.getElementById('toast'); toast.innerText = msg; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 3000); }
-  if(sessionStorage.getItem('isara_admin_logged_in') === 'true') { loadProducts('Ethnic'); }
+  function showToast(msg) { 
+    const toast = document.getElementById('toast'); 
+    toast.innerText = msg; 
+    toast.classList.add('show'); 
+    setTimeout(() => toast.classList.remove('show'), 3500); 
+  }
+
+  if(sessionStorage.getItem('isara_admin_logged_in') === 'true') { 
+    loadProducts('Ethnic'); 
+  }
 </script>
 </body>
 </html>
